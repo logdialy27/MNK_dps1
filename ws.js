@@ -5,10 +5,12 @@ const setting = require("./setting");
 
 const table_ws = {
     "シャンデュシニュ": ws_シャンデュシニュ,
-    "ビクトリースマイト": ws_ビクトリースマイト,
     "ウッコフューリー": ws_ウッコフューリー,
-    "トアクリーバー": ws_トアクリーバー,
 
+    "ビクトリースマイト": ws_ビクトリースマイト,
+    "四神円舞": ws_四神円舞,
+
+    "トアクリーバー": ws_トアクリーバー,
 };
 
 exports.ws = function (name,player,line) {
@@ -460,8 +462,8 @@ function ws_ビクトリースマイト(player, line_p) {
 
             list1.push({
                 "QA": true, // QA
-                "C": critcal, // クリティカル発生
-                "xN": xN,// WS倍率
+                "C": critcal,
+                "xN": xN,
                 "attack": attack,
                 "acc": acc,
                 "D": D,
@@ -471,8 +473,8 @@ function ws_ビクトリースマイト(player, line_p) {
             for (i = 1; i < 4; ++i) {
                 list2.push({
                     "QA": true, // QA
-                    "C": critcal, // クリティカル発生
-                    "xN": xN,// WS倍率
+                    "C": critcal,
+                    "xN": xN,
                     "attack": attack,
                     "acc": acc,
                     "D": D,
@@ -483,8 +485,8 @@ function ws_ビクトリースマイト(player, line_p) {
             // TA判定
             list1.push({
                 "TA": true, // TA・・TAダメージアップのために必要
-                "C": critcal, // クリティカル
-                "xN": xN,// WS倍率
+                "C": critcal,
+                "xN": xN,
                 "attack": attack,
                 "acc": acc,
                 "D": D,
@@ -494,8 +496,8 @@ function ws_ビクトリースマイト(player, line_p) {
             for (i = 1; i < 3; ++i) {
                 list2.push({
                     "TA": true, // TA・・TAダメージアップのために必要
-                    "C": critcal, // クリティカル
-                    "xN": xN,// WS倍率
+                    "C": critcal,
+                    "xN": xN,
                     "attack": attack,
                     "acc": acc,
                     "D": D,
@@ -506,8 +508,8 @@ function ws_ビクトリースマイト(player, line_p) {
             // DA判定
             list1.push({
                 "DA": true, // DA・・DAダメージアップのために必要
-                "C": critcal, // クリティカル
-                "xN": xN,// 倍撃
+                "C": critcal,
+                "xN": xN,
                 "attack": attack,
                 "acc": acc,
                 "D": D,
@@ -517,8 +519,8 @@ function ws_ビクトリースマイト(player, line_p) {
             for (i = 1; i < 2; ++i) {
                 list2.push({
                     "DA": true, // DA・・DAダメージアップのために必要
-                    "C": critcal, // クリティカル
-                    "xN": xN,// 倍撃
+                    "C": critcal,
+                    "xN": xN,
                     "attack": attack,
                     "acc": acc,
                     "D": D,
@@ -531,7 +533,7 @@ function ws_ビクトリースマイト(player, line_p) {
 
             list1.push({
                 "MythicAM3": true,
-                "C": critcal, // クリティカル
+                "C": critcal,
                 "xN": xN,
                 "attack": attack,
                 "acc": acc,
@@ -542,7 +544,7 @@ function ws_ビクトリースマイト(player, line_p) {
             for (i = 1; i < count; ++i) {
                 list2.push({
                     "MythicAM3": true,
-                    "C": critcal, // クリティカル
+                    "C": critcal,
                     "xN": xN,
                     "attack": attack,
                     "acc": acc,
@@ -552,8 +554,8 @@ function ws_ビクトリースマイト(player, line_p) {
             }
         } else {
             list1.push({
-                "C": critcal, // クリティカル
-                "xN": xN,// 倍撃
+                "C": critcal,
+                "xN": xN,
                 "attack": attack,
                 "acc": acc,
                 "D": D,
@@ -565,8 +567,8 @@ function ws_ビクトリースマイト(player, line_p) {
     // [格闘の片手] 
     {
         list1.push({
-            "C": critcal, // クリティカル
-            "xN": xN,// WS倍率
+            "C": critcal,
+            "xN": xN,
             "attack": attack,
             "acc": acc,
             "D": D,
@@ -581,8 +583,8 @@ function ws_ビクトリースマイト(player, line_p) {
             // QA判定
             list1.push({
                 "QA": true, // QA
-                "C": critcal, // クリティカル発生
-                "xN": xN,// WS倍率
+                "C": critcal,
+                "xN": xN,
                 "attack": attack,
                 "acc": acc,
                 "D": D,
@@ -592,8 +594,8 @@ function ws_ビクトリースマイト(player, line_p) {
             for (i = 1; i < 4; ++i) {
                 list2.push({
                     "QA": true, // QA
-                    "C": critcal, // クリティカル発生
-                    "xN": xN,// WS倍率
+                    "C": critcal,
+                    "xN": xN,
                     "attack": attack,
                     "acc": acc,
                     "D": D,
@@ -604,8 +606,8 @@ function ws_ビクトリースマイト(player, line_p) {
             // TA判定
             list1.push({
                 "TA": true, // TA・・・TAダメージアップのために必要
-                "C": critcal, // クリティカル
-                "xN": xN,// WS倍率
+                "C": critcal,
+                "xN": xN,
                 "attack": attack,
                 "acc": acc,
                 "D": D,
@@ -615,8 +617,8 @@ function ws_ビクトリースマイト(player, line_p) {
             for (i = 1; i < 3; ++i) {
                 list2.push({
                     "TA": true, // TA・・・TAダメージアップのために必要
-                    "C": critcal, // クリティカル
-                    "xN": xN,// WS倍率
+                    "C": critcal,
+                    "xN": xN,
                     "attack": attack,
                     "acc": acc,
                     "D": D,
@@ -627,8 +629,8 @@ function ws_ビクトリースマイト(player, line_p) {
             // DA判定
             list1.push({
                 "DA": true, // DA・・DAダメージアップのために必要
-                "C": critcal, // クリティカル
-                "xN": xN,// 倍撃
+                "C": critcal,
+                "xN": xN,
                 "attack": attack,
                 "acc": acc,
                 "D": D,
@@ -638,8 +640,8 @@ function ws_ビクトリースマイト(player, line_p) {
             for (i = 1; i < 2; ++i) {
                 list2.push({
                     "DA": true, // DA・・DAダメージアップのために必要
-                    "C": critcal, // クリティカル
-                    "xN": xN,// 倍撃
+                    "C": critcal,
+                    "xN": xN,
                     "attack": attack,
                     "acc": acc,
                     "D": D,
@@ -651,7 +653,7 @@ function ws_ビクトリースマイト(player, line_p) {
             var count = logic.MythicAM3(player, line);
             list1.push({
                 "MythicAM3": true,
-                "C": critcal, // クリティカル
+                "C": critcal,
                 "xN": xN,
                 "attack": attack,
                 "acc": acc,
@@ -662,7 +664,7 @@ function ws_ビクトリースマイト(player, line_p) {
             for (i = 1; i < count; ++i) {
                 list2.push({
                     "MythicAM3": true,
-                    "C": critcal, // クリティカル
+                    "C": critcal,
                     "xN": xN,
                     "attack": attack,
                     "acc": acc,
@@ -672,7 +674,7 @@ function ws_ビクトリースマイト(player, line_p) {
             }
         } else {
             list1.push({
-                "C": critcal, // クリティカル
+                "C": critcal,
                 "xN": xN,
                 "attack": attack,
                 "acc": acc,
@@ -1071,6 +1073,223 @@ function ws_ウッコフューリー(player, line_p) {
     // 得TPとダメージを返却する
     return [dmg, TP];
 }
+
+
+
+// WSのマルチが有効な段の共通処理
+// xN1:マルチの最初の倍率
+// xN2:初段以降の倍率
+// attack:攻撃力
+// acc:命中率
+// D:D
+// wt:武器種
+// critcal:クリティカル確率
+
+function helper_WSマルチ(player,list1, list2, xN1, xN2, attack, acc, D, wt, critcal) {
+
+    if (logic.rand(player.QA())) {
+        // QA判定
+        list1.push({
+            "QA": true, // QA
+            "C": critcal,
+            "xN": xN1,
+            "attack": attack,
+            "acc": acc,
+            "D": D,
+            "wt": wt,
+        });
+
+        for (i = 1; i < 4; ++i) {
+            list2.push({
+                "QA": true,
+                "C": critcal,
+                "xN": xN2,
+                "attack": attack,
+                "acc": acc,
+                "D": D,
+                "wt": wt,
+            });
+        }
+    } else if (logic.rand(player.TA())) {
+        // TA判定
+        list1.push({
+            "TA": true, // TA・・TAダメージアップのために必要
+            "C": critcal,
+            "xN": xN1,
+            "attack": attack,
+            "acc": acc,
+            "D": D,
+            "wt": wt,
+        });
+
+        for (i = 1; i < 3; ++i) {
+            list2.push({
+                "TA": true, // TA・・TAダメージアップのために必要
+                "C": critcal,
+                "xN": xN2,
+                "attack": attack,
+                "acc": acc,
+                "D": D,
+                "wt": wt,
+            });
+        }
+    } else if (logic.rand(player.DA())) {
+        // DA判定
+        list1.push({
+            "DA": true, // DA・・DAダメージアップのために必要
+            "C": critcal,
+            "xN": xN1,
+            "attack": attack,
+            "acc": acc,
+            "D": D,
+            "wt": wt,
+        });
+
+        for (i = 1; i < 2; ++i) {
+            list2.push({
+                "DA": true, // DA・・DAダメージアップのために必要
+                "C": critcal,
+                "xN": xN2,
+                "attack": attack,
+                "acc": acc,
+                "D": D,
+                "wt": wt,
+            });
+        }
+    } else if (player.MythicAM3()) {
+        // ミシックAM3
+        var count = logic.MythicAM3(player, line);
+
+        list1.push({
+            "MythicAM3": true,
+            "C": critcal,
+            "xN": xN1,
+            "attack": attack,
+            "acc": acc,
+            "D": D,
+            "wt": wt,
+        });
+
+        for (i = 1; i < count; ++i) {
+            list2.push({
+                "MythicAM3": true,
+                "C": critcal,
+                "xN": xN2,
+                "attack": attack,
+                "acc": acc,
+                "D": D,
+                "wt": wt,
+            });
+        }
+    } else {
+        list1.push({
+            "C": critcal,
+            "xN": xN1,
+            "attack": attack,
+            "acc": acc,
+            "D": D,
+            "wt": wt,
+        });
+    }
+}
+
+// 格闘:四神円舞
+function ws_四神円舞(player, line_p) {
+
+    // 四神円舞
+    // 5回攻撃
+    // 1.5(全段)
+    // DEX73% - 85%
+    // 属性ゴルゲ全段適用
+
+    var line = line_p;
+    var list = [];
+
+    // 作業用リスト
+    var list1 = []; // WSの固定分
+    var list2 = []; // マルチ
+
+    // WS実行のTP計算
+    var execTP = logic.addTP(player.n_TP, player.TP_Bonus());
+    // TP:追加効果発動確率修正
+
+    // [1] [格闘の片手] [2] [3] [4] + マルチの順
+    var attack = player.Attack();
+    var acc = player.Accuracy();
+    var D = player.D();
+    var wt = player.WeaponType();
+
+    // 全段1.5で属性ゴルゲも全段適用なので最初に計算
+    var xN = 1.5;
+    xN += player.WS_DamageUp0();
+
+    // [1] マルチ判定実施
+    helper_WSマルチ(player,list1, list2, xN, xN, attack, acc, D, wt, 0);
+
+    // [格闘の片手] 
+    list1.push({ "C": 0, "xN": xN, "attack": attack, "acc": acc, "D": D, "wt": wt, "sub": true });
+
+    // [2] マルチ判定実施
+    helper_WSマルチ(player,list1, list2, xN, xN, attack, acc, D, wt, 0);
+
+    // [3] マルチ判定なし
+    list1.push({ "C": 0, "xN": xN, "attack": attack, "acc": acc, "D": D, "wt": wt });
+
+    // [4] マルチ判定なし
+    list1.push({ "C": 0, "xN": xN, "attack": attack, "acc": acc, "D": D, "wt": wt });
+
+    // リストを結合[0]～[7]までが有効
+    list = list1.concat(list2);
+
+    // 修正項目
+    // 修正項目は全段適用なので最初に計算
+    var BP_D = Math.floor(player.DEX() * 85 / 100);
+
+    // 得TP
+    var gain_TP = logic.get_得TP(player, line);
+
+    // 得TPの合計
+    var TP = 0;
+
+    // ダメージ合計
+    var dmg = 0;
+
+    line["WS"] = [];
+
+    for (i = 0; i < list.length && i < 8; ++i) {
+        var line = {};
+        var t = list[i];
+
+        // 命中判定
+        var hit = logic.命中判定(t.wt, t.sub, t.acc, player, enemy, line);
+
+        if (!hit) {
+            // ミス
+            line["ミス"] = true;
+        } else {
+            // ヒット毎のダメージ計算
+            var d = logic.WS_ダメージ計算(i, BP_D, t, player, enemy, line);
+            dmg += d[0];
+
+            if (i == 0) {
+                TP += gain_TP;
+            } else if (t.sub) {
+                TP += gain_TP;
+            } else {
+                TP += logic.STP(10, player, line);
+            }
+
+            line["ダメージ"] = d[0];
+            line["TP合計"] = gain_TP;
+        }
+
+        line_p["WS"].push(line);
+    }
+
+    // 得TPとダメージを返却する
+    return [dmg, TP];
+}
+
 
 function ws_トアクリーバー() {
     return [0,0];

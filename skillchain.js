@@ -13,7 +13,7 @@ const table_sc_timelimit = [
 ];
 
 // WSの連携属性
-const table_ws_element_AM = {
+const table_ws_element = {
     "シャンデュシニュ": ["光", "湾曲"],
     "ビクトリースマイト": ["光", "分解"],
     "四神円舞":["核熱","振動"],
@@ -22,7 +22,7 @@ const table_ws_element_AM = {
 }
 
 // イオニックのAM状態の連携属性
-const table_ws_element = {
+const table_ws_element_AM = {
     "四神円舞": ["光","核熱", "振動"],
 }
 

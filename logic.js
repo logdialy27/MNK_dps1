@@ -316,8 +316,12 @@ exports.AA_ダメージ計算 = function (t, player, enemy, line) {
 exports.WS_ダメージ計算 = function (idx,BP_D,t, player, enemy, line) {
     var logic = this;
 
-    // クリティカルヒット判定
-    var c = logic.critical(t.C, player, enemy, line);
+    var c = false;
+
+    // クリティカルヒット修正のWSのみ判定を実施
+    if (t.C > 0) {
+        c = logic.critical(t.C, player, enemy, line);
+    }
 
     var attack = t.attack;
     // TODO:シのTA攻撃力アップ
