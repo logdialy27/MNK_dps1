@@ -89,12 +89,16 @@ exports.result_dist = function (name, v, n,c) {
 // 定義jsのロード
 var impl = null;
 
-// プレイヤー名
 exports.Load = function(name){
     impl = require("./player_" + name);
     impl.n_equipset = this.n_equipset;
+
+    if (impl.Load) {
+        impl.Load(name);
+    }
 }
 
+// プレイヤー名
 exports.Name = function () {
     if (impl.Name) {
         return impl.Name();

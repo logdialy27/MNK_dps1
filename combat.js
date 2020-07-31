@@ -359,7 +359,7 @@ exports.on_auto_attack = function (player,enemy,line_p) {
                 // メインとサブはそれぞれ別
 
                 // 攻撃回数を取得
-                var count = logic.Sub複数回攻撃判定(player, line);
+                var count = logic.複数回攻撃判定(player, line);
 
                 for (i = 0; i < count; ++i) {
                     // 倍撃

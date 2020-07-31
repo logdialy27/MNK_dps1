@@ -1,0 +1,12 @@
+{
+  "name": "mnk1",
+  "version": "0.0.0",
+  "description": "MNK1",
+  "main": "app.js",
+  "author": {
+    "name": ""
+  },
+  "dependencies": {
+    "csv-parse": "^4.11.1"
+  }
+}

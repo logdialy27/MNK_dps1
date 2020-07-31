@@ -41,6 +41,7 @@ GBBunEBV7WwP
 ```
 # git clone https://github.com/logdialy27/MNK_dps1.git
 # cd MNK_dps1
+# npm install
 ```
 
 ### 実行
@@ -50,9 +51,9 @@ GBBunEBV7WwP
 # node app.js [player] [equipset_aa] [equipset_ws] [output_prefix] [end_time] [enemy]
 ```
 
-* player・・・実行対象で、player_XXX.jsのXXX部分、BLU1,MNK1,MNK2,TSV1のいずれかを指定
-* equipset_aa・・・オートアタック時のequipset番号、主にTSV1の場合に指定それ以外の場合は0を指定
-* equipset_ws・・・WS時のequipset番号、主にTSV1の場合に指定それ以外の場合は0を指定
+* player・・・実行対象で、player_XXX.jsのXXX部分、BLU1,MNK1,MNK2,CSV1のいずれかを指定
+* equipset_aa・・・オートアタック時のequipset番号、主にCSV1の場合に指定それ以外の場合は0を指定
+* equipset_ws・・・WS時のequipset番号、主にCSV1の場合に指定それ以外の場合は0を指定
 * output_prefix・・・結果出力ファイルの先頭部で、ディレクトリを含むと出力ディレクトリを指定できる。
 * end_time・・・シミュレーションの仮想実行時間で分単位で指定、未指定時はsetting.jsの値で10分
 * enemy・・・モンスター側の対象でenemy_XXX.jsのXXXの部分を指定する.
@@ -78,16 +79,16 @@ GBBunEBV7WwP
 # node app.js MNK2 0 1 out/mnk2 1440 E4 # 回避1,防御884,VIT187,AGI9999
 ```
 
-TSVの5列目をAA設定、6列目をWS設定で実行<br>
+CSV1の5列目をAA設定、6列目をWS設定で実行<br>
 防御1,DEX-AGIキャップ<br>
 ```
-# node app.js TSV1 5 6 out/TSV1-aa5-ws6 1440 E1
+# node app.js CSV1 5 6 out/CSV1-aa5-ws6 1440 E1
 ```
 
-TSVの7列目をAA設定、8列目をWS設定で実行<br>
+CSV1の7列目をAA設定、8列目をWS設定で実行<br>
 防御1,DEX-AGIキャップ<br>
 ```
-# node app.js TSV1 7 8 out/TSV1-aa7-ws8 1440 E1
+# node app.js CSV1 7 8 out/CSV1-aa7-ws8 1440 E1
 ```
 
 ## Windowsの場合
@@ -114,7 +115,7 @@ resultの部分は、引数で変更可能<br>
 * MNK2・・・モンクのWSクリティカル装備
 * MNK3・・・モンクのWS装備調整後
 * BLU1・・・青のAAマルチ装備
-* TSV1・・・(作業中)TSVファイルに設定されたテーブルと列番号から各プロパティを取得,「TSV1の内容」を参照
+* CSV1・・・(作業中)CSVファイルに設定されたテーブルと列番号から各プロパティを取得,「CSV1の内容」を参照
 
 # enemyの一覧
 
@@ -130,7 +131,7 @@ resultの部分は、引数で変更可能<br>
 ## ロジック
 
 * DPSの測定値(テスト中)
-* 設定TSVからの取得(作業中)
+* 設定CSVからの取得(作業中)
 * モ青以外のジョブの対応
 * WSの種類の追加
 * セーブTP

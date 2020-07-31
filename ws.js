@@ -1193,68 +1193,15 @@ function helper_WSマルチ(player,list1, list2, xN1, xN2, attack, acc, D, wt, c
     }
 }
 
-// 格闘:四神円舞
-function ws_四神円舞(player, line_p) {
-
-    // 四神円舞
-    // 5回攻撃
-    // 1.5(全段)
-    // DEX73% - 85%
-    // 属性ゴルゲ全段適用
-
-    var line = line_p;
-    var list = [];
-
-    // 作業用リスト
-    var list1 = []; // WSの固定分
-    var list2 = []; // マルチ
-
-    // WS実行のTP計算
-    var execTP = logic.addTP(player.n_TP, player.TP_Bonus());
-    // TP:追加効果発動確率修正
-
-    // [1] [格闘の片手] [2] [3] [4] + マルチの順
-    var attack = player.Attack();
-    var acc = player.Accuracy();
-    var D = player.D();
-    var wt = player.WeaponType();
-
-    // 全段1.5で属性ゴルゲも全段適用なので最初に計算
-    var xN = 1.5;
-    xN += player.WS_DamageUp0();
-
-    // [1] マルチ判定実施
-    helper_WSマルチ(player,list1, list2, xN, xN, attack, acc, D, wt, 0);
-
-    // [格闘の片手] 
-    list1.push({ "C": 0, "xN": xN, "attack": attack, "acc": acc, "D": D, "wt": wt, "sub": true });
-
-    // [2] マルチ判定実施
-    helper_WSマルチ(player,list1, list2, xN, xN, attack, acc, D, wt, 0);
-
-    // [3] マルチ判定なし
-    list1.push({ "C": 0, "xN": xN, "attack": attack, "acc": acc, "D": D, "wt": wt });
-
-    // [4] マルチ判定なし
-    list1.push({ "C": 0, "xN": xN, "attack": attack, "acc": acc, "D": D, "wt": wt });
-
-    // リストを結合[0]～[7]までが有効
-    list = list1.concat(list2);
-
-    // 修正項目
-    // 修正項目は全段適用なので最初に計算
-    var BP_D = Math.floor(player.DEX() * 85 / 100);
-
-    // 得TP
-    var gain_TP = logic.get_得TP(player, line);
-
+// WSダメージ計算の共通処理
+function helper_WSダメージ計算(list, BP_D, gain_TP, player,enemy,line_p) {
     // 得TPの合計
     var TP = 0;
 
     // ダメージ合計
     var dmg = 0;
 
-    line["WS"] = [];
+    line_p["WS"] = [];
 
     for (i = 0; i < list.length && i < 8; ++i) {
         var line = {};
@@ -1288,6 +1235,60 @@ function ws_四神円舞(player, line_p) {
 
     // 得TPとダメージを返却する
     return [dmg, TP];
+}
+
+// 格闘:四神円舞
+function ws_四神円舞(player, line_p) {
+
+    // 四神円舞
+    // 5回攻撃
+    // 1.5(全段)
+    // DEX73% - 85%
+    // 属性ゴルゲ全段適用
+    var line = line_p;
+    var list = [];
+
+    // 作業用リスト
+    var list1 = []; // WSの固有分
+    var list2 = []; // マルチ
+
+    // WS実行のTP計算
+    var execTP = logic.addTP(player.n_TP, player.TP_Bonus());
+    // TP:追加効果発動確率修正
+
+    // [1] [格闘のオフハンド] [2] [3] [4] + マルチの順
+    var attack = player.Attack();
+    var acc = player.Accuracy();
+    var D = player.D();
+    var wt = player.WeaponType();
+
+    // 全段1.5で属性ゴルゲも全段適用なので最初に計算
+    var xN = 1.5 + player.WS_DamageUp0();
+
+    // [1] マルチ判定実施
+    helper_WSマルチ(player,list1, list2, xN, xN, attack, acc, D, wt, 0);
+
+    // [格闘のオフハンド]
+    list1.push({ "C": 0, "xN": xN, "attack": attack, "acc": acc, "D": D, "wt": wt, "sub": true });
+
+    // [2] マルチ判定実施
+    helper_WSマルチ(player,list1, list2, xN, xN, attack, acc, D, wt, 0);
+
+    // [3] マルチ判定なし
+    list1.push({ "C": 0, "xN": xN, "attack": attack, "acc": acc, "D": D, "wt": wt });
+
+    // [4] マルチ判定なし
+    list1.push({ "C": 0, "xN": xN, "attack": attack, "acc": acc, "D": D, "wt": wt });
+
+    // リストを結合[0]～[7]までが有効
+    list = list1.concat(list2);
+
+    // 修正項目
+    var BP_D = Math.floor(player.DEX() * 85 / 100);
+    // 得TP
+    var gain_TP = logic.get_得TP(player, line);
+
+    return helper_WSダメージ計算(list, BP_D, gain_TP, player, enemy, line);
 }
 
 
