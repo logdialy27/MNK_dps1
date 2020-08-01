@@ -439,6 +439,9 @@ exports.on_auto_attack = function (player,enemy,line_p) {
     // 得TPの計算
     var gain_TP = logic.get_得TP(player, line);
 
+    // クリティカル時の得TP計算
+    var gain_TP_C = logic.get_得TP_クリティカル(player,true,line);
+
     // listの先頭から処理を順番に実施
     // オートアタックは最大8回
     // 末尾は判定しないが、切り捨て順序が不明
@@ -469,7 +472,11 @@ exports.on_auto_attack = function (player,enemy,line_p) {
             if (t["打剣"]) {
                 // 打剣は得TP対象外
             } else {
-                TP = TP + gain_TP;
+                if (!dmg[1]) {
+                    TP += gain_TP;
+                } else {
+                    TP += gain_TP_C;
+                }
             }
 
             hit_count += 1;
@@ -581,7 +588,7 @@ exports.on_ws = function (player,enemy, line) {
     var name = player.WS();
 
     // WS計算
-    ret = ws.ws(name, player,line);
+    ret = ws.ws(name, player, enemy,line);
 
     var dmg = ret[0];
     var TP = ret[1];
@@ -594,6 +601,7 @@ exports.on_ws = function (player,enemy, line) {
     // 分布の測定
     player.result_dist(player.WS(), dmg, setting.dist_unit(),1);
 
+    // TPの集計
     player.result_sum(player.WS() + "/得TP", TP);
 
     // TPを得TPに更新

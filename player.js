@@ -98,6 +98,15 @@ exports.Load = function(name){
     }
 }
 
+
+exports.tryWS = function () {
+    if (this.n_TP >= this.WS_TP()) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 // プレイヤー名
 exports.Name = function () {
     if (impl.Name) {
@@ -142,6 +151,27 @@ exports.equipset = function (no) {
     }
 
     this.n_equipset = no
+}
+
+// WSを実行するTP
+// 現在のTPがこの数値以上の場合にWSを実行する
+//
+// TPが1000を超えていてもWSを実行しないという行動になる
+// この値はDPS値に大きな影響がある
+//
+// 1.AAの比率が増えてWSの回数が減る
+// 2.多段連携の場合、連携の成功確率が下がる
+// 3.TPダメージ修正のWSのダメージ平均が高くなる
+// 4.防御力カット修正などのWSはかなり不利になる
+// 
+// この数値を固定値のまま変更する場合は影響を理解した上で実施する必要がある
+//
+exports.WS_TP = function () {
+    if (impl.WS_TP) {
+        return impl.WS_TP();
+    } else {
+        return 1000;
+    }
 }
 
 // playerの各種ステータス
@@ -1012,5 +1042,26 @@ exports.equip_インピタス性能アップ = function () {
         return impl.equip_インピタス性能アップ();
     } else {
         return false;
+    }
+}
+
+// ラブラウンダ
+// return +値
+exports.equip_クリティカルヒット時TP = function () {
+    if (impl.equip_クリティカルヒット時TP) {
+        return impl.equip_クリティカルヒット時TP();
+    } else {
+        return 0;
+    }
+}
+
+// カランビット
+// クリティカルヒット時ストアTP+50
+// return STP
+exports.equip_クリティカルヒット時ストアTP = function () {
+    if (impl.equip_クリティカルヒット時ストアTP) {
+        return impl.equip_クリティカルヒット時ストアTP();
+    } else {
+        return 0;
     }
 }

@@ -102,9 +102,9 @@ exports.KickD = function () {
 
 exports.Attack = function () {
     if (this.n_equipset == 0) {
-        return 1576;
+        return 1609;
     } else {
-        return 1498;
+        return 1533;
     }
 }
 
@@ -120,15 +120,15 @@ exports.Defense = function () {
     if (this.n_equipset == 0) {
         return 1118;
     } else {
-        return 1137;
+        return 1153;
     }
 }
 
 exports.Accuracy = function () {
     if (this.n_equipset == 0) {
-        return 1284;
+        return 1273;
     } else {
-        return 1319;
+        return 1280;
     }
 }
 
@@ -136,7 +136,7 @@ exports.Evasion = function () {
     if (this.n_equipset == 0) {
         return 843;
     } else {
-        return 826;
+        return 847;
     }
 }
 
@@ -376,7 +376,7 @@ exports.ウェポンスキル使用時TPを消費しない = function () {
 // モクシャ
 // モクシャI+IIの合計
 exports.モクシャ = function () {
-    return 0;
+    return 75;
 }
 
 // バフの有無
@@ -391,4 +391,9 @@ exports.equip_インピタス性能アップ = function () {
     } else {
         return true;
     }
+}
+
+// カランビット
+exports.equip_クリティカルヒット時ストアTP = function () {
+    return 0;
 }

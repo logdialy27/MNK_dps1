@@ -372,7 +372,7 @@ exports.ウェポンスキル使用時TPを消費しない = function () {
 // モクシャ
 // モクシャI+IIの合計
 exports.モクシャ = function () {
-    return 0;
+    return 75;
 }
 
 // バフの有無
@@ -387,4 +387,9 @@ exports.equip_インピタス性能アップ = function () {
     } else {
         return true;
     }
+}
+
+// カランビット
+exports.equip_クリティカルヒット時ストアTP = function () {
+    return 0;
 }

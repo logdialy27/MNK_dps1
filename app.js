@@ -7,7 +7,8 @@ try {
     // player
     //var target = "MNK1";
     //var target = "BLU1";
-    var target = "MNK2";
+    var target = "MNK3";
+    //var target = "CSV1";
     if (process.argv[2]) {
         target = process.argv[2];
     }
@@ -37,7 +38,7 @@ try {
     }
 
     // enemy_target
-    var enemy_target = "E3";
+    var enemy_target = "E2";
     if (process.argv[7]) {
         enemy_target = process.argv[7];
     }

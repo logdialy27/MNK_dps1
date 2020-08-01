@@ -521,11 +521,12 @@ exports.get_基本TP = function (m, player, line) {
 }
 
 // ストアTP適用
-exports.STP = function(base_TP, player, line){
-    var tp = Math.floor(base_TP * (100 + player.STP()) / 100);
+exports.STP = function(base_TP, stp, line){
+    var tp = Math.floor(base_TP * (100 + stp) / 100);
     line["STP適用:TP"] = tp;
     return tp;
 }
+
 
 // 得TPの計算
 exports.get_得TP = function (player, line) {
@@ -537,9 +538,36 @@ exports.get_得TP = function (player, line) {
     var base_TP = logic.get_基本TP(基本間隔, player, line);
 
     // ストアTP適用
-    var gain_TP = logic.STP(base_TP, player, line);
+    var gain_TP = logic.STP(base_TP, player.STP(), line);
 
     line["得TP:TP"] = gain_TP;
+    return gain_TP;
+}
+
+// クリティカル時得TPの計算
+// カランビットとラブラウンダ用
+exports.get_得TP_クリティカル = function (player,AA, line) {
+    var logic = this;
+    // 基本得TPの計算
+    var 基本間隔 = logic.get_基本隔(player, line);
+
+    // 基本TPの計算
+    var base_TP = logic.get_基本TP(基本間隔, player, line);
+
+    // ストアTP適用
+    var gain_TP;
+
+    if (AA) {
+        // カランビット対応
+        gain_TP = logic.STP(base_TP, player.STP() + player.equip_クリティカルヒット時ストアTP(), line);
+    } else {
+        gain_TP = logic.STP(base_TP, player.STP(), line);
+    }
+
+    // ラブラウンダ対応
+    gain_TP += player.equip_クリティカルヒット時TP();
+
+    line["得TPクリ:TP"] = gain_TP;
     return gain_TP;
 }
 

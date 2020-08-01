@@ -82,7 +82,7 @@ exports.run = function (result_file_prefix, p_target, equipset_aa, equipset_ws,e
                 }
             } else {
                 // TPが1000を超えていた場合
-                if (player.n_TP >= 1000) {
+                if (player.tryWS()) {
                     // WSの実行予約
                     // TPがたまってからWSを実行するまでの認識遅延時間
                     // トータルで考えるとこれは差にはならない

@@ -1,5 +1,4 @@
 ﻿const logic = require("./logic");
-const enemy = require("./enemy");
 const setting = require("./setting");
 
 
@@ -9,14 +8,15 @@ const table_ws = {
 
     "ビクトリースマイト": ws_ビクトリースマイト,
     "四神円舞": ws_四神円舞,
+    "夢想阿修羅拳": ws_夢想阿修羅拳,
 
     "トアクリーバー": ws_トアクリーバー,
 };
 
-exports.ws = function (name,player,line) {
+exports.ws = function (name, player, enemy,line) {
 
     if (table_ws[name]) {
-        return table_ws[name](player, line);
+        return table_ws[name](player, enemy, line);
     } else {
         return [0,0];
     }
@@ -31,7 +31,7 @@ const table_TP_シャンデュシニュ =
 ];
 
 // WSのシャンデュシニュ
-function ws_シャンデュシニュ(player, line_p) {
+function ws_シャンデュシニュ(player, enemy, line_p) {
 
     // ヒット数を確定
     // 多段WSのマルチ判定は初段と2段目のみ
@@ -373,7 +373,7 @@ function ws_シャンデュシニュ(player, line_p) {
             } else if (t.sub) {
                 TP += gain_TP;
             } else {
-                TP += logic.STP(10, player, line);
+                TP += logic.STP(10, player.STP(), line);
             }
 
             line["ダメージ"] = d[0];
@@ -397,7 +397,7 @@ const table_TP_ビクトリースマイト =
         { min: 3000, max: 3000, v: function (tp) { return 45; } },
     ];
 
-function ws_ビクトリースマイト(player, line_p) {
+function ws_ビクトリースマイト(player, enemy, line_p) {
 
     // ヒット数を確定
     // 多段WSのマルチ判定は初段と2段目のみ
@@ -734,7 +734,7 @@ function ws_ビクトリースマイト(player, line_p) {
             } else if (t.sub) {
                 TP += gain_TP;
             } else {
-                TP += logic.STP(10, player, line);
+                TP += logic.STP(10, player.STP(), line);
             }
 
             line["ダメージ"] = d[0];
@@ -759,7 +759,7 @@ const table_TP_ウッコフューリー =
     ];
 
 // WSのウッコフューリー
-function ws_ウッコフューリー(player, line_p) {
+function ws_ウッコフューリー(player, enemy, line_p) {
 
     // ヒット数を確定
     // 多段WSのマルチ判定は初段と2段目のみ
@@ -1060,7 +1060,7 @@ function ws_ウッコフューリー(player, line_p) {
             if (i == 0) {
                 TP += gain_TP;
             } else {
-                TP += logic.STP(10, player, line);
+                TP += logic.STP(10, player.STP(), line);
             }
 
             line["ダメージ"] = d[0];
@@ -1194,7 +1194,15 @@ function helper_WSマルチ(player,list1, list2, xN1, xN2, attack, acc, D, wt, c
 }
 
 // WSダメージ計算の共通処理
-function helper_WSダメージ計算(list, BP_D, gain_TP, player,enemy,line_p) {
+function helper_WSダメージ計算(list, BP_D, player,enemy,line_p) {
+
+    var line = line_p;
+    // 得TP
+    var gain_TP = logic.get_得TP(player, line);
+
+    // クリティカル時の得TP計算
+    var gain_TP_C = logic.get_得TP_クリティカル(player, false, line);
+
     // 得TPの合計
     var TP = 0;
 
@@ -1219,11 +1227,19 @@ function helper_WSダメージ計算(list, BP_D, gain_TP, player,enemy,line_p) {
             dmg += d[0];
 
             if (i == 0) {
-                TP += gain_TP;
+                if (d[1]) {
+                    TP += gain_TP_C;
+                } else {
+                    TP += gain_TP;
+                }
             } else if (t.sub) {
-                TP += gain_TP;
+                if (d[1]) {
+                    TP += gain_TP_C;
+                } else {
+                    TP += gain_TP;
+                }
             } else {
-                TP += logic.STP(10, player, line);
+                TP += logic.STP(10, player.STP(), line);
             }
 
             line["ダメージ"] = d[0];
@@ -1238,7 +1254,7 @@ function helper_WSダメージ計算(list, BP_D, gain_TP, player,enemy,line_p) {
 }
 
 // 格闘:四神円舞
-function ws_四神円舞(player, line_p) {
+function ws_四神円舞(player, enemy,line_p) {
 
     // 四神円舞
     // 5回攻撃
@@ -1264,21 +1280,22 @@ function ws_四神円舞(player, line_p) {
 
     // 全段1.5で属性ゴルゲも全段適用なので最初に計算
     var xN = 1.5 + player.WS_DamageUp0();
+    var xN2 = xN;
 
     // [1] マルチ判定実施
-    helper_WSマルチ(player,list1, list2, xN, xN, attack, acc, D, wt, 0);
+    helper_WSマルチ(player, list1, list2, xN, xN2, attack, acc, D, wt, 0);
 
     // [格闘のオフハンド]
-    list1.push({ "C": 0, "xN": xN, "attack": attack, "acc": acc, "D": D, "wt": wt, "sub": true });
+    list1.push({ "C": 0, "xN": xN2, "attack": attack, "acc": acc, "D": D, "wt": wt, "sub": true });
 
     // [2] マルチ判定実施
-    helper_WSマルチ(player,list1, list2, xN, xN, attack, acc, D, wt, 0);
+    helper_WSマルチ(player, list1, list2, xN2, xN2, attack, acc, D, wt, 0);
 
     // [3] マルチ判定なし
-    list1.push({ "C": 0, "xN": xN, "attack": attack, "acc": acc, "D": D, "wt": wt });
+    list1.push({ "C": 0, "xN": xN2, "attack": attack, "acc": acc, "D": D, "wt": wt });
 
     // [4] マルチ判定なし
-    list1.push({ "C": 0, "xN": xN, "attack": attack, "acc": acc, "D": D, "wt": wt });
+    list1.push({ "C": 0, "xN": xN2, "attack": attack, "acc": acc, "D": D, "wt": wt });
 
     // リストを結合[0]～[7]までが有効
     list = list1.concat(list2);
@@ -1288,10 +1305,56 @@ function ws_四神円舞(player, line_p) {
     // 得TP
     var gain_TP = logic.get_得TP(player, line);
 
-    return helper_WSダメージ計算(list, BP_D, gain_TP, player, enemy, line);
+    return helper_WSダメージ計算(list, BP_D, player, enemy, line);
 }
 
+// 格闘:夢想阿修羅拳
+function ws_夢想阿修羅拳(player, enemy,line_p) {
+    // 8回攻撃。TP: 命中率修正
+    // 倍率:1.25
+    // STR15% VIT15%
+    var line = line_p;
+    var list = [];
 
+    // 作業用リスト
+    var list1 = []; // WSの固有分
+    var list2 = []; // マルチ
+
+    // WS実行のTP計算
+    var execTP = logic.addTP(player.n_TP, player.TP_Bonus());
+    // TP:命中率修正
+
+    // [1] [格闘のオフハンド] [2] [3] [4] [5] [6] [7]
+    var attack = player.Attack();
+    var acc = player.Accuracy();
+    var D = player.D();
+    var wt = player.WeaponType();
+
+    // 全段1.5で属性ゴルゲも全段適用なので最初に計算
+    var xN = 1.25 + player.WS_DamageUp0();
+    var xN2 = xN;
+
+    // [1] マルチ判定不要
+    list1.push({ "C": 0, "xN": xN2, "attack": attack, "acc": acc, "D": D, "wt": wt });
+
+    // [格闘のオフハンド]
+    list1.push({ "C": 0, "xN": xN2, "attack": attack, "acc": acc, "D": D, "wt": wt, "sub": true });
+
+    for (var i = 2; i < 8; ++i) {
+        // [2] [3] [4] [5] [6] [7]
+        list1.push({ "C": 0, "xN": xN2, "attack": attack, "acc": acc, "D": D, "wt": wt });
+    }
+
+    // リストを結合[0]～[7]までが有効
+    list = list1.concat(list2);
+
+    // 修正項目
+    var BP_D = Math.floor(player.STR() * 15 / 100) + Math.floor(player.VIT() * 15 / 100);
+
+    return helper_WSダメージ計算(list, BP_D, player, enemy, line);
+}
+
+// 両手剣:トアクリーバー
 function ws_トアクリーバー() {
     return [0,0];
 }
