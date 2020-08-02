@@ -353,13 +353,26 @@ exports.WS_DamageUp3 = function (name) {
 
 // 使用する可能性のあるWS一覧
 exports.WS_list = function () {
+    //return ["四神円舞","ビクトリースマイト"];
     return ["ビクトリースマイト"];
 }
 
+var ws_idx = 0;
+//const ws_list = ["四神円舞", "ビクトリースマイト", "ビクトリースマイト"];
+const ws_list = ["ビクトリースマイト"];
 // 使用するWS名
 exports.WS = function () {
-    return "ビクトリースマイト";
+
+    return ws_list[ws_idx];
 }
+
+exports.on_ws_done = function () {
+    ws_idx = ws_idx + 1;
+    if (ws_idx >= ws_list.length) {
+        ws_idx = 0;
+    }
+}
+
 
 // TPボーナス
 // サブでも適用されるものはこちらに加算

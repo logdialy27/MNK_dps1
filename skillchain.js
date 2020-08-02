@@ -142,13 +142,27 @@ exports.last = function (player, line) {
             var ret = test(last_sc.name, table_ws_element[w1.name]);
 
             // 光or闇の場合は、3(3)→3なのか、3(2)→3かを判定()の中が採用したWSの連携属性のLV
-
-            if (ret[1] == 3) {
-                // 発動連携がLV3の場合
-                if (last_sc.ws_lv == 3) {
-                    // ビクスマ→ビクスマ→ビクスマは発生しない
-                    // 連携未発生
-                    line["連携:光(ws_lv=3)→光(3) or 闇(ws_lv=3)→闇(3)"] = "発生なし";
+            if (ret == null) {
+                // 連携未発生
+            } else {
+                if (ret[1] == 3) {
+                    // 発動連携がLV3の場合
+                    if (last_sc.ws_lv == 3) {
+                        // ビクスマ→ビクスマ→ビクスマは発生しない
+                        // 連携未発生
+                        line["連携:光(ws_lv=3)→光(3) or 闇(ws_lv=3)→闇(3)"] = "発生なし";
+                    } else {
+                        // 連携発生
+                        history_chain.push({
+                            "time": line["current_time"],
+                            "ws_dmg": w1.dmg,
+                            "ws_lv": ret[2], // 適用したWSの連携LV
+                            "name": ret[0],
+                            "lv": ret[1],
+                            "player": player.Name()
+                        });
+                        return true;
+                    }
                 } else {
                     // 連携発生
                     history_chain.push({
@@ -161,17 +175,6 @@ exports.last = function (player, line) {
                     });
                     return true;
                 }
-            } else {
-                // 連携発生
-                history_chain.push({
-                    "time": line["current_time"],
-                    "ws_dmg": w1.dmg,
-                    "ws_lv": ret[2], // 適用したWSの連携LV
-                    "name": ret[0],
-                    "lv": ret[1],
-                    "player": player.Name()
-                });
-                return true;
             }
         }
     }

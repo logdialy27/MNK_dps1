@@ -587,6 +587,8 @@ exports.on_ws = function (player,enemy, line) {
     var ret = null;
     var name = player.WS();
 
+    line["WS名:name"] = name;
+
     // WS計算
     ret = ws.ws(name, player, enemy,line);
 

@@ -64,6 +64,9 @@ exports.run = function (result_file_prefix, p_target, equipset_aa, equipset_ws,e
                         last_ws_time = current_time
                     }
 
+                    // WSの終了
+                    player.on_ws_done();
+
                     // 連携判定
                     if (ws_hit) {
                         combat.on_skillchain(player, enemy, line);
@@ -71,6 +74,8 @@ exports.run = function (result_file_prefix, p_target, equipset_aa, equipset_ws,e
                         // ミスの場合は判定除外
                         // 連携の状態は維持
                     }
+
+
 
                     // オートアタック装備に変更
                     player.equipset(equipset_aa);

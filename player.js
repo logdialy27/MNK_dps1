@@ -134,9 +134,9 @@ exports.on_timer = function(current_time,line){
 }
 
 // WS実行後に呼び出される
-exports.on_ws = function (current_time, ws_name, line) {
+exports.on_ws_done = function (current_time, ws_name, line) {
     if (impl) {
-        return impl.on_ws(current_time, ws_name, line);
+        return impl.on_ws_done(current_time, ws_name, line);
     } else {
         return 0;
     }
