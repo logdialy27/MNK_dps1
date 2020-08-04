@@ -606,9 +606,15 @@ exports.on_ws = function (player,enemy, line) {
     // TPの集計
     player.result_sum(player.WS() + "/得TP", TP);
 
+    // コンサーブTP
+    var conserve_TP = logic.コンサーブTP(player, line);
+    //player.result_all(player.WS() + "/コンサーブTP", conserve_TP);
+    player.result_sum(player.WS() + "/コンサーブTP", conserve_TP);
+
     // TPを得TPに更新
     if (!logic.rand(player.ウェポンスキル使用時TPを消費しない())) {
-        player.n_TP = TP;
+        // セーブTPと比較して大きい値がTPとなる
+        player.n_TP = Math.max(TP, player.セーブTP()) + conserve_TP;
     } else {
         // 「ウェポンスキル使用時TPを消費しない」の場合
         player.n_TP = logic.addTP(player.n_TP, TP);
@@ -618,7 +624,7 @@ exports.on_ws = function (player,enemy, line) {
     player.result_sum("WS実行後TP", player.n_TP);
     line["WS実行後:TP"] = player.n_TP;
 
-    // TP==0の場合ミス判定
+    // 得TP==0の場合ミス判定
 
     if (TP != 0) {
         return true;
@@ -632,7 +638,6 @@ exports.on_ws = function (player,enemy, line) {
         }
         return false;
     }
-
 }
 
 // 連携

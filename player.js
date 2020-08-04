@@ -1016,7 +1016,7 @@ exports.セーブTP = function () {
 }
 
 // コンサーブTP
-exports.セーブTP = function () {
+exports.コンサーブTP = function () {
     if (impl.コンサーブTP) {
         return impl.コンサーブTP();
     } else {

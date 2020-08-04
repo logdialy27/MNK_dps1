@@ -874,3 +874,15 @@ exports.ガンビット = function (e, g, line) {
     return Math.min(30, ret);
 }
 
+// コンサーブTP
+exports.コンサーブTP = function(player, line)
+{
+    if (this.rand(player.コンサーブTP())) {
+        // 10～200の均等ランダム
+        var r = Math.round(Math.random() * 19) * 10 + 10 ;
+        line["コンサーブTP:TP"] = r;
+        return r;
+    }
+
+    return 0;
+}

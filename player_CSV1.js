@@ -21,9 +21,9 @@ exports.Load = function (name) {
     });
 
     for (var y = 0; y < records.length; ++y) {
-        var k = records[y][1];
+        var k = records[y][2];
         tsv[k] = {};
-        for (var x = 2; x < records[y].length; ++x) {
+        for (var x = 3; x < records[y].length; ++x) {
             tsv[k][x] = records[y][x];
         }
     }
@@ -752,7 +752,7 @@ exports.セーブTP = function () {
     }
 }
 
-exports.セーブTP = function () {
+exports.コンサーブTP = function () {
     if (tsv.コンサーブTP && tsv.コンサーブTP[this.n_equipset]) {
         return tsv.コンサーブTP[this.n_equipset];
     } else {
@@ -771,6 +771,22 @@ exports.buff_インピタス = function () {
 exports.equip_インピタス性能アップ = function () {
     if (tsv.equip_インピタス性能アップ && tsv.equip_インピタス性能アップ[this.n_equipset]) {
         return tsv.equip_インピタス性能アップ[this.n_equipset];
+    } else {
+        return 0;
+    }
+}
+
+exports.equip_クリティカルヒット時TP = function () {
+    if (tsv.equip_クリティカルヒット時TP) {
+        return tsv.equip_クリティカルヒット時TP();
+    } else {
+        return 0;
+    }
+}
+
+exports.equip_クリティカルヒット時ストアTP = function () {
+    if (tsv.equip_クリティカルヒット時ストアTP) {
+        return tsv.equip_クリティカルヒット時ストアTP();
     } else {
         return 0;
     }
