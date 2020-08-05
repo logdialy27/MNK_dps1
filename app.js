@@ -1,6 +1,5 @@
 ﻿'use strict';
 
-
 try {
     var main = require("./main");
 

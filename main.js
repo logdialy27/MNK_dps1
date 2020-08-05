@@ -3,6 +3,7 @@ const player = require("./player");
 const enemy = require("./enemy");
 
 const combat = require("./combat");
+const version_info = require("./version_info");
 
 const logic = require("./logic");
 const fs = require('fs');
@@ -144,7 +145,7 @@ exports.run = function (result_file_prefix, p_target, equipset_aa, equipset_ws,e
     {
         // 集計結果出力
         var result = {}
-        result["VERSION"] = setting.VERSION();
+        result["VERSION"] = version_info.VERSION();
         result["target_player"] = p_target;
         result["equipset_aa"] = equipset_aa;
         result["equipset_ws"] = equipset_ws;

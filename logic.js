@@ -407,7 +407,7 @@ exports.AA_間隔 = function(player,line)
 {
     // 短縮キャップがあり武器間隔の1/5より短縮されることはない
     // 格闘の場合は(素手+武器)
-    var min_m = 1000 * (player.AttackSpeed() / 5) / 60;
+    var min_m = Math.floor(1000 * Math.floor(player.AttackSpeed() / 5) / 60);
     line["間隔:最低"] = min_m;
 
     // 得TPの基本間隔とは違って格闘と二刀流は/2の前の値
@@ -433,17 +433,17 @@ exports.AA_間隔 = function(player,line)
 
     }
 
-    var m = 1000 * w / 60;
-    line["間隔:武器"] = m;
+    w = Math.floor(w);
+    line["間隔:武器間隔2"] = w;
 
     // 装備枠ヘイスト加算
     var h = 0;
     h = player.EquipHaste() + player.MagicHaste();
 
     // 両手武器の場合は八双とラストリゾートの加算
-    var w = player.WeaponType();
-    if (w == "両手剣" || w == "両手斧" || w == "両手槍" || w == "両手鎌" ||
-        w == "両手棍" || w == "両手刀") {
+    var wt = player.WeaponType();
+    if (wt == "両手剣" || wt == "両手斧" || wt == "両手槍" || wt == "両手鎌" ||
+        wt == "両手棍" || wt == "両手刀") {
 
         h = h + player.HassoHaste();
         h = h + player.LastResortHaste();
@@ -458,8 +458,12 @@ exports.AA_間隔 = function(player,line)
 
     line["間隔:ヘイスト合計"] = h;
 
-    m = Math.floor(m * (100 - h) / 100.0);
-    line["間隔:装備ヘイスト後"] = m;
+    w= Math.floor(w * (100 - h) / 100.0);
+    line["間隔:装備ヘイスト後"] = w;
+
+    // 以降ミリ秒
+    var m = Math.floor(1000 * w / 60);
+    line["間隔:武器"] = m;
 
     if (m < min_m) {
         m = min_m;
@@ -569,29 +573,6 @@ exports.get_得TP_クリティカル = function (player,AA, line) {
 
     line["得TPクリ:TP"] = gain_TP;
     return gain_TP;
-}
-
-// 連携の受付開始時間
-exports.min連携受付時間 = function () {
-    return 2000;
-}
-
-// 連携の受付終了時間
-exports.max連携受付時間 = function (n) {
-    switch (n) {
-        case 1:
-            return 9000;
-        case 2:
-            return 8000;
-        case 3:
-            return 7000;
-        case 4:
-            return 6000;
-        case 5:
-            return 5000;
-        default:
-            return 5000;
-    }
 }
 
 // ミシックのAM3
