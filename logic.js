@@ -784,6 +784,12 @@ exports.rand_min_max = function (min, max) {
 // 指定範囲に含まれているかを判定
 // min<= value < max
 exports.contains = function (value, min, max) {
+    if (min == max) {
+        if (value == min) {
+            return true;
+        }
+    }
+
     if (value < min) {
         return false;
     }

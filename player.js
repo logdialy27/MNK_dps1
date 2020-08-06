@@ -126,7 +126,7 @@ exports.n_equipset = 0;
 // x = AA遅延時間
 // y = 行動禁止時間
 exports.on_timer = function(current_time,line){
-    if (impl) {
+    if (impl.on_timer) {
         return impl.on_timer(current_time, line);
     } else {
         return [0,0];
@@ -135,7 +135,7 @@ exports.on_timer = function(current_time,line){
 
 // WS実行後に呼び出される
 exports.on_ws_done = function (current_time, ws_name, line) {
-    if (impl) {
+    if (impl.on_ws_done) {
         return impl.on_ws_done(current_time, ws_name, line);
     } else {
         return 0;

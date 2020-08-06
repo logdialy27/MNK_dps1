@@ -20,11 +20,21 @@ exports.Load = function (name) {
         bom: true
     });
 
-    for (var y = 0; y < records.length; ++y) {
+    for (var y = 1; y < records.length; ++y) {
         var k = records[y][2];
         tsv[k] = {};
         for (var x = 3; x < records[y].length; ++x) {
-            tsv[k][x] = records[y][x];
+            var v = records[y][x];
+            var n = Number(v);
+            if (!isNaN(n)) {
+                tsv[k][records[0][x]] = n;
+            } else {
+                if (v == "") {
+                    tsv[k][records[0][x]] = null;
+                } else {
+                    tsv[k][records[0][x]] = v;
+                }
+            }
         }
     }
        
@@ -42,6 +52,14 @@ exports.Name = function () {
 // 装備セット番号
 // この番号を参照し装備に対応する返却値を調節する
 exports.n_equipset = 0;
+
+exports.WS_TP = function () {
+    if (tsv.WS_TP && tsv.WS_TP[this.n_equipset]) {
+        return tsv.WS_TP[this.n_equipset];
+    } else {
+        return 1000;
+    }
+}
 
 exports.STR = function () {
     if (tsv.STR && tsv.STR[this.n_equipset]) {
@@ -264,7 +282,7 @@ exports.STP = function () {
     if (tsv.STP && tsv.STP[this.n_equipset]) {
         return tsv.STP[this.n_equipset];
     } else {
-        return 1;
+        return 0;
     }
 }
 
@@ -272,7 +290,7 @@ exports.DA = function () {
     if (tsv.DA && tsv.DA[this.n_equipset]) {
         return tsv.DA[this.n_equipset];
     } else {
-        return 1;
+        return 0;
     }
 }
 
@@ -280,7 +298,7 @@ exports.TA = function () {
     if (tsv.TA && tsv.TA[this.n_equipset]) {
         return tsv.TA[this.n_equipset];
     } else {
-        return 1;
+        return 0;
     }
 }
 
@@ -288,7 +306,7 @@ exports.QA = function () {
     if (tsv.QA && tsv.QA[this.n_equipset]) {
         return tsv.QA[this.n_equipset];
     } else {
-        return 1;
+        return 0;
     }
 }
 
@@ -298,7 +316,7 @@ exports.MythicAM3 = function () {
     if (tsv.MythicAM3 && tsv.MythicAM3[this.n_equipset]) {
         return tsv.MythicAM3[this.n_equipset];
     } else {
-        return 1;
+        return false;
     }
 }
 
@@ -306,7 +324,7 @@ exports.複数回攻撃 = function () {
     if (tsv.複数回攻撃 && tsv.複数回攻撃[this.n_equipset]) {
         return tsv.複数回攻撃[this.n_equipset];
     } else {
-        return 1;
+        return 0;
     }
 }
 
@@ -314,7 +332,7 @@ exports.Sub複数回攻撃 = function () {
     if (tsv.Sub複数回攻撃 && tsv.Sub複数回攻撃[this.n_equipset]) {
         return tsv.Sub複数回攻撃[this.n_equipset];
     } else {
-        return 1;
+        return 0;
     }
 }
 
@@ -322,7 +340,7 @@ exports.Pursuit = function () {
     if (tsv.Pursuit && tsv.Pursuit[this.n_equipset]) {
         return tsv.Pursuit[this.n_equipset];
     } else {
-        return 1;
+        return 0;
     }
 }
 
@@ -330,7 +348,7 @@ exports.Daken = function () {
     if (tsv.Daken && tsv.Daken[this.n_equipset]) {
         return tsv.Daken[this.n_equipset];
     } else {
-        return 1;
+        return 0;
     }
 }
 
@@ -338,7 +356,7 @@ exports.Kick = function () {
     if (tsv.Kick && tsv.Kick[this.n_equipset]) {
         return tsv.Kick[this.n_equipset];
     } else {
-        return 1;
+        return 0;
     }
 }
 
@@ -346,7 +364,7 @@ exports.Critical = function () {
     if (tsv.Critical && tsv.Critical[this.n_equipset]) {
         return tsv.Critical[this.n_equipset];
     } else {
-        return 1;
+        return 0;
     }
 }
 
@@ -354,7 +372,7 @@ exports.SubCritical = function () {
     if (tsv.SubCritical && tsv.SubCritical[this.n_equipset]) {
         return tsv.SubCritical[this.n_equipset];
     } else {
-        return 1;
+        return 0;
     }
 }
 
@@ -362,7 +380,7 @@ exports.RangedCritical = function () {
     if (tsv.RangedCritical && tsv.RangedCritical[this.n_equipset]) {
         return tsv.RangedCritical[this.n_equipset];
     } else {
-        return 1;
+        return 0;
     }
 }
 
@@ -370,7 +388,7 @@ exports.MagicCritical = function () {
     if (tsv.MagicCritical && tsv.MagicCritical[this.n_equipset]) {
         return tsv.MagicCritical[this.n_equipset];
     } else {
-        return 1;
+        return 0;
     }
 }
 
@@ -378,7 +396,7 @@ exports.MagicCriticalDamage = function () {
     if (tsv.MagicCriticalDamage && tsv.MagicCriticalDamage[this.n_equipset]) {
         return tsv.MagicCriticalDamage[this.n_equipset];
     } else {
-        return 1;
+        return 0;
     }
 }
 
@@ -386,7 +404,7 @@ exports.CriticalDown = function () {
     if (tsv.CriticalDown && tsv.CriticalDown[this.n_equipset]) {
         return tsv.CriticalDown[this.n_equipset];
     } else {
-        return 1;
+        return 0;
     }
 }
 
@@ -394,7 +412,7 @@ exports.CriticalDamage = function () {
     if (tsv.CriticalDamage && tsv.CriticalDamage[this.n_equipset]) {
         return tsv.CriticalDamage[this.n_equipset];
     } else {
-        return 1;
+        return 0;
     }
 }
 
@@ -402,7 +420,7 @@ exports.SkillchainBonus = function () {
     if (tsv.SkillchainBonus && tsv.SkillchainBonus[this.n_equipset]) {
         return tsv.SkillchainBonus[this.n_equipset];
     } else {
-        return 1;
+        return 0;
     }
 }
 
@@ -410,7 +428,7 @@ exports.魔法ダメージ = function () {
     if (tsv.魔法ダメージ && tsv.魔法ダメージ[this.n_equipset]) {
         return tsv.魔法ダメージ[this.n_equipset];
     } else {
-        return 1;
+        return 0;
     }
 }
 
@@ -423,7 +441,7 @@ exports.Affinity = function (element) {
     if (tsv.Affinity && tsv.Affinity[this.n_equipset]) {
         return tsv.Affinity[this.n_equipset][getElementIdx(element)];
     } else {
-        return 1;
+        return 0;
     }
 }
 
@@ -431,7 +449,7 @@ exports.天候曜日 = function (element) {
     if (tsv.天候曜日 && tsv.天候曜日[this.n_equipset]) {
         return tsv.天候曜日[this.n_equipset][getElementIdx(element)];
     } else {
-        return 1;
+        return 0;
     }
 }
 
@@ -439,7 +457,7 @@ exports.属性杖 = function (element) {
     if (tsv.属性杖 && tsv.属性杖[this.n_equipset]) {
         return tsv.属性杖[this.n_equipset][getElementIdx(element)];
     } else {
-        return 1;
+        return 0;
     }
 }
 
@@ -447,7 +465,7 @@ exports.虚誘 = function (element) {
     if (tsv.虚誘 && tsv.虚誘[this.n_equipset]) {
         return tsv.虚誘[this.n_equipset][getElementIdx(element)];
     } else {
-        return 1;
+        return 0;
     }
 }
 
@@ -641,11 +659,7 @@ exports.WS_DamageUp3 = function (name) {
 }
 
 exports.WS_list = function () {
-    if (tsv.WS_list && tsv.WS_list[this.n_equipset]) {
-        return [tsv.WS_list[this.n_equipset]];
-    } else {
-        return [];
-    }
+    return [this.WS()];
 }
 
 exports.WS = function () {
@@ -777,17 +791,21 @@ exports.equip_インピタス性能アップ = function () {
 }
 
 exports.equip_クリティカルヒット時TP = function () {
-    if (tsv.equip_クリティカルヒット時TP) {
-        return tsv.equip_クリティカルヒット時TP();
+    if (tsv.equip_クリティカルヒット時TP && tsv.equip_クリティカルヒット時TP[this.n_equipset]) {
+        return tsv.equip_クリティカルヒット時TP[this.n_equipset];
     } else {
         return 0;
     }
 }
 
 exports.equip_クリティカルヒット時ストアTP = function () {
-    if (tsv.equip_クリティカルヒット時ストアTP) {
-        return tsv.equip_クリティカルヒット時ストアTP();
+    if (tsv.equip_クリティカルヒット時ストアTP && tsv.equip_クリティカルヒット時ストアTP[this.n_equipset]) {
+        return tsv.equip_クリティカルヒット時ストアTP[this.n_equipset];
     } else {
         return 0;
     }
+
+    
+    
 }
+

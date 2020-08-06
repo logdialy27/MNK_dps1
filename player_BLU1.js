@@ -274,7 +274,7 @@ exports.EquipHaste = function () {
     if (this.n_equipset == 0) {
         return Math.min(25,(4 + 8 + 4 + 5 + 6 + 4));
     } else {
-        return Math.min(25, (4 +8 + 4 + 5 + 6 + 4));
+        return Math.min(25,(4 +8 + 4 + 5 + 6 + 4));
     }
 }
 
@@ -371,7 +371,7 @@ exports.ウェポンスキル使用時TPを消費しない = function () {
     if (this.n_equipset == 0) {
         return 0;
     } else {
-        return 0;
+        return 1;
     }
 }
 
