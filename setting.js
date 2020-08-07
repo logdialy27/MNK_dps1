@@ -1,22 +1,17 @@
 ﻿
-// バージョン文字列
-exports.VERSION = function () {
-    return "GBBunEBV7WwP";
-}
-
 // デバッグ出力
 exports.DEBUG = function () {
-    //return true;
     return false;
+    //return true;
 }
 // 最大実行時間
 // ミリ秒
 exports.end_time = function () {
     // return 120 * 10 * 60 * 1000; // 120分
-    return 6 * 10 * 60 * 1000; // 60分
-    //return 1 * 3 * 60 * 1000; // 10分
+    //return 6 * 10 * 60 * 1000; // 60分
+    //return 1 * 60 * 1000; // 10分
     //return 160 * 1000;
-    //return 30*24*  60 * 60 * 1000; // 30日
+    return 30*24*  60 * 60 * 1000; // 30日
     //return 60 * 24 * 60 * 60 * 1000; // 60日
 }
 

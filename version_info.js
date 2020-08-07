@@ -1,9 +1,10 @@
 ﻿// バージョン文字列
 exports.VERSION = function () {
-    return "GJELBQSCi7EA";
+    return "Jze52iLJVFHY";
 }
 
 const version_history =
 {
-    "GJELBQSCi7EA":"2020080501",
+    "Jze52iLJVFHY": "2020080701",
+    "GJELBQSCi7EA": "2020080501",
 }

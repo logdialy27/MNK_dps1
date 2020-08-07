@@ -660,7 +660,7 @@ exports.on_skillchain = function (player,enemy, line) {
         var element_all = skillchain.get_last_element();
 
         // 適用する属性の決定
-        var element = skillchain.連携の適用属性(element_all,enemy,line);
+        var element = skillchain.連携の適用属性(count,element_all,enemy,line);
 
         // 連携倍率
         var xN = skillchain.連携倍率(count, lv,line) / 100;
@@ -672,7 +672,7 @@ exports.on_skillchain = function (player,enemy, line) {
             line["連携ダメージ1:ws"] = dmg;
 
             // 属性耐性
-            dmg = Math.floor(dmg * (enemy.属性耐性2(element)) / 100);
+            dmg = Math.floor(dmg * (enemy.属性耐性2(element )) / 100);
             line["連携ダメージ1:耐性"] = dmg;
 
             // アフィニティ枠
@@ -752,6 +752,10 @@ exports.on_skillchain = function (player,enemy, line) {
         if (setting.連携詳細()) {
             player.result_list("連携詳細:" + name, [dmg3, ws_dmg, lv, count, xN, enemy.属性耐性2(element)]);
         }
+
+        // 次回の連携時に下がる耐性
+        enemy.down_elements(element_all);
+        line["連携:耐性ダウン"] = element_all;
     }
 
     return 0;

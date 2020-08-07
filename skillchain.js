@@ -363,7 +363,7 @@ function test(last, ws) {
 }
 
 // 連携の適用属性決定
-exports.連携の適用属性 = function (element_all, enemy, line) {
+exports.連携の適用属性 = function (count,element_all, enemy, line) {
 
     if (element_all.length == 0) {
         // 連携属性定義誤り
@@ -375,6 +375,12 @@ exports.連携の適用属性 = function (element_all, enemy, line) {
     for (var i = 0; i < element_all.length; ++i) {
         var e = element_all[i];
         var e_v = enemy.属性耐性2(e);
+
+        // 耐性ダウンの段数を取得
+        var e_down = enemy.debuff_耐性ダウン(e,(count > 1));
+
+        // 耐性ダウン適用
+        e_v = test2(e_v, e_down, line);
 
         if (e_v > e_max) {
             e_max = e_v;
@@ -388,4 +394,30 @@ exports.連携の適用属性 = function (element_all, enemy, line) {
     line["連携:適用属性"] = e_ret;
     line["連携:適用属性値"] = e_max;
     return e_ret;
+}
+
+// 耐性ダウン後の耐性値の取得
+function test2(e_v, e_down,line) {
+
+    const t = [5, 10, 15, 20, 25, 30, 40, 50, 60, 70, 85, 100, 115, 130, 150];
+
+    line["耐性ダウン:value"] = e_v;
+    line["耐性ダウン:down"] = e_down;
+
+    for (var i = 0; i < t.length; ++i) {
+        if (t[i] == e_v) {
+
+            if (t[i + e_down]) {
+                e_v = t[i + e_down];
+            } else {
+                e_v = t[t.length - 1];
+            }
+
+            line["耐性ダウン:r"] = e_v;
+            return e_v;
+        }
+    }
+
+    line["耐性ダウン:r0"] = e_v;
+    return e_v;
 }

@@ -438,7 +438,7 @@ exports.AA_間隔 = function(player,line)
 
     // 装備枠ヘイスト加算
     var h = 0;
-    h = player.EquipHaste() + player.MagicHaste();
+    h = Math.min(25.0, player.EquipHaste()) + Math.min(43.75,player.MagicHaste());
 
     // 両手武器の場合は八双とラストリゾートの加算
     var wt = player.WeaponType();
@@ -447,6 +447,8 @@ exports.AA_間隔 = function(player,line)
 
         h = h + player.HassoHaste();
         h = h + player.LastResortHaste();
+
+        h = Math.min(25.0, h);
     }
 
     // ヘイストサンバ加算

@@ -1,4 +1,10 @@
 ﻿
+var n_skillchain_elements = null;
+
+exports.down_elements = function (e)
+{
+    n_skillchain_elements = e.concat();
+}
 
 // 定義実態jsのロード
 var impl = null;
@@ -139,6 +145,8 @@ exports.属性耐性2 = function (e) {
     }
 }
 
+
+
 // ガンビットが入っている属性一覧
 // 複数の同じルーンが入っている場合は複数記載
 exports.ガンビット = function () {
@@ -176,4 +184,27 @@ exports.toString = function () {
     ret["回避"] = this.Evasion();
 
     return JSON.stringify(JSON.stringify(ret));
+}
+
+
+exports.debuff_耐性ダウン = function (e, skillchain_done) {
+    var down = 0;
+
+    var t1 = this.レイク();
+    for (var i = 0; i < t1.length; ++i) {
+        if (e = t1[i]) {
+            down += 1;
+        }
+    }
+
+    if (this.n_skillchain_elements) {
+        var t2 = this.n_skillchain_elements;
+        for (var i = 0; i < t2.length; ++i) {
+            if (e = t2[i]) {
+                down += 1;
+            }
+        }
+    }
+
+    return down;
 }
