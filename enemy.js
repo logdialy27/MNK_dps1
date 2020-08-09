@@ -182,6 +182,7 @@ exports.toString = function () {
     ret["CHR"] = this.CHR();
     ret["防御"] = this.Defence();
     ret["回避"] = this.Evasion();
+    ret["属性耐性2"] = this.属性耐性2();
 
     return JSON.stringify(JSON.stringify(ret));
 }

@@ -160,10 +160,11 @@ exports.DA = function () {
 
 exports.TA = function () {
     if (this.n_equipset == 0) {
-        return 4 + 4+ 5 + 8;
+        // 頭 + 両手 + リング + 腰
+        return 4 + 4 + 5 + 8;
     } else {
-        // 頭 + 腰 + 脚 + 足
-        return 4 + 8 + 5 + 4;
+        // 頭 +  リング + 腰 + 脚 + 足
+        return 4 + 5 + 8 + 5 + 4;
     }
 }
 
@@ -189,9 +190,11 @@ exports.Pursuit = function () {
 // 蹴撃発動率
 exports.Kick = function () {
     if (this.n_equipset == 0) {
-        return (14+5) + 25 + 10 + 19;
+        // (特性 + メリポ) + 首 + 背中 + 脚 + 足
+        return (14 + 5) + 25 + 10 + 19 + 10;
     } else {
-        return (14+5) + 25 + 10;
+        // (特性 + メリポ) + 首 + 背中
+        return (14 + 5) + 25 + 10 ;
     }
 }
 
@@ -356,13 +359,13 @@ exports.WS_DamageUp3 = function (name) {
 
 // 使用する可能性のあるWS一覧
 exports.WS_list = function () {
-    //return ["四神円舞","ビクトリースマイト"];
-    return ["ビクトリースマイト"];
+    return ["四神円舞","ビクトリースマイト"];
+    //return ["ビクトリースマイト"];
 }
 
 var ws_idx = 0;
-//const ws_list = ["四神円舞", "ビクトリースマイト", "ビクトリースマイト"];
-const ws_list = ["ビクトリースマイト"];
+const ws_list = ["四神円舞", "ビクトリースマイト", "ビクトリースマイト"];
+//const ws_list = ["ビクトリースマイト"];
 // 使用するWS名
 exports.WS = function () {
 

@@ -188,9 +188,11 @@ exports.Pursuit = function () {
 // 蹴撃発動率
 exports.Kick = function () {
     if (this.n_equipset == 0) {
-        return (14+5) + 25 + 10 + 19;
+        // (特性 + メリポ) + 首 + 背中 + 脚 + 足
+        return (14 + 5) + 25 + 10 + 19 + 10;
     } else {
-        return (14+5) + 25 + 10;
+        // (特性 + メリポ) + 首 + 背中
+        return (14 + 5) + 25 + 10;
     }
 }
 

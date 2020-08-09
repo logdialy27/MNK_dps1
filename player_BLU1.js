@@ -68,8 +68,8 @@ exports.CHR = function () {
 
 // メインのD値
 exports.D = function () {
-    //return 158 + 5;
-    return 167;
+    return 158 + 5;
+    //return 167;
 }
 
 // 攻撃間隔

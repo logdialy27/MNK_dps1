@@ -408,6 +408,7 @@ exports.AA_間隔 = function(player,line)
     // 短縮キャップがあり武器間隔の1/5より短縮されることはない
     // 格闘の場合は(素手+武器)
     var min_m = Math.floor(1000 * Math.floor(player.AttackSpeed() / 5) / 60);
+
     line["間隔:最低"] = min_m;
 
     // 得TPの基本間隔とは違って格闘と二刀流は/2の前の値
@@ -436,27 +437,24 @@ exports.AA_間隔 = function(player,line)
     w = Math.floor(w);
     line["間隔:武器間隔2"] = w;
 
-    // 装備枠ヘイスト加算
-    var h = 0;
-    h = Math.min(25.0, player.EquipHaste()) + Math.min(43.75,player.MagicHaste());
+    // 魔法枠と装備枠ヘイスト加算
+    var h1 = Math.min(25.0, player.EquipHaste()) + Math.min(43.75,player.MagicHaste());
 
+    // アビリティ枠ヘイスト
+    var h2 = 0;
     // 両手武器の場合は八双とラストリゾートの加算
     var wt = player.WeaponType();
     if (wt == "両手剣" || wt == "両手斧" || wt == "両手槍" || wt == "両手鎌" ||
         wt == "両手棍" || wt == "両手刀") {
 
-        h = h + player.HassoHaste();
-        h = h + player.LastResortHaste();
+        h2 = h2 + player.HassoHaste();
+        h2 = h2 + player.LastResortHaste();
 
-        h = Math.min(25.0, h);
     }
-
     // ヘイストサンバ加算
-    h = h + player.SambaHaste();
+    h2 = Math.min(h2 + player.SambaHaste(), 25);
 
-    if (h >= 100) {
-        h = 100;
-    }
+    var h = h1 + h2;
 
     line["間隔:ヘイスト合計"] = h;
 

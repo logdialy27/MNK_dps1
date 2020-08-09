@@ -143,14 +143,17 @@ exports.Evasion = function () {
 // ストアTP
 exports.STP = function () {
     if (this.n_equipset == 0) {
+        // 投てき + 左耳 + 右耳 + 両手
         return 5 + 1 + 5 + 7;
-    } else{
-        return 5 + 1;
+    } else {
+        // 投てき + 左耳 + 右耳
+        return 5 + 1 + 5;
     }
 }
 
 exports.DA = function () {
     if (this.n_equipset == 0) {
+        // サポ戦  + 耳左 + 耳右 + 背中
         return (10) + 5 + 5 + 10;
     } else {
         // サポ戦  + 耳左 + 耳右
@@ -160,10 +163,11 @@ exports.DA = function () {
 
 exports.TA = function () {
     if (this.n_equipset == 0) {
+        // 頭 + 両手 + リング + 腰
         return 4 + 4+ 5 + 8;
     } else {
-        // 頭 + 腰 + 脚 + 足
-        return 4 + 8 + 5 + 4;
+        // 頭 +  リング + 腰 + 脚 + 足
+        return 4 + 5 + 8 + 5 + 4;
     }
 }
 
@@ -189,9 +193,11 @@ exports.Pursuit = function () {
 // 蹴撃発動率
 exports.Kick = function () {
     if (this.n_equipset == 0) {
-        return (14+5) + 25 + 10 + 19;
+        // (特性 + メリポ) + 首 + 背中 + 脚 + 足
+        return (14 + 5) + 25 + 10 + 19 + 10;
     } else {
-        return (14+5) + 25 + 10;
+        // (特性 + メリポ) + 首 + 背中
+        return (14 + 5) + 25 + 10;
     }
 }
 
@@ -353,7 +359,7 @@ exports.WS_DamageUp3 = function (name) {
 
 // 使用する可能性のあるWS一覧
 exports.WS_list = function () {
-    //return ["四神円舞","ビクトリースマイト"];
+//    return ["四神円舞","ビクトリースマイト"];
     return ["ビクトリースマイト"];
 }
 
