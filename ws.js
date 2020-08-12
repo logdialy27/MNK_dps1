@@ -4,6 +4,8 @@ const setting = require("./setting");
 
 const table_ws = {
     "シャンデュシニュ": ws_シャンデュシニュ,
+    "サンギンブレード": ws_サンギンブレード,
+
     "ウッコフューリー": ws_ウッコフューリー,
 
     "ビクトリースマイト": ws_ビクトリースマイト,
@@ -1074,8 +1076,6 @@ function ws_ウッコフューリー(player, enemy, line_p) {
     return [dmg, TP];
 }
 
-
-
 // WSのマルチが有効な段の共通処理
 // xN1:マルチの最初の倍率
 // xN2:初段以降の倍率
@@ -1354,7 +1354,60 @@ function ws_夢想阿修羅拳(player, enemy,line_p) {
     return helper_WSダメージ計算(list, BP_D, player, enemy, line);
 }
 
+
+// 属性WSダメージ計算の共通処理
+function helper_属性WSダメージ計算(name,element,base_dmg, xN, BP_D, 系統係数,player, enemy, line)
+{
+    var 属性WSD = player.属性ウェポンスキルダメージ();
+    var 魔法ダメージ = player.魔法ダメージ();
+
+    var d1 = ((base_dmg + BP_D) * (xN + player.WS_DamageUp0()) * (100 + 属性WSD)/100);
+    line["属性WSダメージ計算:d1"] = d1;
+
+    d1 = d1 + 魔法ダメージ + 系統係数;
+    line["属性WSダメージ計算:d1-b"] = d1;
+
+    var d2 = Math.floor(d1 * (100 + player.WS_DamageUp1()) / 100);
+    line["属性WSダメージ計算:d2"] = d2;
+    d3 = Math.floor(d2 * (100 + player.Affinity(element)) / 100);
+    line["属性WSダメージ計算:d3"] = d3;
+    d3 = Math.floor(d3 * (100 + player.天候曜日(element)) / 100);
+    line["属性WSダメージ計算:d4"] = d3;
+    d3 = Math.floor(d3 * (100 + logic.ガンビット(element, enemy.ガンビット())) / 100);
+    line["属性WSダメージ計算:d5"] = d3;
+    d3 = Math.floor(d3 * (100 + player.MagicAttack()) / enemy.魔防());
+    line["属性WSダメージ計算:d6"] = d3;
+    d3 = Math.floor(d3 * (100 + player.WS_DamageUp2()) / 100);
+    line["属性WSダメージ計算:d7"] = d3;
+    d3 = Math.floor(d3 * (100 + player.WS_DamageUp3(name)) / 100);
+    line["属性WSダメージ計算:d8"] = d3;
+
+    var gain_TP = logic.get_得TP(player, line);
+
+    return [d3, gain_TP];
+}
+
+// 片手剣:サンギンブレード
+function ws_サンギンブレード(player, enemy, line_p) {
+
+    var line = line_p;
+
+    var base_dmg = logic.属性WS基本D(player,line);
+    var xN = 2.75;
+    var BP_D = Math.floor(player.STR() * 30 / 100) + Math.floor(player.MND() * 50 / 100);
+    
+    var 系統係数;
+    
+    if (player.INT() > enemy.INT()) {
+        系統係数 = Math.abs(player.INT() - enemy.INT()) * 2;
+    } else {
+        系統係数 = Math.abs(player.INT() - enemy.INT()) * 1.5;
+    }
+
+    return helper_属性WSダメージ計算("サンギンブレード", "闇", base_dmg, xN, BP_D,系統係数,player,enemy,line);
+}
+
 // 両手剣:トアクリーバー
 function ws_トアクリーバー() {
-    return [0,0];
+    return [0, 0];
 }

@@ -201,9 +201,9 @@ exports.Kick = function () {
 // ※WSのクリティカル補正除く
 exports.Critical = function () {
     if (this.n_equipset == 0) {
-        return 8 + (3 + 5);  // 末尾の3+5はメリポとイオニス
+        return 8 + (0 + 5);  // 末尾の3+5はメリポとイオニス
     } else {
-        return 5 + 5 + 5 + 10 + 7 + 5 + (3 + 5);// 末尾の3+5はメリポとイオニス
+        return 5 + 5 + 5 + 10 + 7 + 5 + (0 + 5);// 末尾の3+5はメリポとイオニス
     }
 }
 

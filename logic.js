@@ -873,3 +873,13 @@ exports.コンサーブTP = function(player, line)
 
     return 0;
 }
+
+exports.属性WS基本D = function (player, line) {
+    var w_lv = 119;
+
+    if (w_lv <= 99) {
+        return w_lv * 1.5 + 5;
+    } else {
+        return 99 * 1.5 + 5 + (w_lv - 100) * 2.5;
+    }
+}

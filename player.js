@@ -707,7 +707,7 @@ exports.SambaHaste = function () {
     if (impl.SambaHaste) {
         return impl.SambaHaste();
     } else {
-        return 0;
+        return 10;
     }
 }
 
@@ -860,6 +860,16 @@ exports.WS_DamageUp2 = function () {
 exports.WS_DamageUp3 = function (name) {
     if (impl.WS_DamageUp3) {
         return impl.WS_DamageUp3(name);
+    } else {
+        return 0;
+    }
+}
+
+// 属性ウェポンスキルダメージ
+// クロセアモースやシャランガのオーグメント
+exports.属性ウェポンスキルダメージ = function () {
+    if (impl.属性ウェポンスキルダメージ) {
+        return impl.属性ウェポンスキルダメージ(name);
     } else {
         return 0;
     }
@@ -1019,6 +1029,30 @@ exports.セーブTP = function () {
 exports.コンサーブTP = function () {
     if (impl.コンサーブTP) {
         return impl.コンサーブTP();
+    } else {
+        return 0;
+    }
+}
+
+exports.被物理ダメージ = function () {
+    if (impl.被物理ダメージ) {
+        return impl.被物理ダメージ();
+    } else {
+        return 0;
+    }
+}
+
+exports.被魔法ダメージ = function () {
+    if (impl.被魔法ダメージ) {
+        return impl.被魔法ダメージ();
+    } else {
+        return 0;
+    }
+}
+
+exports.被ダメージ = function () {
+    if (impl.被ダメージ) {
+        return impl.被ダメージ();
     } else {
         return 0;
     }

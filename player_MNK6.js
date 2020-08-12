@@ -3,7 +3,7 @@ exports.n_equipset = 0;
 
 // プレイヤー名
 exports.Name = function () {
-    return "MNK/WAR/ビクスマ/テスト用";
+    return "MNK/WAR/ビクスマ/調整装備";
 }
 
 // playerの各種ステータス
@@ -12,17 +12,19 @@ exports.Name = function () {
 //
 exports.STR = function () {
     if (this.n_equipset == 0) {
-        return 107+265;
+        return 107+253;
     } else {
         return 107+283;
+        //return 107 + 240;
     }
 }
 
 exports.DEX = function () {
     if (this.n_equipset == 0) {
-        return 106 + 260;
+        return 106 + 282;
     } else {
-        return 106 + 234;
+        return 106 + 244;
+        //return 106 + 222;
     }
 }
 
@@ -122,15 +124,15 @@ exports.Defense = function () {
 
 exports.Accuracy = function () {
     if (this.n_equipset == 0) {
-        return 1293;
+        return 1311;
     } else {
-        return 1280;
+        return 1297;
     }
 }
 
 exports.Evasion = function () {
     if (this.n_equipset == 0) {
-        return 843;
+        return 869;
     } else {
         return 847;
     }
@@ -139,21 +141,21 @@ exports.Evasion = function () {
 // ストアTP
 exports.STP = function () {
     if (this.n_equipset == 0) {
-        // 投てき + 左耳 + 右耳 + 両手
-        return 5 + 1 + 5 + 7;
+        // 投てき + 右耳 + 両手
+        return 5 + 5 + 7;
     } else {
-        // 投てき + 左耳 + 右耳
-        return 5 + 1 + 5;
+        // 投てき + 右耳
+        return 5 + 5;
     }
 }
 
 exports.DA = function () {
     if (this.n_equipset == 0) {
-        // サポ戦  + 耳左 + 耳右 + 背中
-        return (10) + 5 + 5 + 10;
+        // サポ戦  + 耳右 + 背中
+        return (10) + 5 + 10;
     } else {
-        // サポ戦  + 耳左 + 耳右
-        return (10) + 5 + 5  ;
+        // サポ戦  + 耳右 
+        return (10) + 5 ;
     }
 }
 
@@ -204,10 +206,10 @@ exports.Kick = function () {
 exports.Critical = function () {
     if (this.n_equipset == 0) {
         // 脚と耳とアデマのコンビ
-        return 8 + (3 + 5) + 2;  // 末尾の3+5はメリポとイオニス
+        return 8 + 5 + (3 + 5) + 2;  // 末尾の3+5はメリポとイオニス 
     } else {
-        // 両手+マント+脚+足の順
-        return  5 + 10 + 7 + 5 + (3 + 5);// 末尾の3+5はメリポとイオニス
+        // 両手+耳+脚+足+背中
+        return  5 + 5 + 7 + 5 + 10 + (3 + 5);// 末尾の3+5はメリポとイオニス
     }
 }
 

@@ -3,7 +3,7 @@ exports.n_equipset = 0;
 
 // プレイヤー名
 exports.Name = function () {
-    return "MNK/WAR/ビクスマ/サギッタA/調整後";
+    return "MNK/WAR/ビクスマ/サギッタA/調整装備";
 }
 
 // playerの各種ステータス
@@ -143,18 +143,21 @@ exports.Evasion = function () {
 // ストアTP
 exports.STP = function () {
     if (this.n_equipset == 0) {
-        return 5 + 1 + 5 + 7 + 25;
-    } else{
-        return 5 + 1 + 25;
+        // 投てき + 右耳 + 両手
+        return 5 + 5 + 7 + 25;
+    } else {
+        // 投てき + 右耳
+        return 5 + 5 + 25;
     }
 }
 
 exports.DA = function () {
     if (this.n_equipset == 0) {
-        return (10) + 2 + 5 + 10;
+        // サポ戦  + 耳右 + 背中
+        return (10) + 5 + 10;
     } else {
-        // サポ戦  + 耳左 + 耳右
-        return (10) + 5 + 5  ;
+        // サポ戦  + 耳右
+        return (10) + 5;
     }
 }
 
@@ -204,10 +207,11 @@ exports.Kick = function () {
 // ※WSのクリティカル補正除く
 exports.Critical = function () {
     if (this.n_equipset == 0) {
-        return 8 + (3 + 5);  // 末尾の3+5はメリポとイオニス
+        // 脚と耳とアデマのコンビ
+        return 8 + 5 + (3 + 5) + 2;  // 末尾の3+5はメリポとイオニス
     } else {
-        // 両手+マント+脚+足の順
-        return  5 + 10 + 7 + 5 + (3 + 5);// 末尾の3+5はメリポとイオニス
+        // 両手+耳+脚+足+背中
+        return 5 + 5 + 7 + 5 + 10 + (3 + 5);// 末尾の3+5はメリポとイオニス
     }
 }
 
@@ -363,13 +367,13 @@ exports.WS_DamageUp3 = function (name) {
 
 // 使用する可能性のあるWS一覧
 exports.WS_list = function () {
-    return ["四神円舞","ビクトリースマイト"];
-    //return ["ビクトリースマイト"];
+    //return ["四神円舞","ビクトリースマイト"];
+    return ["ビクトリースマイト"];
 }
 
 var ws_idx = 0;
-const ws_list = ["四神円舞", "ビクトリースマイト", "ビクトリースマイト"];
-//const ws_list = ["ビクトリースマイト"];
+//const ws_list = ["四神円舞", "ビクトリースマイト", "ビクトリースマイト"];
+const ws_list = ["ビクトリースマイト"];
 // 使用するWS名
 exports.WS = function () {
 

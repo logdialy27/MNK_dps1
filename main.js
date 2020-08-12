@@ -224,7 +224,7 @@ exports.run = function (result_file_prefix, p_target, equipset_aa, equipset_ws,e
         result["TP:AA得TP平均"] = average(player.r_list["TP"]);
         result["TP:与TP平均"] = average(player.r_list["与TP"]);
 
-        result["間隔:WS実行間隔"] = average(player.r_list["WS実行間隔"]);
+        result["間隔:WS実行間隔(ミリ秒)"] = average(player.r_list["WS実行間隔"]);
 
         // 再計算項目
         result["命中率"] = 100 * (player.r_count["クリティカル"] + player.r_count["攻撃"]) /
@@ -243,8 +243,11 @@ exports.run = function (result_file_prefix, p_target, equipset_aa, equipset_ws,e
         result["(テスト中)DPS:AA+エン+WS"] = (result["合計:AA+エン+WS"]) / result["経過時間(秒)"];
         result["(テスト中)DPS:AA+エン+WS+連携"] = (result["合計:AA+エン+WS+連携"]) / result["経過時間(秒)"];
 
-
+        // JSON出力
         output_to_json(result_file_prefix + "_all.txt", result, true);
+
+        // TSVも出力
+        output_to_tsv(result_file_prefix + "_all_tsv.txt",result);
 
     }
 }
@@ -256,6 +259,28 @@ function get_attack_speed(player, line) {
     return logic.AA_間隔(player, line);
 }
 
+// TSV形式出力
+function output_to_tsv(output_file, result)
+{
+    // 実行結果ファイル出力
+    var result_fd = fs.openSync(output_file, 'w');
+
+    for (var i in result) {
+        if (result[i] == undefined || result[i] == null) {
+            fs.writeSync(result_fd, i + "\t\n");
+        } else if (typeof result[i] == "string") {
+            fs.writeSync(result_fd, i + "\t" + result[i] + "\n");
+        } else if (!isNaN(result[i])) {
+            fs.writeSync(result_fd, i + "\t" + result[i] + "\n");
+        } else {
+            fs.writeSync(result_fd, i + "\t\n");
+        }
+    }
+
+    fs.closeSync(result_fd);
+}
+
+// JSON形式出力
 function output_to_json(output_file, result,format) {
     // 実行結果ファイル出力
     var result_fd = fs.openSync(output_file, 'w');
@@ -266,13 +291,6 @@ function output_to_json(output_file, result,format) {
         fs.writeSync(result_fd, JSON.stringify(result));
     }
 
-    fs.closeSync(result_fd);
-}
-
-function output_to_tsv(output_file, result) {
-    // 実行結果ファイル出力
-    var result_fd = fs.openSync(output_file, 'w');
-    fs.writeSync(result_fd, JSON.stringify(result));
     fs.closeSync(result_fd);
 }
 

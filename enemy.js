@@ -126,6 +126,40 @@ exports.Evasion = function () {
     }
 }
 
+// 魔防
+exports.魔防 = function () {
+    if (impl.魔防) {
+        return impl.魔防();
+    } else {
+        return 100;
+    }
+}
+
+exports.被物理ダメージ = function () {
+    if (impl.被物理ダメージ) {
+        return impl.被物理ダメージ();
+    } else {
+        return 0;
+    }    
+}
+
+exports.被魔法ダメージ = function () {
+    if (impl.被魔法ダメージ) {
+        return impl.被魔法ダメージ();
+    } else {
+        return 0;
+    }
+}
+
+exports.被ダメージ = function () {
+    if (impl.被ダメージ) {
+        return impl.被ダメージ();
+    } else {
+        return 0;
+    }
+}
+
+
 // バ系で増加やスレノディで対象となる属性耐性
 exports.属性耐性1 = function (e) {
     if (impl.属性耐性1) {

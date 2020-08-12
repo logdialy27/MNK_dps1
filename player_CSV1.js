@@ -658,6 +658,14 @@ exports.WS_DamageUp3 = function (name) {
     }
 }
 
+exports.属性ウェポンスキルダメージ = function () {
+    if (tsv.属性ウェポンスキルダメージ && tsv.属性ウェポンスキルダメージ[this.n_equipset]) {
+        return tsv.属性ウェポンスキルダメージ[this.n_equipset];
+    } else {
+        return 0;
+    }
+}
+
 exports.WS_list = function () {
     return [this.WS()];
 }
@@ -769,6 +777,30 @@ exports.セーブTP = function () {
 exports.コンサーブTP = function () {
     if (tsv.コンサーブTP && tsv.コンサーブTP[this.n_equipset]) {
         return tsv.コンサーブTP[this.n_equipset];
+    } else {
+        return 0;
+    }
+}
+
+exports.被物理ダメージ = function () {
+    if (tsv.被物理ダメージ && tsv.被物理ダメージ[this.n_equipset]) {
+        return tsv.被物理ダメージ[this.n_equipset];
+    } else {
+        return 0;
+    }
+}
+
+exports.被魔法ダメージ = function () {
+    if (tsv.被魔法ダメージ && tsv.被魔法ダメージ[this.n_equipset]) {
+        return tsv.被魔法ダメージ[this.n_equipset];
+    } else {
+        return 0;
+    }
+}
+
+exports.被ダメージ = function () {
+    if (tsv.被ダメージ && tsv.被ダメージ[this.n_equipset]) {
+        return tsv.被ダメージ[this.n_equipset];
     } else {
         return 0;
     }
