@@ -86,6 +86,8 @@ exports.result_dist = function (name, v, n,c) {
 
 }
 
+var zone = require("./zone");
+
 // 定義jsのロード
 var impl = null;
 
@@ -189,7 +191,7 @@ exports.WS_TP = function () {
 // 
 exports.STR = function () {
     if (impl.STR) {
-        return impl.STR();
+        return impl.STR() + zone.STR();
     } else {
         return 1;
     }
@@ -197,7 +199,7 @@ exports.STR = function () {
 
 exports.DEX = function () {
     if (impl.DEX) {;
-        return impl.DEX();
+        return impl.DEX() + zone.DEX();
     } else {
         return 1;
     }
@@ -205,7 +207,7 @@ exports.DEX = function () {
 
 exports.VIT = function () {
     if (impl.VIT) {
-        return impl.VIT();
+        return impl.VIT() + zone.VIT();
     } else {
         return 1;
     }
@@ -213,7 +215,7 @@ exports.VIT = function () {
 
 exports.AGI = function () {
     if (impl.AGI) {
-        return impl.AGI();
+        return impl.AGI() + zone.AGI();
     } else {
         return 1;
     }
@@ -221,7 +223,7 @@ exports.AGI = function () {
 
 exports.INT = function () {
     if (impl.INT) {
-        return impl.INT();
+        return impl.INT() + zone.INT();
     } else {
         return 1;
     }
@@ -229,7 +231,7 @@ exports.INT = function () {
 
 exports.MND = function () {
     if (impl.MND) {
-        return impl.MND();
+        return impl.MND() + zone.MND();
     } else {
         return 1;
     }
@@ -237,7 +239,7 @@ exports.MND = function () {
 
 exports.CHR = function () {
     if (impl.CHR) {
-        return impl.CHR();
+        return impl.CHR() + zone.CHR();
     } else {
         return 1;
     }
@@ -245,7 +247,7 @@ exports.CHR = function () {
 
 exports.HP = function () {
     if (impl.HP) {
-        return impl.HP();
+        return impl.HP() + zone.HP();
     } else {
         return 1;
     }
@@ -253,7 +255,7 @@ exports.HP = function () {
 
 exports.MP = function () {
     if (impl.MP) {
-        return impl.MP();
+        return impl.MP() + zone.MP();
     } else {
         return 1;
     }
@@ -310,7 +312,7 @@ exports.KickD = function () {
 
 exports.Attack = function () {
     if (impl.Attack) {
-        return impl.Attack();
+        return impl.Attack() + zone.Attack();
     } else {
         return 1;
     }
@@ -318,7 +320,7 @@ exports.Attack = function () {
 
 exports.SubAttack = function () {
     if (impl.SubAttack) {
-        return impl.SubAttack();
+        return impl.SubAttack() + zone.SubAttack();
     } else {
         return 1;
     }
@@ -326,7 +328,7 @@ exports.SubAttack = function () {
 
 exports.RangedAttack = function () {
     if (impl.RangedAttack) {
-        return impl.RangedAttack();
+        return impl.RangedAttack() + zone.RangedAttack();
     } else {
         return 1;
     }
@@ -334,7 +336,7 @@ exports.RangedAttack = function () {
 
 exports.Defense = function () {
     if (impl.Defense) {
-        return impl.Defense();
+        return impl.Defense() + zone.Defense();
     } else {
         return 1;
     }
@@ -342,7 +344,7 @@ exports.Defense = function () {
 
 exports.Accuracy = function () {
     if (impl.Accuracy) {
-        return impl.Accuracy();
+        return impl.Accuracy() + zone.Accuracy();
     } else {
         return 0;
     }
@@ -350,7 +352,7 @@ exports.Accuracy = function () {
 
 exports.SubAccuracy = function () {
     if (impl.SubAccuracy) {
-        return impl.SubAccuracy();
+        return impl.SubAccuracy() + zone.SubAccuracy();
     } else {
         return 0;
     }
@@ -358,7 +360,7 @@ exports.SubAccuracy = function () {
 
 exports.RangedAccuracy = function () {
     if (impl.RangedAccuracy) {
-        return impl.RangedAccuracy();
+        return impl.RangedAccuracy() + zone.RangedAccuracy();
     } else {
         return 0;
     }
@@ -374,7 +376,7 @@ exports.RangedD = function () {
 
 exports.MagicAttack = function () {
     if (impl.MagicAttack) {
-        return impl.MagicAttack();
+        return impl.MagicAttack() + zone.MagicAttack();
     } else {
         return 1;
     }
@@ -382,7 +384,7 @@ exports.MagicAttack = function () {
 
 exports.MagicAccuracy = function () {
     if (impl.MagicAccuracy) {
-        return impl.MagicAccuracy();
+        return impl.MagicAccuracy() + zone.MagicAccuracy();
     } else {
         return 1;
     }
@@ -390,7 +392,7 @@ exports.MagicAccuracy = function () {
 
 exports.MagicDefense = function () {
     if (impl.MagicDefense) {
-        return impl.MagicDefense();
+        return impl.MagicDefense() + zone.MagicDefense();
     } else {
         return 1;
     }
@@ -398,7 +400,7 @@ exports.MagicDefense = function () {
 
 exports.Evasion = function () {
     if (impl.Evasion) {
-        return impl.Evasion();
+        return impl.Evasion() + zone.Evasion();
     } else {
         return 1;
     }
@@ -406,7 +408,7 @@ exports.Evasion = function () {
 
 exports.MagicEvasion = function () {
     if (impl.MagicEvasion) {
-        return impl.MagicEvasion();
+        return impl.MagicEvasion() + zone.MagicEvasion();
     } else {
         return 1;
     }
@@ -512,7 +514,7 @@ exports.Kick = function () {
 // ※インピタスは除く
 exports.Critical = function () {
     if (impl.Critical) {
-        return impl.Critical();
+        return impl.Critical() + zone.Critical();
     } else {
         return 0;
     }
@@ -522,7 +524,7 @@ exports.Critical = function () {
 // 武器に付与されているプロパティ「クリティカルヒット+」は、基本的にその武器での攻撃にしか適用されない。
 exports.SubCritical = function () {
     if (impl.SubCritical) {
-        return impl.SubCritical();
+        return impl.SubCritical() + zone.SubCritical();
     } else {
         return 0;
     }
@@ -531,7 +533,7 @@ exports.SubCritical = function () {
 // 遠隔のクリティカル
 exports.RangedCritical = function () {
     if (impl.RangedCritical) {
-        return impl.RangedCritical();
+        return impl.RangedCritical() + zone.RangedCritical();
     } else {
         return 0;
     }
@@ -707,7 +709,7 @@ exports.SambaHaste = function () {
     if (impl.SambaHaste) {
         return impl.SambaHaste();
     } else {
-        return 10;
+        return 0;
     }
 }
 
@@ -1019,7 +1021,7 @@ exports.モクシャ = function () {
 // セーブTP
 exports.セーブTP = function () {
     if (impl.セーブTP) {
-        return impl.セーブTP();
+        return impl.セーブTP() + zone.セーブTP();
     } else {
         return 0;
     }
@@ -1052,7 +1054,7 @@ exports.被魔法ダメージ = function () {
 
 exports.被ダメージ = function () {
     if (impl.被ダメージ) {
-        return impl.被ダメージ();
+        return impl.被ダメージ() + zone.被ダメージ();
     } else {
         return 0;
     }

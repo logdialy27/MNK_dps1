@@ -712,7 +712,7 @@ exports.critical = function (c, player, enemy,line) {
     // TODO:enemy側の被クリティカル率アップ状態を参照
     var r = 0;
 
-    if (player.buff_インピタス() && player.equip_インピタス性能アップ()) {
+    if (player.buff_インピタス()) {
         c += Math.min(50, player.n_hit_count_インピタス);
     }
 

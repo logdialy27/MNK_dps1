@@ -69,9 +69,7 @@ exports.CHR = function () {
 // メインのD値
 // 格闘の場合も素手のDを加算した値
 exports.D = function () {
-    //return 80 + 158 + 20;// ウルス
     return  80 + 192 + 12;// サギッタA
-    //return 78 + 180;//カランビット
 }
 
 // 素手のD値、SV計算時に減算する
@@ -87,9 +85,7 @@ exports.素手D = function () {
 // ヘイストも非適用
 // 最低値が武器の攻撃間隔の値の20%のためこの値の計算はあとで実施する
 exports.AttackSpeed = function () {
-    //return (480)+81; // ウルス
     return (480) + 121; //サギッタA
-    //return (480) + 96; // カランビット
 }
 
 exports.KickD = function () {
@@ -143,10 +139,10 @@ exports.Evasion = function () {
 // ストアTP
 exports.STP = function () {
     if (this.n_equipset == 0) {
-        // 投てき + 右耳 + 両手
+        // 投てき + 右耳 + 両手+ 武器
         return 5 + 5 + 7 + 25;
     } else {
-        // 投てき + 右耳
+        // 投てき + 右耳 + 武器
         return 5 + 5 + 25;
     }
 }
@@ -207,11 +203,11 @@ exports.Kick = function () {
 // ※WSのクリティカル補正除く
 exports.Critical = function () {
     if (this.n_equipset == 0) {
-        // 脚と耳とアデマのコンビ
-        return 8 + 5 + (3 + 5) + 2;  // 末尾の3+5はメリポとイオニス
+        // 脚と左耳とアデマのコンビ
+        return 8 + 5 + 2 + (5); 
     } else {
         // 両手+耳+脚+足+背中
-        return 5 + 5 + 7 + 5 + 10 + (3 + 5);// 末尾の3+5はメリポとイオニス
+        return 5 + 5 + 7 + 5 + 10 + (5);
     }
 }
 
@@ -284,10 +280,9 @@ exports.EquipHaste = function () {
 
 // マーシャルアーツ合計値
 // 特性、ギフト、メリポ、ジョブポ、装備全部加算後の値
-// サギッタの場合耳をマーケピアス+1
 exports.MartialArts = function () {
     if (this.n_equipset == 0) {
-        return (210) + 6 + 13;
+        return (210) + 6 ;
     } else {
         return (210) + 6 ;
     }
@@ -422,9 +417,4 @@ exports.equip_インピタス性能アップ = function () {
 // カランビット
 exports.equip_クリティカルヒット時ストアTP = function () {
     return 0;
-}
-
-// WSを実行するTP
-exports.WS_TP = function () {
-    return 1000;
 }

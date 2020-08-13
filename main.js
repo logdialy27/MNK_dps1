@@ -36,6 +36,9 @@ exports.run = function (result_file_prefix, p_target, equipset_aa, equipset_ws,e
         player.result_dist(player.WS(), i, setting.dist_unit(), 0);
     }
 
+    var startTime = new Date();
+
+
     // シミュレーション開始
     while (current_time < end_time) {
         var line = {};
@@ -114,6 +117,8 @@ exports.run = function (result_file_prefix, p_target, equipset_aa, equipset_ws,e
 
     fs.closeSync(log_fd);
 
+    var elaspedTime = new Date() - startTime;
+
     {
         // 合計出力
         var result = {};
@@ -146,6 +151,7 @@ exports.run = function (result_file_prefix, p_target, equipset_aa, equipset_ws,e
         // 集計結果出力
         var result = {}
         result["VERSION"] = version_info.VERSION();
+        result["計算時間(秒)"] = elaspedTime / 1000;
         result["target_player"] = p_target;
         result["equipset_aa"] = equipset_aa;
         result["equipset_ws"] = equipset_ws;

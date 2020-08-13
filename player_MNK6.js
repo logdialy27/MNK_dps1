@@ -3,7 +3,7 @@ exports.n_equipset = 0;
 
 // プレイヤー名
 exports.Name = function () {
-    return "MNK/WAR/ビクスマ/調整装備";
+    return "MNK/WAR/ビクスマ/ウルス/調整装備";
 }
 
 // playerの各種ステータス
@@ -206,10 +206,10 @@ exports.Kick = function () {
 exports.Critical = function () {
     if (this.n_equipset == 0) {
         // 脚と耳とアデマのコンビ
-        return 8 + 5 + (3 + 5) + 2;  // 末尾の3+5はメリポとイオニス 
+        return 8 + 5 + 2 + (5); 
     } else {
         // 両手+耳+脚+足+背中
-        return  5 + 5 + 7 + 5 + 10 + (3 + 5);// 末尾の3+5はメリポとイオニス
+        return  5 + 5 + 7 + 5 + 10 + (5);
     }
 }
 

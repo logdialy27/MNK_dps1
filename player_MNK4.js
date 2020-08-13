@@ -207,11 +207,11 @@ exports.Kick = function () {
 // ※WSのクリティカル補正除く
 exports.Critical = function () {
     if (this.n_equipset == 0) {
-        // 脚と耳とアデマのコンビ
-        return 8 + 5 + (3 + 5) + 2;  // 末尾の3+5はメリポとイオニス
+        // 脚と左耳とアデマのコンビ
+        return 8 + 5 + 2 + (5);
     } else {
         // 両手+耳+脚+足+背中
-        return 5 + 5 + 7 + 5 + 10 + (3 + 5);// 末尾の3+5はメリポとイオニス
+        return 5 + 5 + 7 + 5 + 10 + (5);
     }
 }
 
@@ -278,14 +278,13 @@ exports.EquipHaste = function () {
     if (this.n_equipset == 0) {
         return Math.min(25,(4 + 8 + 4 + 5 + 6 + 4));
     } else {
-        return Math.min(25, (4 +8 + 4 + 5 + 6 + 4));
+        return Math.min(25,(4 +8 + 4 + 5 + 6 + 4));
     }
 }
 
 // マーシャルアーツ合計値
 // 特性、ギフト、メリポ、ジョブポ、装備全部加算後の値
 exports.MartialArts = function () {
-    // ウルスの場合は胴の+6は過剰
     return (210)+6;
 }
 

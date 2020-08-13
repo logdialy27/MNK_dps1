@@ -12,17 +12,17 @@ exports.Name = function () {
 //
 exports.STR = function () {
     if (this.n_equipset == 0) {
-        return 95+197;
+        return 95+206;
     } else {
-        return 95+194;
+        return 95+193;
     }
 }
 
 exports.DEX = function () {
     if (this.n_equipset == 0) {
-        return 98 + 343;
+        return 98 + 360;
     } else {
-        return 98+354;
+        return 98 + 371;
     }
 }
 
@@ -30,23 +30,23 @@ exports.VIT = function () {
     if (this.n_equipset == 0) {
         return 93 + 122;
     } else {
-        return 93+120;
+        return 93+123;
     }
 }
 
 exports.AGI = function () {
     if (this.n_equipset == 0) {
-        return 101 + 170;
+        return 101 + 172;
     } else {
-        return 101+157;
+        return 101+169;
     }
 }
 
 exports.INT = function () {
     if (this.n_equipset == 0) {
-        return 101 + 70;
+        return 101 + 73;
     } else {
-        return 101+71;
+        return 101+74;
     }
 }
 
@@ -69,7 +69,6 @@ exports.CHR = function () {
 // メインのD値
 exports.D = function () {
     return 158 + 5;
-    //return 167;
 }
 
 // 攻撃間隔
@@ -84,46 +83,46 @@ exports.SubD = function () {
 
 exports.Attack = function () {
     if (this.n_equipset == 0) {
-        return 1388;
+        return 1382;
     } else {
-        return 1388;
+        return 1331;
     }
 }
 
 exports.SubAttack = function () {
     if (this.n_equipset == 0) {
-        return 1215;
+        return 1204;
     } else {
-        return 1215;
+        return 1160;
     }
 }
 
 exports.Defense = function () {
     if (this.n_equipset == 0) {
-        return 1114;
+        return 1094;
     } else {
-        return 1114;
+        return 1094;
     }
 }
 
 exports.Accuracy = function () {
     if (this.n_equipset == 0) {
-        return 1397;
+        return 1381;
     } else {
-        return 1397;
+        return 1390;
     }
 }
 
 exports.SubAccuracy = function () {
     if (this.n_equipset == 0) {
-        return 1372;
+        return 1357;
     } else {
-        return 1372;
+        return 1365;
     }
 }
 
 exports.Evasion = function () {
-    return 817;
+    return 798;
 }
 
 // ストアTP
@@ -185,9 +184,9 @@ exports.Sub複数回攻撃 = function () {
 // ※WSのクリティカル補正除く
 exports.Critical = function () {
     if (this.n_equipset == 0) {
-        return 5 + 5 + 4 + (5) + (3); // メリポ(5) + イオニス(3)
+        return 5 + 5 + 4 + (5); // メリポ(5)
     } else {
-        return 5 + 5 + 5 + 2 + 10 + (5) + (3); // メリポ(5) + イオニス(3)
+        return 5 + 5 + 5 + 2 + 10 + (5); // メリポ(5)
     }
 }
 
@@ -195,9 +194,9 @@ exports.Critical = function () {
 
 exports.SubCritical = function () {
     if (this.n_equipset == 0) {
-        return 5 + 5 + 4 + (5) + (3); // メリポ(5) + イオニス(3)
+        return 5 + 5 + 4 + (5); // メリポ(5) 
     } else {
-        return 5 + 5 + 5 + 2 + 10 + (5) + (3); // メリポ(5) + イオニス(3)
+        return 5 + 5 + 5 + 2 + 10 + (5); // メリポ(5)
     }
 }
 
@@ -351,12 +350,14 @@ exports.WS_DamageUp3 = function (name) {
 
 // 使用する可能性のあるWS一覧
 exports.WS_list = function () {
+    //return ["サンギンブレード"];
     return ["シャンデュシニュ"];
 }
 
 // 使用するWS名
 exports.WS = function () {
-    return "シャンデュシニュ";
+    //return "サンギンブレード";
+    return ["シャンデュシニュ"];
 }
 
 // TPボーナス

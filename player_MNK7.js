@@ -1,9 +1,9 @@
-﻿// モンクのビクスマ-マルチ
+﻿// モンクのビクスマ-調整装備
 exports.n_equipset = 0;
 
 // プレイヤー名
 exports.Name = function () {
-    return "MNK/WAR/ビクスマ/マルチ";
+    return "MNK/WAR/ビクスマ/スファライ/調整装備";
 }
 
 // playerの各種ステータス
@@ -12,10 +12,9 @@ exports.Name = function () {
 //
 exports.STR = function () {
     if (this.n_equipset == 0) {
-        return 107+253;
+        return 107 + 195;
     } else {
-        return 107+283;
-        //return 107 + 240;
+        return 107 + 213;
     }
 }
 
@@ -23,17 +22,15 @@ exports.DEX = function () {
     if (this.n_equipset == 0) {
         return 106 + 260;
     } else {
-        return 106 + 234;
-        //return 106 + 222;
+        return 106 + 214;
     }
-
 }
 
 exports.VIT = function () {
     if (this.n_equipset == 0) {
         return 107 + 138;
     } else {
-        return 107+140;
+        return 107 + 140;
     }
 }
 
@@ -47,9 +44,9 @@ exports.AGI = function () {
 
 exports.INT = function () {
     if (this.n_equipset == 0) {
-        return 88 + 87;
+        return 88 + 97;
     } else {
-        return 88+77;
+        return 88 + 77;
     }
 }
 
@@ -72,8 +69,7 @@ exports.CHR = function () {
 // メインのD値
 // 格闘の場合も素手のDを加算した値
 exports.D = function () {
-    return 80 + 158 + 20;// ウルス
-    //return  80 + 12;// サギッタA
+    return 80 + 182 + 24;
 }
 
 // 素手のD値、SV計算時に減算する
@@ -89,8 +85,7 @@ exports.素手D = function () {
 // ヘイストも非適用
 // 最低値が武器の攻撃間隔の値の20%のためこの値の計算はあとで実施する
 exports.AttackSpeed = function () {
-    return (480)+81; // ウルス
-    //return (480) + 121;
+    return (480) + 116;
 }
 
 exports.KickD = function () {
@@ -103,9 +98,9 @@ exports.KickD = function () {
 
 exports.Attack = function () {
     if (this.n_equipset == 0) {
-        return 1576;
+        return 1589;
     } else {
-        return 1533;
+        return 1513;
     }
 }
 
@@ -119,23 +114,23 @@ exports.SubAttack = function () {
 
 exports.Defense = function () {
     if (this.n_equipset == 0) {
-        return 1133;
-    } else {
         return 1138;
+    } else {
+        return 1153;
     }
 }
 
 exports.Accuracy = function () {
     if (this.n_equipset == 0) {
-        return 1284;
+        return 1324;
     } else {
-        return 1280;
+        return 1315;
     }
 }
 
 exports.Evasion = function () {
     if (this.n_equipset == 0) {
-        return 843;
+        return 863;
     } else {
         return 847;
     }
@@ -144,25 +139,31 @@ exports.Evasion = function () {
 // ストアTP
 exports.STP = function () {
     if (this.n_equipset == 0) {
-        return 5 + 1 + 5 + 7;
-    } else{
-        return 5 + 1;
+        // 投てき + 右耳 + 両手
+        return 5 + 5 + 7;
+    } else {
+        // 投てき + 右耳
+        return 5 + 5;
     }
 }
 
 exports.DA = function () {
     if (this.n_equipset == 0) {
-        return (10) + 5 + 5 + 10;
+        // サポ戦  + 耳右 + 背中
+        return (10) + 5 + 10;
     } else {
-        return (10) + 5 + 5 + 10;
+        // サポ戦  + 耳右
+        return (10) + 5;
     }
 }
 
 exports.TA = function () {
     if (this.n_equipset == 0) {
+        // 頭 + 両手 + リング + 腰
         return 4 + 4 + 5 + 8;
     } else {
-        return 4     + 5 + 8 + 5 + 4;
+        // 頭 +  リング + 腰 + 脚 + 足
+        return 4 + 5 + 8 + 5 + 4;
     }
 }
 
@@ -188,11 +189,11 @@ exports.Pursuit = function () {
 // 蹴撃発動率
 exports.Kick = function () {
     if (this.n_equipset == 0) {
-        // (特性 + メリポ) + 首 + 背中 + 脚 + 足
-        return (14 + 5) + 25 + 10 + 19 + 10;
+        // (特性 + メリポ) + 首 + 背中 + 脚 + 足 + アフマス
+        return (14 + 5) + 25 + 10 + 19 + 10  + (15);
     } else {
-        // (特性 + メリポ) + 首 + 背中
-        return (14 + 5) + 25 + 10;
+        // (特性 + メリポ) + 首 + 背中 + アフマス
+        return (14 + 5) + 25 + 10 + (15);
     }
 }
 
@@ -202,11 +203,11 @@ exports.Kick = function () {
 // ※WSのクリティカル補正除く
 exports.Critical = function () {
     if (this.n_equipset == 0) {
-        // 脚
-        return 8 + (5); 
+        // 脚と耳とアデマのコンビ
+        return 8 + 5 + 2 + (5);  // 末尾の3+5はメリポとイオニス
     } else {
-        // 胴 + 脚 + 足
-        return 5 + 7 + 5 + (5);
+        // 両手+耳+脚+足+背中
+        return 5 + 5 + 7 + 5 + 10 + (5);// 末尾の3+5はメリポとイオニス
     }
 }
 
@@ -224,6 +225,7 @@ exports.CriticalDamage = function () {
     if (this.n_equipset == 0) {
         return 6;
     } else {
+        // 頭 + 両手
         return 6 + 5;
     }
 }
@@ -235,7 +237,7 @@ exports.SkillchainBonus = function () {
 }
 
 // 魔法ダメージ+
-exports.魔法ダメージ = function(){
+exports.魔法ダメージ = function () {
     return 0;
 }
 
@@ -270,22 +272,26 @@ exports.MagicHaste = function () {
 exports.EquipHaste = function () {
     //return 25.0;
     if (this.n_equipset == 0) {
-        return Math.min(25,(4 + 8 + 4 + 5 + 6 + 4));
+        return Math.min(25, (4 + 8 + 4 + 5 + 6 + 4));
     } else {
-        return Math.min(25, (4 +8 + 4 + 5 + 6 + 4));
+        return Math.min(25, (4 + 8 + 4 + 5 + 6 + 4));
     }
 }
 
 // マーシャルアーツ合計値
 // 特性、ギフト、メリポ、ジョブポ、装備全部加算後の値
+// スファライの場合耳をマーケピアス+1
 exports.MartialArts = function () {
-    // ウルスの場合は胴の+6は過剰
-    return (210)+6;
+    if (this.n_equipset == 0) {
+        return (210) + 6;
+    } else {
+        return (210) + 6;
+    }
 }
 
 // 特性のダメージ上限アップ
 exports.DamageLimit = function () {
-    return 3 * 26/256; // = 0.3
+    return 3 * 26 / 256; // = 0.3
 }
 // 装備の物理ダメージ上限(%)
 exports.PhysicalDamageLimit = function () {
@@ -296,14 +302,14 @@ exports.PhysicalDamageLimit = function () {
 // レリックをメインに装備している場合にのみ設定
 // 発生確率
 exports.xN_Relic = function () {
-    return 0;
+    return 10;
 }
 
 // エンピの倍撃
 // エンピをメインに装備していてAMの場合に設定
 // 発生確率なのでAMの発生確率を設定
 exports.xN_Empyrean = function () {
-    return 30;
+    return 0;
 }
 
 // マスター武器の倍撃
@@ -347,19 +353,34 @@ exports.WS_DamageUp2 = function () {
 // 引数のWS毎の対応で返却
 exports.WS_DamageUp3 = function (name) {
     if (name == "ビクトリースマイト") {
-        return 10;
+        return 0;
+    }
+    if (name == "夢想阿修羅拳") {
+        return 0;
     }
     return 0;
 }
 
 // 使用する可能性のあるWS一覧
 exports.WS_list = function () {
+    //return ["四神円舞","ビクトリースマイト"];
     return ["ビクトリースマイト"];
 }
 
+var ws_idx = 0;
+//const ws_list = ["四神円舞", "ビクトリースマイト", "ビクトリースマイト"];
+const ws_list = ["ビクトリースマイト"];
 // 使用するWS名
 exports.WS = function () {
-    return "ビクトリースマイト";
+
+    return ws_list[ws_idx];
+}
+
+exports.on_ws_done = function () {
+    ws_idx = ws_idx + 1;
+    if (ws_idx >= ws_list.length) {
+        ws_idx = 0;
+    }
 }
 
 // TPボーナス
@@ -397,4 +418,9 @@ exports.equip_インピタス性能アップ = function () {
 // カランビット
 exports.equip_クリティカルヒット時ストアTP = function () {
     return 0;
+}
+
+// WSを実行するTP
+exports.WS_TP = function () {
+    return 1000;
 }
