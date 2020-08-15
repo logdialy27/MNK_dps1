@@ -39,16 +39,31 @@ WqXG786Xivqb
 ```
 
 <hr> 
+
 # 簡単な使用例
 
 ## 個別実行
 
-* 設定はMNK6.jsを使用する。
+* 設定はplayer_MNK6.jsを使用する。
+* パラメータ設定はplayer_MNK6.jsを参照
 * 結果はout/result_all_tsv.txtがサマリー出力する。
 
 ```
 # mkdir -p out/
 # node app.js MNK6 0 1 out/mnk6 
+```
+
+
+## 個別実行(CSV)
+
+* 設定はplayer_CSV1.jsを経由しinput1.tsvを使用する。
+* パラメータ設定はinput1.tsvを参照
+* 結果はout/result_all_tsv.txtがサマリー出力する。
+* input1.tsvの0をAA装備、1をWS装備
+
+```
+# mkdir -p out/
+# node app.js CSV1 0 1 out/csv1_0_1
 ```
 
 ## バッチ実行
