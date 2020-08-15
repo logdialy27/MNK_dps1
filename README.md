@@ -38,7 +38,35 @@ WqXG786Xivqb
 # npm install
 ```
 
-### 実行
+<hr> 
+# 簡単な使用例
+
+## 個別実行
+
+* 設定はMNK6.jsを使用する。
+* 結果はout/result_all_tsv.txtがサマリー出力する。
+
+```
+# mkdir -p out/
+# node app.js MNK6 0 1 out/mnk6 
+```
+
+## バッチ実行
+
+* 設定はinput1.csvとbatch1.jsonを使用する。
+* 結果はbatch1_all_tsv.txtがサマリー出力される。
+* 個別の実行結果はbatch1/以下に出力される。
+
+```
+# mkdir -p batch1/
+# node app_batch.js batch1.json batch1
+```
+
+<hr>
+
+# 実行方法詳細「個別実行」
+
+バッチ実行(一括実行については後述)
 
 コマンドライン
 ```
@@ -117,18 +145,18 @@ resultの部分は、引数で変更可能<br>
 # enemyの一覧
 
 * E1 ・・・ 防御1,VIT1,AGI1 / 回避1 / 攻防関数キャップ / SV関数キャップ / DEX-AGIキャップ
-* E2 ・・・ 防御1,VIT1,AGI9999 / 回避1 / 攻防関数キャップ / SV関数キャップ / DEX-AGIボトム 
-* E3 ・・・ 防御884,VIT187,AGI1 / 回避1 / 攻防関数非キャップ / SV関数非キャップ / DEX-AGIキャップに対してディアIIIが入っている状態
-* E4 ・・・ 防御884,VIT187,AGI9999 / 回避1 / 攻防関数非キャップ / SV関数非キャップ / DEX-AGIボトムに対してディアIIIが入っている状態
+* E2 ・・・ 防御1,VIT999,AGI9999 / 回避1 / 攻防関数キャップ / SV関数ボトム  / DEX-AGIボトム 
+* E3 ・・・ 防御1,VIT388,AGI353 / 回避1 / 攻防関数キャップ / VIT388 / AGI353
+* E4 ・・・ 防御884,VIT187,AGI1 / 回避1 / 攻防関数非キャップ / VIT187 / DEX-AGIボトム / ディアIIIが入っている状態
 
-※AGIは回避には影響しない
+※AGIは回避とは独立した設定で影響しない
+※VITは回避とは独立した設定で影響しない
 
 # TODO
 
 ## ロジック
 
 * DPSの測定値(テスト中)
-* 設定CSVからの取得(作業中)
 * モ青以外のジョブの対応
 * WSの種類の追加
 * 与TP
@@ -149,7 +177,6 @@ resultの部分は、引数で変更可能<br>
 
 ## その他
 
-* 引数リストを入力としたバッチ実行と結果のマージ
 * ElectronでUIを作成
 
 ## 結果ファイル / result_all.txt 
@@ -274,3 +301,64 @@ WSのダメージ分布でダメージ値/100単位で発生回数を集計
 
 * setting.jsのDEBUGをtrueにするとdebug.txtに実行中の過程を出力する。
 
+<hr>
+
+# 実行方法詳細「バッチ実行」
+
+コマンドライン
+```
+# node app_batch.js [input_json] [name]
+```
+
+* input_json・・・バッチ実行の設定ファイルJSON 
+* name・・・実行名
+
+```
+# node app_batch.js MNKb1_input.json MNKb1
+
+```
+
+# input_jsonの内容
+
+player_MNKx.jsを使用した例
+MNK4,5,6,7,8をE3で実行する。
+```
+[
+        { target: "MNK8", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "MNK8", end_time: 0, enemy_target: "E3" },
+        { target: "MNK7", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "MNK7", end_time: 0, enemy_target: "E3", },
+        { target: "MNK6", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "MNK6", end_time :0, enemy_target: "E3", },
+        { target: "MNK5", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "MNK5", end_time :0, enemy_target: "E3", },
+        { target: "MNK4", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "MNK4", end_time: 0, enemy_target: "E3", },
+];
+```
+
+player_CSV1.jsを使用した例
+CSV1からAAとWS設定を取得して、E1～E4に対して実行する。
+```
+[
+        { target: "CSV1", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "CSV1_0_1_E1", end_time: 0, enemy_target: "E1", },
+        { target: "CSV1", equipset_aa: 2, equipset_ws: 3, result_file_prefix: "CSV1_2_3_E1", end_time: 0, enemy_target: "E1", },
+        { target: "CSV1", equipset_aa: 4, equipset_ws: 5, result_file_prefix: "CSV1_4_5_E1", end_time :0, enemy_target: "E1", },
+        { target: "CSV1", equipset_aa: 6, equipset_ws: 7, result_file_prefix: "CSV1_6_7_E1", end_time :0, enemy_target: "E1", },
+        { target: "CSV1", equipset_aa: 8, equipset_ws: 9, result_file_prefix: "CSV1_7_9_E1", end_time: 0, enemy_target: "E1", },
+
+        { target: "CSV1", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "CSV1_0_1_E2", end_time: 0, enemy_target: "E2", },
+        { target: "CSV1", equipset_aa: 2, equipset_ws: 3, result_file_prefix: "CSV1_2_3_E2", end_time: 0, enemy_target: "E2", },
+        { target: "CSV1", equipset_aa: 4, equipset_ws: 5, result_file_prefix: "CSV1_4_5_E2", end_time :0, enemy_target: "E2", },
+        { target: "CSV1", equipset_aa: 6, equipset_ws: 7, result_file_prefix: "CSV1_6_7_E2", end_time :0, enemy_target: "E2", },
+        { target: "CSV1", equipset_aa: 8, equipset_ws: 9, result_file_prefix: "CSV1_7_9_E2", end_time: 0, enemy_target: "E2", },
+
+        { target: "CSV1", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "CSV1_0_1_E3", end_time: 0, enemy_target: "E3", },
+        { target: "CSV1", equipset_aa: 2, equipset_ws: 3, result_file_prefix: "CSV1_2_3_E3", end_time: 0, enemy_target: "E3", },
+        { target: "CSV1", equipset_aa: 4, equipset_ws: 5, result_file_prefix: "CSV1_4_5_E3", end_time :0, enemy_target: "E3", },
+        { target: "CSV1", equipset_aa: 6, equipset_ws: 7, result_file_prefix: "CSV1_6_7_E3", end_time :0, enemy_target: "E3", },
+        { target: "CSV1", equipset_aa: 8, equipset_ws: 9, result_file_prefix: "CSV1_7_9_E3", end_time: 0, enemy_target: "E3", },
+
+        { target: "CSV1", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "CSV1_0_1_E4", end_time: 0, enemy_target: "E4", },
+        { target: "CSV1", equipset_aa: 2, equipset_ws: 3, result_file_prefix: "CSV1_2_3_E4", end_time: 0, enemy_target: "E4", },
+        { target: "CSV1", equipset_aa: 4, equipset_ws: 5, result_file_prefix: "CSV1_4_5_E4", end_time :0, enemy_target: "E4", },
+        { target: "CSV1", equipset_aa: 6, equipset_ws: 7, result_file_prefix: "CSV1_6_7_E4", end_time :0, enemy_target: "E4", },
+        { target: "CSV1", equipset_aa: 8, equipset_ws: 9, result_file_prefix: "CSV1_7_9_E4", end_time: 0, enemy_target: "E4", },
+        
+];
+```
