@@ -835,9 +835,6 @@ exports.equip_クリティカルヒット時ストアTP = function () {
         return tsv.equip_クリティカルヒット時ストアTP[this.n_equipset];
     } else {
         return 0;
-    }
-
-    
-    
+    }  
 }
 

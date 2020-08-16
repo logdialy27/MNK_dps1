@@ -352,11 +352,8 @@ exports.WS_DamageUp2 = function () {
 // WSダメージアップ:RMEAやアンバス武器
 // 引数のWS毎の対応で返却
 exports.WS_DamageUp3 = function (name) {
-    if (name == "ビクトリースマイト") {
-        return 0;
-    }
-    if (name == "夢想阿修羅拳") {
-        return 0;
+    if (name == "ファイナルヘヴン") {
+        return 60;
     }
     return 0;
 }
@@ -418,9 +415,4 @@ exports.equip_インピタス性能アップ = function () {
 // カランビット
 exports.equip_クリティカルヒット時ストアTP = function () {
     return 0;
-}
-
-// WSを実行するTP
-exports.WS_TP = function () {
-    return 1000;
 }

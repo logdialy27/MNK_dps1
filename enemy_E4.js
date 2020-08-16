@@ -1,5 +1,5 @@
 ﻿exports.Name = function () {
-    return "回避1/防御884/VIT1/AGI9999/ディアIII";
+    return "回避1/防御884/VIT187/AGI1/ディアIII";
 }
 
 exports.LV = function () {
@@ -27,11 +27,11 @@ exports.DEX = function () {
 }
 
 exports.VIT = function () {
-    return 1;
+    return 187;
 }
 
 exports.AGI = function () {
-    return 9999;
+    return 1;
 }
 
 exports.INT = function () {

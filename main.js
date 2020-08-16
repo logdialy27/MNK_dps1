@@ -1,8 +1,4 @@
-﻿
-const player = require("./player");
-const enemy = require("./enemy");
-
-const combat = require("./combat");
+﻿const combat = require("./combat");
 const version_info = require("./version_info");
 
 const logic = require("./logic");
@@ -10,9 +6,14 @@ const fs = require('fs');
 
 exports.run = function (result_file_prefix, p_target, equipset_aa, equipset_ws,end_time,e_target,debug_file) {
 
+    var player = require("./player");
+    var enemy = require("./enemy");
+
     const setting = require("./setting");
 
     player.Load(p_target);
+    player.equipset(equipset_aa);
+
     enemy.Load(e_target);
 
     // デバッグ用ログ出力

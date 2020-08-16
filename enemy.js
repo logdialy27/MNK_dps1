@@ -16,6 +16,8 @@ exports.Load = function (name) {
     } catch (err) {
         impl = {};
     }
+
+    n_skillchain_elements = null;
 }
 
 exports.Name = function () {

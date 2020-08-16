@@ -27,7 +27,7 @@ exports.DEX = function () {
 }
 
 exports.VIT = function () {
-    return 1;
+    return 187;
 }
 
 exports.AGI = function () {

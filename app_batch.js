@@ -1,8 +1,8 @@
 ﻿'use strict';
 
 try {
-    var app = require("./run_exec");
-    //var app = require("./run_batch");
+    //var app = require("./run_exec");
+    var app = require("./run_batch");
     app.start();
 
 } catch (err) {

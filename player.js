@@ -93,13 +93,22 @@ var impl = null;
 
 exports.Load = function(name){
     impl = require("./player_" + name);
-    impl.n_equipset = this.n_equipset;
 
     if (impl.Load) {
         impl.Load(name);
     }
-}
 
+    this.n_TP = 0;
+    this.n_hit_count_エンII = 0;
+    this.n_hit_count_インピタス = 0;
+
+    this.r_count = {};
+    this.r_sum = {};
+    this.r_list = {};
+    this.r_max = {};
+    this.r_min = {};
+    this.r_dist = {};
+}
 
 exports.tryWS = function () {
     if (this.n_TP >= this.WS_TP()) {

@@ -1,7 +1,6 @@
 ﻿const logic = require("./logic");
 const setting = require("./setting");
 
-
 const table_ws = {
     "シャンデュシニュ": ws_シャンデュシニュ,
     "サンギンブレード": ws_サンギンブレード,

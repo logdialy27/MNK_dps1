@@ -128,37 +128,61 @@ exports.攻防比 = function (a, d, wt,player,line) {
     return r;
 }
 
+// SV関数の変数計算
+// 簡易計算式
+function SV_Lambda(d, w_rank) {
+    // 範囲は4 - 16
+    // 簡易式
+    var y = 3.97 * Math.pow(w_rank, -0.232);
+    var z = y * w_rank;
+
+    var x = -4 / (-1 * z);
+
+    var r = Math.floor(8 - (d) * x);
+
+    r = Math.max(4, r);
+    r = Math.min(16,r);
+
+    return r;
+}
+
 exports.固定ダメージ = function (str,vit,d,wt,player,line) {
 
     var w_rank;
 
     if (wt == "格闘") {
         w_rank = Math.floor((d - player.素手D() + 3) / 9);
-    }
-    else {
+    } else {
         w_rank = Math.floor(d / 9);
     }
 
-    var sv_min = 0 - (w_rank * 2);
-    var sv_max = (w_rank * 2 + 16) / 2;
+    var sv;
+    var sv_min;
+    var sv_max;
+
+
+    if (wt == "投てき" || wt == "弓術" || wt == "射撃") {
+        // 遠隔
+        sv = Math.floor(((str - vit) + SV_Lambda(str - vit, w_rank)) / 2);
+
+        if (w_rank == 0) {
+            sv_min = Math.min(0 - (w_rank * 2), -2);
+        } else {
+            sv_min = Math.min(0 - (w_rank * 2), -3);
+        }
+
+        sv_max = (w_rank * 2 + 16) ;
+
+    } else {
+        // 近接
+        sv = Math.floor(((str - vit) + SV_Lambda(str - vit, w_rank)) / 4);
+
+        sv_min = Math.min(0 - w_rank , -1);
+        sv_max = (w_rank * 2 + 16) / 2;
+    }
 
     line["固定ダメージ:sv_max"] = sv_max;
     line["固定ダメージ:sv_min"] = sv_min;
-
-    // TODO:SV関数は非キャップの変数
-
-    var sv;
-
-    if (false) {
-        // 遠隔
-        // 変数は4を採用
-        sv = ((str - vit) + 4) / 2;
-    } else {
-        // 近接
-        // 変数は4を採用
-        sv = ((str - vit) + 4) / 4;
-    }
-
     line["固定ダメージ:sv1"] = sv;
 
     // SV関数最大値と最低値補正
@@ -452,7 +476,7 @@ exports.AA_間隔 = function(player,line)
 
     }
     // ヘイストサンバ加算
-    h2 = Math.min(h2 + player.SambaHaste(), 25);
+    h2 = Math.min(h2 + player.SambaHaste(), 20);
 
     var h = h1 + h2;
 
