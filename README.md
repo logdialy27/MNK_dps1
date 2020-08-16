@@ -68,13 +68,13 @@ WqXG786Xivqb
 
 ## バッチ実行
 
-* 設定はinput1.csvとbatch1.jsonを使用する。
-* 結果はbatch1_all_tsv.txtがサマリー出力される。
+* 設定はinput1.csvとbatchRun2.jsonを使用する。
+* 結果はbatchRun2_all_tsv.txtがサマリー出力される。
 * 個別の実行結果はbatch1/以下に出力される。
 
 ```
 # mkdir -p batch1/
-# node app_batch.js batch1.json batch1
+# node app_batch.js batchRun2_input.json batchRun2
 ```
 
 <hr>
@@ -329,11 +329,11 @@ WSのダメージ分布でダメージ値/100単位で発生回数を集計
 * name・・・実行名
 
 ```
-# node app_batch.js MNKb1_input.json MNKb1
-
+# mkdir batchRun1
+# node app_batch.js batchRun1_input.json batchRun1
 ```
 
-# input_jsonの内容
+# input_jsonの内容例
 
 player_MNKx.jsを使用した例
 MNK4,5,6,7,8をE3で実行する。
@@ -349,6 +349,12 @@ MNK4,5,6,7,8をE3で実行する。
 
 player_CSV1.jsを使用した例
 CSV1からAAとWS設定を取得して、E1～E4に対して実行する。
+
+```
+# mkdir batchRun2
+# node app_batch.js batchRun2_input.json batchRun2
+```
+
 ```
 [
         { target: "CSV1", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "CSV1_0_1_E1", end_time: 0, enemy_target: "E1", },
