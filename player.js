@@ -185,6 +185,14 @@ exports.WS_TP = function () {
     }
 }
 
+// メインジョブ
+exports.JOB = function () {
+    if (impl.JOB) {
+        return impl.JOB();
+    } else {
+        return "MNK";
+    }
+}
 // playerの各種ステータス
 // 装備や支援、ジョブ、種族、食事といった全ての計算を適用した結果を返却する
 // 
@@ -1064,6 +1072,22 @@ exports.被魔法ダメージ = function () {
 exports.被ダメージ = function () {
     if (impl.被ダメージ) {
         return impl.被ダメージ() + zone.被ダメージ();
+    } else {
+        return 0;
+    }
+}
+
+exports.残心 = function () {
+    if (impl.残心) {
+        return impl.残心();
+    } else {
+        return 0;
+    }
+}
+
+exports.意気衝天 = function () {
+    if (impl.意気衝天) {
+        return impl.意気衝天()
     } else {
         return 0;
     }

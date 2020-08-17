@@ -5,6 +5,10 @@ exports.n_equipset = 0;
 exports.Name = function () {
     return "MNK/WAR/ビクスマ/テスト用";
 }
+// JOB
+exports.JOB = function () {
+    return "MNK";
+}
 
 // playerの各種ステータス
 // 

@@ -6,6 +6,11 @@ exports.Name = function () {
     return "MNK/WAR/ビクスマ/マルチ";
 }
 
+// JOB
+exports.JOB = function () {
+    return "MNK";
+}
+
 // playerの各種ステータス
 // 
 // 関連するプロパティのメソッドのみplayer.jsと同じ名前で実装

@@ -6,6 +6,11 @@ exports.Name = function () {
     return "BLU/WAR/シャンデュシニュ";
 }
 
+// JOB
+exports.JOB = function () {
+    return "BLU";
+}
+
 // playerの各種ステータス
 // 
 // 関連するプロパティのメソッドのみplayer.jsと同じ名前実装

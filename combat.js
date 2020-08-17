@@ -474,14 +474,14 @@ exports.on_auto_attack = function (player,enemy,line_p) {
             } else {
                 if (!dmg[1]) {
                     TP += gain_TP;
+                    player.result_sum("TP", gain_TP);
                 } else {
                     TP += gain_TP_C;
+                    player.result_sum("TP", gain_TP_C);
                 }
             }
 
             hit_count += 1;
-
-            player.result_sum("TP", gain_TP);
 
             if (!dmg[1]) {
                 player.result_all("攻撃", dmg[0]);
@@ -489,65 +489,8 @@ exports.on_auto_attack = function (player,enemy,line_p) {
                 player.result_all("クリティカル", dmg[0]);
             }
 
-            // エンダメージ
-            if (player.エンII() > 0) {
-                var en_dmg = player.エンII();
-                // エンIIは初段のみ適用
-                if (i == 0) {
-                    // エンIIダメージはヒット毎に増加で基本ダメージの倍まで増加
-                    // ヒット数増加
-                    player.n_hit_count_エンII += 1;
-
-                    // 基本ダメージかヒット数の小さい方を加算
-                    en_dmg += Math.min(en_dmg, player.n_hit_count_エンII);
-
-                    // レジスト計算
-                    en_dmg = logic.regist_エン(en_dmg, player, enemy, line);
-
-                    // 魔法剣ダメージ+N%の適用
-                    // エンIIはメインだけが対象
-                    en_dmg = Math.floor(en_dmg * (100 + player.EnspellDamageUp())/100);
-
-                    // アフィニティ計算 
-                    en_dmg = Math.floor(en_dmg * (100 + player.Affinity(player.エン属性())) / 100);
-
-                    // 天候曜日計算
-                    en_dmg = Math.floor(en_dmg * (100 + player.天候曜日(player.エン属性())) / 100);
-
-                    // ガンビット計算
-                    en_dmg = Math.floor(en_dmg * (100 + logic.ガンビット(player.エン属性(), enemy.ガンビット())) / 100);
-
-                    player.result_all("エンダメージ", en_dmg);
-                }
-            } else if (player.エン() > 0) {
-                var en_dmg;
-
-                // エンは全段適用
-                if (t.sub) {
-                    en_dmg = player.Subエン();
-                } else {
-                    en_dmg = player.エン();
-                }
-
-                // レジスト計算
-                en_dmg = logic.regist_エン(en_dmg, player, enemy, line);
-
-                // 魔法剣ダメージ+N%の適用
-                // エンはメインとサブで個別
-                if (t.sub) {
-                    en_dmg = Math.floor(en_dmg * (100 + player.SubEnspellDamageUp()) / 100);
-                } else {
-                    en_dmg = Math.floor(en_dmg * (100 + player.EnspellDamageUp()) / 100);
-                }
-                // アフィニティ計算 
-                en_dmg = Math.floor(en_dmg * (100 + player.Affinity(player.エン属性())) / 100);
-
-                // 天候曜日計算
-                en_dmg = Math.floor(en_dmg * (100 + player.天候曜日(player.エン属性())) / 100);
-
-                // ガンビット計算
-                en_dmg = Math.floor(en_dmg * (100 + logic.ガンビット(player.エン属性(),enemy.ガンビット())) / 100);
-
+            var en_dmg = logic.エンダメージ計算(t,player,enemy,line);
+            if (en_dmg > 0) {
                 player.result_all("エンダメージ", en_dmg);
             }
 
@@ -558,6 +501,80 @@ exports.on_auto_attack = function (player,enemy,line_p) {
         }
 
         line_p["オートアタック"].push(line);
+    }
+
+    // 残心
+    if (player.残心() > 0) {
+        if (list.length == 1) {
+            // 攻撃回数が一回だけの場合
+            var line = {"残心":true};
+
+            // 1. 攻撃がミスの場合
+            // 2. メイン侍で八双の場合のみヒット時にも発動で1/4の発生率
+
+            var attack = player.Attack();
+            var acc = player.Accuracy();
+            var D = player.D();
+            var wt = player.WeaponType();
+
+            var critcal = player.Critical();
+            var xN = logic.xN(player, wt, i, line);
+
+            var t = {
+                "C": critcal,
+                "xN": xN,
+                "attack": attack,
+                "acc": acc + 9999, // 仮処理
+                "D": D,
+                "残心": true,
+                "wt": wt,
+            };
+
+            var z = false;
+
+            if (hit_count == 0) {
+                if (logic.rand(player.残心())) {
+                    z = true;
+                }
+            } else if (player.JOB() == "SAM"){
+                if (logic.rand(player.残心()/4)) {
+                    z = true;
+                }
+            }
+
+            if (z) {
+                // 命中判定
+                var hit = logic.命中判定(t.wt, t.sub, t.acc, player, enemy, line);
+                var gain_TP_z = logic.get_得TP_意気衝天(player, line);
+
+                if (!hit) {
+                    // ミス
+                    line["ミス"] = true;
+                    player.result_count("ミス");
+                } else {
+                    var dmg = logic.AA_ダメージ計算(t, player, enemy, line);
+
+                    if (!dmg[1]) {
+                        player.result_all("攻撃", dmg[0]);
+                    } else {
+                        player.result_all("クリティカル", dmg[0]);
+                    }
+
+                    // クリティカル時TP/STP+は該当しないので考慮しない
+                    TP += gain_TP_z;
+                    player.result_sum("TP", gain_TP_z);
+
+                    hit_count += 1;
+
+                    var en_dmg = logic.エンダメージ計算(t, player, enemy, line);
+                    if (en_dmg > 0) {
+                        player.result_all("エンダメージ", en_dmg);
+                    }
+                }
+            }
+
+            line_p["オートアタック"].push(line);
+        }
     }
 
     // ヒット数履歴

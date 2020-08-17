@@ -18,7 +18,7 @@ exports.start = function () {
     // 実行時間(分)
     var end_time = 0;
     // enemy_target
-    var enemy_target = "E2";
+    var enemy_target = "E1";
 
     if (process.argv[2]) {
         target = process.argv[2];

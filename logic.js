@@ -592,12 +592,33 @@ exports.get_得TP_クリティカル = function (player,AA, line) {
         gain_TP = logic.STP(base_TP, player.STP(), line);
     }
 
+    // 仮処理:STPの前 or 後
     // ラブラウンダ対応
     gain_TP += player.equip_クリティカルヒット時TP();
 
     line["得TPクリ:TP"] = gain_TP;
     return gain_TP;
 }
+
+// 意気衝天時の得TPの計算
+exports.get_得TP_意気衝天 = function (player, line) {
+    var logic = this;
+    // 基本得TPの計算
+    var 基本間隔 = logic.get_基本隔(player, line);
+
+    // 基本TPの計算
+    var base_TP = logic.get_基本TP(基本間隔, player, line);
+
+    // 意気衝天の追加
+    base_TP += player.意気衝天();
+
+    // ストアTP適用
+    var gain_TP = logic.STP(base_TP, player.STP(), line);
+
+    line["得TP:TP"] = gain_TP;
+    return gain_TP;
+}
+
 
 // ミシックのAM3
 exports.MythicAM3 = function (player, line) {
@@ -772,6 +793,71 @@ exports.extra_CriticalDamage = function (player){
     return c;
 }
 
+// 魔法剣のダメージ計算
+exports.エンダメージ計算 = function (t,player, enemy, line) {
+    var en_dmg = 0;
+    // エンダメージ
+    if (player.エンII() > 0) {
+        var en_dmg = player.エンII();
+        // エンIIは初段のみ適用
+        if (i == 0) {
+            // エンIIダメージはヒット毎に増加で基本ダメージの倍まで増加
+            // ヒット数増加
+            player.n_hit_count_エンII += 1;
+
+            // 基本ダメージかヒット数の小さい方を加算
+            en_dmg += Math.min(en_dmg, player.n_hit_count_エンII);
+
+            // レジスト計算
+            en_dmg = logic.regist_エン(en_dmg, player, enemy, line);
+
+            // 魔法剣ダメージ+N%の適用
+            // エンIIはメインだけが対象
+            en_dmg = Math.floor(en_dmg * (100 + player.EnspellDamageUp()) / 100);
+
+            // アフィニティ計算 
+            en_dmg = Math.floor(en_dmg * (100 + player.Affinity(player.エン属性())) / 100);
+
+            // 天候曜日計算
+            en_dmg = Math.floor(en_dmg * (100 + player.天候曜日(player.エン属性())) / 100);
+
+            // ガンビット計算
+            en_dmg = Math.floor(en_dmg * (100 + logic.ガンビット(player.エン属性(), enemy.ガンビット())) / 100);
+        }
+    } else if (player.エン() > 0) {
+        var en_dmg;
+
+        // エンは全段適用
+        if (t.sub) {
+            en_dmg = player.Subエン();
+        } else {
+            en_dmg = player.エン();
+        }
+
+        // レジスト計算
+        en_dmg = logic.regist_エン(en_dmg, player, enemy, line);
+
+        // 魔法剣ダメージ+N%の適用
+        // エンはメインとサブで個別
+        if (t.sub) {
+            en_dmg = Math.floor(en_dmg * (100 + player.SubEnspellDamageUp()) / 100);
+        } else {
+            en_dmg = Math.floor(en_dmg * (100 + player.EnspellDamageUp()) / 100);
+        }
+        // アフィニティ計算 
+        en_dmg = Math.floor(en_dmg * (100 + player.Affinity(player.エン属性())) / 100);
+
+        // 天候曜日計算
+        en_dmg = Math.floor(en_dmg * (100 + player.天候曜日(player.エン属性())) / 100);
+
+        // ガンビット計算
+        en_dmg = Math.floor(en_dmg * (100 + logic.ガンビット(player.エン属性(), enemy.ガンビット())) / 100);
+    }
+
+    return en_dmg;
+}
+
+// TPの加算
 exports.addTP = function (t, a) {
     t += a;
     if (t > 3000) {

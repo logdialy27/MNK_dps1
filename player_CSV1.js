@@ -49,6 +49,15 @@ exports.Name = function () {
     }
 }
 
+// JOB
+exports.JOB = function () {
+    if (tsv.JOB && tsv.JOB[this.n_equipset]) {
+        return tsv.JOB[this.n_equipset];
+    } else {
+        return "MNK";
+    }
+}
+
 // 装備セット番号
 // この番号を参照し装備に対応する返却値を調節する
 exports.n_equipset = 0;

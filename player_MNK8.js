@@ -5,6 +5,10 @@ exports.n_equipset = 0;
 exports.Name = function () {
     return "MNK/WAR/グランツファウスト/調整装備";
 }
+// JOB
+exports.JOB = function () {
+    return "MNK";
+}
 
 // playerの各種ステータス
 // 
