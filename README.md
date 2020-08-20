@@ -66,15 +66,26 @@ WqXG786Xivqb
 # node app.js CSV1 0 1 out/csv1_0_1
 ```
 
-## バッチ実行
+## バッチ実行1
 
-* 設定はinput1.csvとbatchRun2.jsonを使用する。
-* 結果はbatchRun2_all_tsv.txtがサマリー出力される。
-* 個別の実行結果はbatch1/以下に出力される。
+* 設定はinput1.csvとbatchRun1.jsonを使用する。
+* 結果はbatchRun1_all_tsv.txtにサマリーをまとめて出力される。
+* 個別の実行結果はbatchRun1/以下に出力される。
 
 ```
-# mkdir -p batch1/
-# node app_batch.js batchRun2_input.json batchRun2
+# mkdir -p batchRun1/
+# node app_batch.js batchRun1
+```
+
+## バッチ実行2
+
+* 設定はinput1.csvとbatchRun2.jsonを使用する。
+* 結果はbatchRun2_all_tsv.txtにサマリーをまとめて出力される。
+* 個別の実行結果はbatchRun2/以下に出力される。
+
+```
+# mkdir -p batchRun2/
+# node app_batch.js batchRun2
 ```
 
 <hr>
@@ -154,6 +165,9 @@ resultの部分は、引数で変更可能<br>
 * MNK4・・・モンク/カランビット/ビクスマ/WS装備調整
 * MNK5・・・モンク/サギッタA/ビクスマ/WS装備調整
 * MNK6・・・モンク/ウルスラグナR15/ビクスマ/WS装備調整
+* MNK7・・・モンク/グランツファウストR15/ビクスマ/WS装備調整
+* MNK8・・・モンク/スファライR15/ビクスマ/WS装備調整
+* MNK9・・・モンク/ゴッドハンドR15/ビクスマ/WS装備調整
 * BLU1・・・青のアルマスのマルチ装備
 * CSV1・・・(作業中)CSVファイルに設定されたテーブルと列番号から各プロパティを取得,「CSV1について」を参照
 
@@ -164,8 +178,8 @@ resultの部分は、引数で変更可能<br>
 * E3 ・・・ 防御1,VIT388,AGI353 / 回避1 / 攻防関数キャップ / VIT388 / AGI353
 * E4 ・・・ 防御884,VIT187,AGI1 / 回避1 / 攻防関数非キャップ / VIT187 / DEX-AGIボトム / ディアIIIが入っている状態
 
-※AGIは回避とは独立した設定で影響しない
-※VITは回避とは独立した設定で影響しない
+※AGIは回避とは独立した設定で影響しない<br>
+※VITは防御とは独立した設定で影響しない<br>
 
 # TODO
 
@@ -177,7 +191,6 @@ resultの部分は、引数で変更可能<br>
 * 与TP
 * 属性WS
 * 遠隔WS
-* 残心
 * 猫足
 * アンバスの武器のプロパティ対応
 * ジャンプなどの与ダメージのアビリティ
