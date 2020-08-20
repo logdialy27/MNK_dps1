@@ -46,7 +46,7 @@ WqXG786Xivqb
 
 * 設定はplayer_MNK6.jsを使用する。
 * パラメータ設定はplayer_MNK6.jsを参照
-* 結果はout/result_all_tsv.txtがサマリー出力する。
+* 結果はout/mnk6_result_all_tsv.txtがサマリー出力する。
 
 ```
 # mkdir -p out/
@@ -58,7 +58,7 @@ WqXG786Xivqb
 
 * 設定はplayer_CSV1.jsを経由しinput1.tsvを使用する。
 * パラメータ設定はinput1.tsvを参照
-* 結果はout/result_all_tsv.txtがサマリー出力する。
+* 結果はout/csv1_0_1_result_all_tsv.txtがサマリー出力する。
 * input1.tsvの0をAA装備、1をWS装備
 
 ```
@@ -335,21 +335,24 @@ WSのダメージ分布でダメージ値/100単位で発生回数を集計
 
 コマンドライン
 ```
-# node app_batch.js [input_json] [name]
+# node app_batch.js [name] [input.json]
 ```
 
-* input_json・・・バッチ実行の設定ファイルJSON 
 * name・・・実行名
+* input.json・・・設定JSONファイル名（省略可）<br>省略時は実行名.jsonとする。
 
 ```
 # mkdir batchRun1
-# node app_batch.js batchRun1_input.json batchRun1
+# node app_batch.js batchRun1
 ```
 
 # input_jsonの内容例
 
-player_MNKx.jsを使用した例
-MNK4,5,6,7,8をE3で実行する。
+* [input.json]の省略時は、[name].jsonを対象ファイルとする
+* player_MNKx.jsを使用した例
+* MNK4,5,6,7,8をE3で実行する。
+* 作業ディレクトリは事前に作成する
+
 ```
 [
         { target: "MNK8", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "MNK8", end_time: 0, enemy_target: "E3" },
@@ -360,12 +363,12 @@ MNK4,5,6,7,8をE3で実行する。
 ];
 ```
 
-player_CSV1.jsを使用した例
-CSV1からAAとWS設定を取得して、E1～E4に対して実行する。
+* player_CSV1.jsを使用した例
+* CSV1からAAとWS設定を取得して、E1～E4に対して実行する。
 
 ```
-# mkdir batchRun2
-# node app_batch.js batchRun2_input.json batchRun2
+# mkdir batchRun3
+# node app_batch.js batchRun3
 ```
 
 ```
