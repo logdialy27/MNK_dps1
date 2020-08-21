@@ -631,6 +631,7 @@ exports.MythicAM3 = function (player, line) {
     // 乱数は一回だけ計算
     var r = Math.ceil(Math.random() * 100);
 
+
     line["MythicAM3:n"] = 3;
     line["MythicAM3:r"] = r;
 

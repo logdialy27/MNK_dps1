@@ -1145,8 +1145,8 @@ function helper_WSマルチ(player,list1, list2, xN1, xN2, attack, acc, D, wt, c
                 "wt": wt,
             });
         }
-    } else if (player.MythicAM3() && (list1.length == 0)) {
-        // ミシックAM3
+    } else if (player.MythicAM3() && ( setting.MythicAM3のWS適用x2() ? true : (list1.length == 0))) {
+        // ミシックAM3(
         // 初段のみ判定
         var count = logic.MythicAM3(player, line);
 
