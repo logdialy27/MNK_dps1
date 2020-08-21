@@ -16,10 +16,9 @@ exports.JOB = function () {
 //
 exports.STR = function () {
     if (this.n_equipset == 0) {
-        return 107+253;
+        return 107+251;
     } else {
-        return 107+283;
-        //return 107 + 240;
+        return 107+281;
     }
 }
 
@@ -28,15 +27,14 @@ exports.DEX = function () {
         return 106 + 282;
     } else {
         return 106 + 244;
-        //return 106 + 222;
     }
 }
 
 exports.VIT = function () {
     if (this.n_equipset == 0) {
-        return 107 + 138;
+        return 107 + 135;
     } else {
-        return 107+140;
+        return 107+137;
     }
 }
 
@@ -104,9 +102,9 @@ exports.KickD = function () {
 
 exports.Attack = function () {
     if (this.n_equipset == 0) {
-        return 1572;
+        return 1497;
     } else {
-        return 1533;
+        return 1458;
     }
 }
 
@@ -120,25 +118,25 @@ exports.SubAttack = function () {
 
 exports.Defense = function () {
     if (this.n_equipset == 0) {
-        return 1118;
+        return 1113;
     } else {
-        return 1153;
+        return 1128;
     }
 }
 
 exports.Accuracy = function () {
     if (this.n_equipset == 0) {
-        return 1311;
+        return 1211;
     } else {
-        return 1297;
+        return 1197;
     }
 }
 
 exports.Evasion = function () {
     if (this.n_equipset == 0) {
-        return 869;
+        return 849;
     } else {
-        return 847;
+        return 827;
     }
 }
 
@@ -159,7 +157,7 @@ exports.DA = function () {
         return (10) + 5 + 10;
     } else {
         // サポ戦  + 耳右 
-        return (10) + 5 ;
+        return (10) + 5;
     }
 }
 

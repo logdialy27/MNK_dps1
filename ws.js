@@ -442,16 +442,6 @@ function ws_ビクトリースマイト(player, enemy, line_p) {
     var wt = player.WeaponType();
     var critcal = player.Critical() + C_add;
 
-    // テスト
-    if (player.buff_インピタス() && player.equip_インピタス性能アップ()) {
-        // 50
-        var c = 5 + critcal + Math.min(50, player.n_hit_count_インピタス);
-
-        if (c >= 100) {
-            player.result_count("ビクスマ100");
-        }
-    }
-
     // [1] マルチ判定実施
     {
         // ビクトリースマイトは全段1.5で属性ゴルゲも全段適用なので最初に計算
@@ -739,8 +729,7 @@ function ws_ビクトリースマイト(player, enemy, line_p) {
             }
 
             line["ダメージ"] = d[0];
-            line["TP合計"] = gain_TP;
-
+            line["TP合計"] = TP;
         }
 
         line_p["WS"].push(line);
@@ -1031,6 +1020,7 @@ function ws_ウッコフューリー(player, enemy, line_p) {
     // 修正項目
     // 修正項目は全段適用なので最初に計算
     var BP_D = Math.floor(player.STR() * 80 / 100);
+    BP_D += Math.floor(player.DEX() * player.equip_ウェポンスキルDEX補正() / 100);
 
     // 得TP
     var gain_TP = logic.get_得TP(player, line);
@@ -1065,7 +1055,7 @@ function ws_ウッコフューリー(player, enemy, line_p) {
             }
 
             line["ダメージ"] = d[0];
-            line["TP合計"] = gain_TP;
+            line["TP合計"] = TP;
         }
 
         line_p["WS"].push(line);
@@ -1155,8 +1145,9 @@ function helper_WSマルチ(player,list1, list2, xN1, xN2, attack, acc, D, wt, c
                 "wt": wt,
             });
         }
-    } else if (player.MythicAM3()) {
+    } else if (player.MythicAM3() && (list1.length == 0)) {
         // ミシックAM3
+        // 初段のみ判定
         var count = logic.MythicAM3(player, line);
 
         list1.push({
@@ -1242,7 +1233,7 @@ function helper_WSダメージ計算(list, BP_D, player,enemy,line_p) {
             }
 
             line["ダメージ"] = d[0];
-            line["TP合計"] = gain_TP;
+            line["TP合計"] = TP;
         }
 
         line_p["WS"].push(line);

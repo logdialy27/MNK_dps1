@@ -129,7 +129,7 @@ exports.攻防比 = function (a, d, wt,player,line) {
 }
 
 // SV関数の変数計算
-// 簡易計算式
+// 近似計算式のため不正確だが1-4の差なので大きい影響にはならない
 function SV_Lambda(d, w_rank) {
     // 範囲は4 - 16
     // 簡易式
@@ -159,7 +159,6 @@ exports.固定ダメージ = function (str,vit,d,wt,player,line) {
     var sv;
     var sv_min;
     var sv_max;
-
 
     if (wt == "投てき" || wt == "弓術" || wt == "射撃") {
         // 遠隔
@@ -299,7 +298,8 @@ exports.AA_ダメージ計算 = function (t, player, enemy, line) {
     var 攻防関数 = logic.rand_min_max(攻防関数min, 攻防関数max);
     line["攻防関数:確定値"] = 攻防関数;
 
-    var dmg = Math.floor(固定ダメージ * t.xN);
+    var dmg = 固定ダメージ;
+    dmg = Math.floor(dmg * t.xN);
     line["ダメージ:0"] = dmg;
 
     dmg = Math.floor(dmg * 攻防関数);

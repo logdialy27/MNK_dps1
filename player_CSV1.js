@@ -58,6 +58,23 @@ exports.JOB = function () {
     }
 }
 
+// イオニス、神符といったエリア効果
+exports.zone = function () {
+    if (tsv.zone && tsv.zone[this.n_equipset]) {
+        return tsv.zone[this.n_equipset];
+    } else {
+        return "イオニス";
+    }
+}
+
+// 食事
+exports.food = function () {
+    if (tsv.food && tsv.food[this.n_equipset]) {
+        return tsv.food[this.n_equipset];
+    } else {
+        return "ブドウ大福";
+    }
+}
 // 装備セット番号
 // この番号を参照し装備に対応する返却値を調節する
 exports.n_equipset = 0;
@@ -847,3 +864,10 @@ exports.equip_クリティカルヒット時ストアTP = function () {
     }  
 }
 
+exports.equip_ウェポンスキルDEX補正 = function () {
+    if (tsv.equip_ウェポンスキルDEX補正 && tsv.equip_ウェポンスキルDEX補正[this.n_equipset]) {
+        return tsv.equip_ウェポンスキルDEX補正[this.n_equipset];
+    } else {
+        return 0;
+    }  
+}

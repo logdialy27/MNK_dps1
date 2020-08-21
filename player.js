@@ -86,7 +86,8 @@ exports.result_dist = function (name, v, n,c) {
 
 }
 
-var zone = require("./zone");
+var zone = require("./effect_zone");
+var food = require("./effect_food");
 
 // 定義jsのロード
 var impl = null;
@@ -108,6 +109,9 @@ exports.Load = function(name){
     this.r_max = {};
     this.r_min = {};
     this.r_dist = {};
+
+    zone.set(this.zone());
+    food.set(this.food());
 }
 
 exports.tryWS = function () {
@@ -193,6 +197,26 @@ exports.JOB = function () {
         return "MNK";
     }
 }
+// イオニス、神符といったエリア効果
+exports.zone = function () {
+    if (impl.zone) {
+        return impl.zone();
+    } else {
+        return "イオニス";
+        //return "";
+    }
+}
+
+// 食事
+exports.food = function () {
+    if (impl.food) {
+        return impl.food();
+    } else {
+        return "ブドウ大福";
+        //return "";
+    }
+}
+
 // playerの各種ステータス
 // 装備や支援、ジョブ、種族、食事といった全ての計算を適用した結果を返却する
 // 
@@ -208,7 +232,7 @@ exports.JOB = function () {
 // 
 exports.STR = function () {
     if (impl.STR) {
-        return impl.STR() + zone.STR();
+        return impl.STR() + zone.STR() + food.STR();
     } else {
         return 1;
     }
@@ -216,7 +240,7 @@ exports.STR = function () {
 
 exports.DEX = function () {
     if (impl.DEX) {;
-        return impl.DEX() + zone.DEX();
+        return impl.DEX() + zone.DEX() + food.DEX();
     } else {
         return 1;
     }
@@ -224,7 +248,7 @@ exports.DEX = function () {
 
 exports.VIT = function () {
     if (impl.VIT) {
-        return impl.VIT() + zone.VIT();
+        return impl.VIT() + zone.VIT() + food.VIT();
     } else {
         return 1;
     }
@@ -232,7 +256,7 @@ exports.VIT = function () {
 
 exports.AGI = function () {
     if (impl.AGI) {
-        return impl.AGI() + zone.AGI();
+        return impl.AGI() + zone.AGI() + food.AGI();
     } else {
         return 1;
     }
@@ -240,7 +264,7 @@ exports.AGI = function () {
 
 exports.INT = function () {
     if (impl.INT) {
-        return impl.INT() + zone.INT();
+        return impl.INT() + zone.INT() + food.INT();
     } else {
         return 1;
     }
@@ -248,7 +272,7 @@ exports.INT = function () {
 
 exports.MND = function () {
     if (impl.MND) {
-        return impl.MND() + zone.MND();
+        return impl.MND() + zone.MND() + food.MND();
     } else {
         return 1;
     }
@@ -256,7 +280,7 @@ exports.MND = function () {
 
 exports.CHR = function () {
     if (impl.CHR) {
-        return impl.CHR() + zone.CHR();
+        return impl.CHR() + zone.CHR() + food.CHR();
     } else {
         return 1;
     }
@@ -264,7 +288,7 @@ exports.CHR = function () {
 
 exports.HP = function () {
     if (impl.HP) {
-        return impl.HP() + zone.HP();
+        return impl.HP() + zone.HP() + food.HP();
     } else {
         return 1;
     }
@@ -272,7 +296,7 @@ exports.HP = function () {
 
 exports.MP = function () {
     if (impl.MP) {
-        return impl.MP() + zone.MP();
+        return impl.MP() + zone.MP() + food.MP();
     } else {
         return 1;
     }
@@ -329,7 +353,7 @@ exports.KickD = function () {
 
 exports.Attack = function () {
     if (impl.Attack) {
-        return impl.Attack() + zone.Attack();
+        return impl.Attack() + zone.Attack() + food.Attack();
     } else {
         return 1;
     }
@@ -337,7 +361,7 @@ exports.Attack = function () {
 
 exports.SubAttack = function () {
     if (impl.SubAttack) {
-        return impl.SubAttack() + zone.SubAttack();
+        return impl.SubAttack() + zone.SubAttack() + food.SubAttack();
     } else {
         return 1;
     }
@@ -345,7 +369,7 @@ exports.SubAttack = function () {
 
 exports.RangedAttack = function () {
     if (impl.RangedAttack) {
-        return impl.RangedAttack() + zone.RangedAttack();
+        return impl.RangedAttack() + zone.RangedAttack() + food.SubAttack();
     } else {
         return 1;
     }
@@ -353,7 +377,7 @@ exports.RangedAttack = function () {
 
 exports.Defense = function () {
     if (impl.Defense) {
-        return impl.Defense() + zone.Defense();
+        return impl.Defense() + zone.Defense() + food.Defense();
     } else {
         return 1;
     }
@@ -361,7 +385,7 @@ exports.Defense = function () {
 
 exports.Accuracy = function () {
     if (impl.Accuracy) {
-        return impl.Accuracy() + zone.Accuracy();
+        return impl.Accuracy() + zone.Accuracy() + food.Accuracy();
     } else {
         return 0;
     }
@@ -369,7 +393,7 @@ exports.Accuracy = function () {
 
 exports.SubAccuracy = function () {
     if (impl.SubAccuracy) {
-        return impl.SubAccuracy() + zone.SubAccuracy();
+        return impl.SubAccuracy() + zone.SubAccuracy() + food.SubAccuracy();
     } else {
         return 0;
     }
@@ -377,7 +401,7 @@ exports.SubAccuracy = function () {
 
 exports.RangedAccuracy = function () {
     if (impl.RangedAccuracy) {
-        return impl.RangedAccuracy() + zone.RangedAccuracy();
+        return impl.RangedAccuracy() + zone.RangedAccuracy() + food.RangedAccuracy();
     } else {
         return 0;
     }
@@ -393,7 +417,7 @@ exports.RangedD = function () {
 
 exports.MagicAttack = function () {
     if (impl.MagicAttack) {
-        return impl.MagicAttack() + zone.MagicAttack();
+        return impl.MagicAttack() + zone.MagicAttack() + food.MagicAttack();
     } else {
         return 1;
     }
@@ -401,7 +425,7 @@ exports.MagicAttack = function () {
 
 exports.MagicAccuracy = function () {
     if (impl.MagicAccuracy) {
-        return impl.MagicAccuracy() + zone.MagicAccuracy();
+        return impl.MagicAccuracy() + zone.MagicAccuracy() + food.MagicAccuracy();
     } else {
         return 1;
     }
@@ -409,7 +433,7 @@ exports.MagicAccuracy = function () {
 
 exports.MagicDefense = function () {
     if (impl.MagicDefense) {
-        return impl.MagicDefense() + zone.MagicDefense();
+        return impl.MagicDefense() + zone.MagicDefense() + food.MagicDefense();
     } else {
         return 1;
     }
@@ -417,7 +441,7 @@ exports.MagicDefense = function () {
 
 exports.Evasion = function () {
     if (impl.Evasion) {
-        return impl.Evasion() + zone.Evasion();
+        return impl.Evasion() + zone.Evasion() + food.MagicDefense();
     } else {
         return 1;
     }
@@ -425,7 +449,7 @@ exports.Evasion = function () {
 
 exports.MagicEvasion = function () {
     if (impl.MagicEvasion) {
-        return impl.MagicEvasion() + zone.MagicEvasion();
+        return impl.MagicEvasion() + zone.MagicEvasion() + food.MagicEvasion();
     } else {
         return 1;
     }
@@ -434,7 +458,7 @@ exports.MagicEvasion = function () {
 // ストアTP
 exports.STP = function () {
     if (impl.STP) {
-        return impl.STP();
+        return impl.STP() + food.STP();
     } else {
         return 0;
     }
@@ -442,7 +466,7 @@ exports.STP = function () {
 
 exports.DA = function () {
     if (impl.DA) {
-        return impl.DA();
+        return impl.DA() + food.DA();
     } else {
         return 0;
     }
@@ -1130,6 +1154,16 @@ exports.equip_クリティカルヒット時TP = function () {
 exports.equip_クリティカルヒット時ストアTP = function () {
     if (impl.equip_クリティカルヒット時ストアTP) {
         return impl.equip_クリティカルヒット時ストアTP();
+    } else {
+        return 0;
+    }
+}
+
+// ウトゥグリップ
+// ウェポンスキルDEX補正+10
+exports.equip_ウェポンスキルDEX補正 = function () {
+    if (impl.equip_ウェポンスキルDEX補正) {
+        return impl.equip_ウェポンスキルDEX補正();
     } else {
         return 0;
     }

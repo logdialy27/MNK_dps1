@@ -16,31 +16,31 @@ exports.JOB = function () {
 //
 exports.STR = function () {
     if (this.n_equipset == 0) {
-        return 107+195;
+        return 107+181;
     } else {
-        return 107+213;
+        return 107+211;
     }
 }
 
 exports.DEX = function () {
     if (this.n_equipset == 0) {
-        return 106 + 260;
+        return 106 + 262;
     } else {
-        return 106 + 214;
+        return 106 + 224;
     }
 }
 
 exports.VIT = function () {
     if (this.n_equipset == 0) {
-        return 107 + 138;
+        return 107 + 135;
     } else {
-        return 107 + 140;
+        return 107 + 137;
     }
 }
 
 exports.AGI = function () {
     if (this.n_equipset == 0) {
-        return 95 + 138;
+        return 95 + 150;
     } else {
         return 95 + 146;
     }
@@ -48,7 +48,7 @@ exports.AGI = function () {
 
 exports.INT = function () {
     if (this.n_equipset == 0) {
-        return 88 + 97;
+        return 88 + 87;
     } else {
         return 88+77;
     }
@@ -102,9 +102,9 @@ exports.KickD = function () {
 
 exports.Attack = function () {
     if (this.n_equipset == 0) {
-        return 1529;
+        return 1417;
     } else {
-        return 1453;
+        return 1378;
     }
 }
 
@@ -118,25 +118,25 @@ exports.SubAttack = function () {
 
 exports.Defense = function () {
     if (this.n_equipset == 0) {
-        return 1138;
+        return 1113;
     } else {
-        return 1153;
+        return 1128;
     }
 }
 
 exports.Accuracy = function () {
     if (this.n_equipset == 0) {
-        return 1324;
+        return 1246;
     } else {
-        return 1315;
+        return 1232;
     }
 }
 
 exports.Evasion = function () {
     if (this.n_equipset == 0) {
-        return 863;
+        return 849;
     } else {
-        return 847;
+        return 827;
     }
 }
 

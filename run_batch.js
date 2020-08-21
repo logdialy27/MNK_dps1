@@ -4,16 +4,35 @@ const fs = require('fs');
 
 exports.start = function () {
     // バッチ実行
-    const in_end_time = 1 * 24 * 60 * 60 * 1000;
-    const in_enemy_target = "E2";
 
-    var args_list = [
-        { target: "MNK8", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "b/MNK8", end_time: in_end_time, enemy_target: in_enemy_target, },
-        { target: "MNK7", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "b/MNK7", end_time: in_end_time, enemy_target: in_enemy_target, },
-        { target: "MNK6", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "b/MNK6", end_time : in_end_time, enemy_target: in_enemy_target, },
-        { target: "MNK5", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "b/MNK5", end_time : in_end_time, enemy_target: in_enemy_target, },
-        { target: "MNK4", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "b/MNK4", end_time: in_end_time, enemy_target: in_enemy_target, },
-    ];
+    var batchName = null;
+    var args_list = null;
+
+    if (process.argv[2]) {
+        batchName = process.argv[2];
+
+        var input_file = batchName + "_json.txt";
+        if (process.argv[3]) {
+            input_file = process.argv[3];
+        }
+
+        args_list = readJsonFromFile(input_file);
+    }
+    else
+    {
+        batchName = "batchRun0";
+        const in_end_time = 6 * 60 * 60 * 1000;
+        const in_enemy_target = "E1";
+
+        args_list = [
+            { target: "MNK9", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "batchRun0/MNK9", end_time: in_end_time, enemy_target: in_enemy_target, },
+            { target: "MNK8", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "batchRun0/MNK8", end_time: in_end_time, enemy_target: in_enemy_target, },
+            { target: "MNK7", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "batchRun0/MNK7", end_time: in_end_time, enemy_target: in_enemy_target, },
+            { target: "MNK6", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "batchRun0/MNK6", end_time: in_end_time, enemy_target: in_enemy_target, },
+            { target: "MNK5", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "batchRun0/MNK5", end_time: in_end_time, enemy_target: in_enemy_target, },
+            { target: "MNK4", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "batchRun0/MNK4", end_time: in_end_time, enemy_target: in_enemy_target, },
+        ];
+    }
 
     function run(args) {
         try {
@@ -58,18 +77,16 @@ exports.start = function () {
     }
 
     // マージ結果の出力
-    output_to_json("test_aa.json",r, true);
-    output_to_tsv("test_aa.txt", r);
+    output_to_json(batchName + "_join_json.txt",r, true);
+    output_to_tsv(batchName + "_join_tsv.txt", r);
     return;
 }
 
 function readJsonFromFile(file) {
-   
     var text = fs.readFileSync(file, 'utf8');
 
     return JSON.parse(text);
 }
-
 
 // TSV形式出力
 function output_to_tsv(output_file, result) {
