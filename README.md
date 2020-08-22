@@ -46,7 +46,7 @@ WqXG786Xivqb
 
 * 設定はplayer_MNK6.jsを使用する。
 * パラメータ設定はplayer_MNK6.jsを参照
-* 結果はout/mnk6_result_all_tsv.txtがサマリー出力する。
+* 結果はout/mnk6_result_all_tsv.txtにサマリーを出力する。
 
 ```
 # mkdir -p out/
@@ -58,7 +58,7 @@ WqXG786Xivqb
 
 * 設定はplayer_CSV1.jsを経由しinput1.tsvを使用する。
 * パラメータ設定はinput1.tsvを参照
-* 結果はout/csv1_0_1_result_all_tsv.txtがサマリー出力する。
+* 結果はout/csv1_0_1_result_all_tsv.txtにサマリーを出力する。
 * input1.tsvの0をAA装備、1をWS装備
 
 ```
@@ -68,7 +68,7 @@ WqXG786Xivqb
 
 ## バッチ実行1
 
-* 設定はinput1.csvとbatchRun1.jsonを使用する。
+* 設定はplayer_MNKxとbatchRun1.jsonを使用する。
 * 結果はbatchRun1_all_tsv.txtにサマリーをまとめて出力される。
 * 個別の実行結果はbatchRun1/以下に出力される。
 
@@ -202,6 +202,7 @@ resultの部分は、引数で変更可能<br>
 * 究極連携
 * イオニックのAM
 * 不意打ち/だまし討ち
+* インヒビットTP
 
 ## その他
 
