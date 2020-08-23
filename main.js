@@ -203,8 +203,7 @@ exports.run = function (result_file_prefix, p_target, equipset_aa, equipset_ws,e
 
         result["合計:TP"] = player.r_sum["TP"];
 
-        // TODO:
-        result["合計:与TP"] = 0;
+        result["合計:与TP"] = player.r_sum["与TP"];
 
         result["最大:攻撃"] = player.r_max["攻撃"];
         result["最大:クリティカル"] = player.r_max["クリティカル"];

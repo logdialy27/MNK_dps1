@@ -436,6 +436,8 @@ exports.on_auto_attack = function (player,enemy,line_p) {
         });
     }
 
+    var base_TP = logic.get_baseTP(player, line);
+
     // 得TPの計算
     var gain_TP = logic.get_得TP(player, line);
 
@@ -498,6 +500,11 @@ exports.on_auto_attack = function (player,enemy,line_p) {
             if (player.buff_インピタス()) {
                 player.n_hit_count_インピタス += 1;
             }
+
+            // 与TP計算
+            var give_TP = logic.与TP計算(base_TP, player, enemy, line);
+
+            player.result_all("与TP", give_TP);
         }
 
         line_p["オートアタック"].push(line);

@@ -555,15 +555,24 @@ exports.STP = function(base_TP, stp, line){
     return tp;
 }
 
-
-// 得TPの計算
-exports.get_得TP = function (player, line) {
+// 基本TPの計算
+exports.get_baseTP = function (player, line) {
     var logic = this;
     // 基本得TPの計算
     var 基本間隔 = logic.get_基本隔(player, line);
 
     // 基本TPの計算
     var base_TP = logic.get_基本TP(基本間隔, player, line);
+
+    line["base_TP:TP"] = base_TP;
+    return base_TP;
+}
+
+
+// 得TPの計算
+exports.get_得TP = function (player, line) {
+    var logic = this;
+    var base_TP = logic.get_baseTP(player, line);
 
     // ストアTP適用
     var gain_TP = logic.STP(base_TP, player.STP(), line);
@@ -576,11 +585,7 @@ exports.get_得TP = function (player, line) {
 // カランビットとラブラウンダ用
 exports.get_得TP_クリティカル = function (player,AA, line) {
     var logic = this;
-    // 基本得TPの計算
-    var 基本間隔 = logic.get_基本隔(player, line);
-
-    // 基本TPの計算
-    var base_TP = logic.get_基本TP(基本間隔, player, line);
+    var base_TP = logic.get_baseTP(player, line);
 
     // ストアTP適用
     var gain_TP;
@@ -603,11 +608,7 @@ exports.get_得TP_クリティカル = function (player,AA, line) {
 // 意気衝天時の得TPの計算
 exports.get_得TP_意気衝天 = function (player, line) {
     var logic = this;
-    // 基本得TPの計算
-    var 基本間隔 = logic.get_基本隔(player, line);
-
-    // 基本TPの計算
-    var base_TP = logic.get_基本TP(基本間隔, player, line);
+    var base_TP = logic.get_baseTP(player, line);
 
     // 意気衝天の追加
     base_TP += player.意気衝天();
@@ -985,6 +986,7 @@ exports.コンサーブTP = function(player, line)
     return 0;
 }
 
+// 属性WSの基本D値
 exports.属性WS基本D = function (player, line) {
     var w_lv = 119;
 
@@ -993,4 +995,36 @@ exports.属性WS基本D = function (player, line) {
     } else {
         return 99 * 1.5 + 5 + (w_lv - 100) * 2.5;
     }
+}
+
+// 通常/WS時の与TP計算
+exports.与TP計算 = function (base_TP, player, enemy, line) {
+
+    var m = (100 - Math.max(75, player.モクシャ())) / 100;
+
+    var C = 10;// TODO:この値は相手のAGIにより変化
+
+    var top = 50 + C;
+    var bottom = -50 + C;
+
+    var a1 = player.AGI() - enemy.AGI();
+
+    if (a1 > top) {
+        a1 = top;
+    }
+
+    if (a1 < bottom) {
+        a1 = bottom;
+    }
+
+    var r = Math.floor(50 * (a1 - bottom) / (top - bottom));
+    // 変形すると 1 / 2 * (dAGI + (50 - C))
+    // 既知の式はC=35の格下の場合
+
+    var a = (100 - r) / 100;
+
+    // TODO:インヒビットTP
+    var c = 1.0;
+
+    return Math.floor((base_TP + 30) * m * a * c)　;
 }

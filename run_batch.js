@@ -21,7 +21,7 @@ exports.start = function () {
     else
     {
         batchName = "batchRun0";
-        const in_end_time = 6 * 60 * 60 * 1000;
+        const in_end_time = 1 * 60 * 60 * 1000;
         const in_enemy_target = "E1";
 
         args_list = [
@@ -82,6 +82,7 @@ exports.start = function () {
     return;
 }
 
+// JSON
 function readJsonFromFile(file) {
     var text = fs.readFileSync(file, 'utf8');
 
