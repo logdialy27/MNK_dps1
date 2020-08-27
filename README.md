@@ -121,10 +121,10 @@ WqXG786Xivqb
 # node app.js MNK2 0 1 out/mnk2 1440 # 24時間
 # node app.js MNK2 0 1 out/mnk2 43200 # 30日
 
-# node app.js MNK2 0 1 out/mnk2 1440 E1 # 回避1,防御1,VIT1,AGI1
-# node app.js MNK2 0 1 out/mnk2 1440 E2 # 回避1,防御1,VIT1,AGI9999
-# node app.js MNK2 0 1 out/mnk2 1440 E3 # 回避1,防御884,VIT187,AGI1
-# node app.js MNK2 0 1 out/mnk2 1440 E4 # 回避1,防御884,VIT187,AGI9999
+# node app.js MNK2 0 1 out/mnk2 1440 E1 # E1/回避1/防御1/VIT187/AGI1
+# node app.js MNK2 0 1 out/mnk2 1440 E2 # E2/回避1/防御1/VIT9999/AGI9999
+# node app.js MNK2 0 1 out/mnk2 1440 E3 # E3/回避1/防御1/VIT388/AGI353
+# node app.js MNK2 0 1 out/mnk2 1440 E4 # E4/回避1/防御884/VIT187/AGI1/ディアIII
 ```
 
 CSV1の5列目をAA設定、6列目をWS設定で実行<br>
