@@ -86,7 +86,7 @@ function ws_シャンデュシニュ(player, enemy, line_p) {
     }
 
     // [2] マルチ判定実施
-    helper_WSマルチ(player, list1, list2, xN2, xN2, attack, acc, D, wt, critcal);
+    helper_WSマルチ(player, list1, list2, xN2, xN2, attack, acc, D, wt, critcal, line);
 
     // [3] マルチ判定なし
     list1.push({ "C": critcal, "xN": xN2, "attack": attack, "acc": acc, "D": D, "wt": wt });
@@ -145,13 +145,13 @@ function ws_ビクトリースマイト(player, enemy, line_p) {
     var xN2 = xN;
 
     // [1] マルチ判定実施
-    helper_WSマルチ(player, list1, list2, xN, xN2, attack, acc, D, wt, critcal);
+    helper_WSマルチ(player, list1, list2, xN, xN2, attack, acc, D, wt, critcal, line);
 
     // [格闘のオフハンド]
     list1.push({ "C": critcal, "xN": xN2, "attack": attack, "acc": acc, "D": D, "wt": wt, "sub": true });
 
     // [2] マルチ判定実施
-    helper_WSマルチ(player, list1, list2, xN2, xN2, attack, acc, D, wt, critcal);
+    helper_WSマルチ(player, list1, list2, xN2, xN2, attack, acc, D, wt, critcal, line);
 
     // [3] マルチ判定なし
     list1.push({ "C": critcal, "xN": xN2, "attack": attack, "acc": acc, "D": D, "wt": wt });
@@ -209,10 +209,10 @@ function ws_ウッコフューリー(player, enemy, line_p) {
     var xN2 = 1.0;
 
     // [1] マルチ判定実施
-    helper_WSマルチ(player, list1, list2, xN, xN2, attack, acc, D, wt, critcal);
+    helper_WSマルチ(player, list1, list2, xN, xN2, attack, acc, D, wt, critcal, line);
 
     // [2] マルチ判定実施
-    helper_WSマルチ(player, list1, list2, xN2, xN2, attack, acc, D, wt, critcal);
+    helper_WSマルチ(player, list1, list2, xN2, xN2, attack, acc, D, wt, critcal, line);
 
     // リストを結合[0]～[7]までが有効
     list = list1.concat(list2);
@@ -232,7 +232,9 @@ function ws_ウッコフューリー(player, enemy, line_p) {
 // wt:武器種
 // critcal:クリティカル確率
 
-function helper_WSマルチ(player,list1, list2, xN1, xN2, attack, acc, D, wt, critcal) {
+function helper_WSマルチ(player, list1, list2, xN1, xN2, attack, acc, D, wt, critcal, line_p) {
+
+    var line = line_p;
 
     if (logic.rand(player.QA())) {
         // QA判定
@@ -304,7 +306,7 @@ function helper_WSマルチ(player,list1, list2, xN1, xN2, attack, acc, D, wt, c
             });
         }
     } else if (player.MythicAM3() && ( setting.MythicAM3のWS適用x2() ? true : (list1.length == 0))) {
-        // ミシックAM3(
+        // ミシックAM3
         // 初段のみ判定
         var count = logic.MythicAM3(player, line);
 
@@ -444,13 +446,13 @@ function ws_四神円舞(player, enemy,line_p) {
     var xN2 = xN;
 
     // [1] マルチ判定実施
-    helper_WSマルチ(player, list1, list2, xN, xN2, attack, acc, D, wt, 0);
+    helper_WSマルチ(player, list1, list2, xN, xN2, attack, acc, D, wt, 0,line);
 
     // [格闘のオフハンド]
     list1.push({ "C": 0, "xN": xN2, "attack": attack, "acc": acc, "D": D, "wt": wt, "sub": true });
 
     // [2] マルチ判定実施
-    helper_WSマルチ(player, list1, list2, xN2, xN2, attack, acc, D, wt, 0);
+    helper_WSマルチ(player, list1, list2, xN2, xN2, attack, acc, D, wt, 0, line);
 
     // [3] マルチ判定なし
     list1.push({ "C": 0, "xN": xN2, "attack": attack, "acc": acc, "D": D, "wt": wt });

@@ -6,8 +6,8 @@ exports.start = function () {
 
     // player
     //var target = "MNK1";
-    var target = "BLU1";
-    //var target = "MNK6";
+    //var target = "BLU1";
+    var target = "MNK6";
     //var target = "CSV1";
     // AA時のequipset番号
     var equipset_aa = 0;

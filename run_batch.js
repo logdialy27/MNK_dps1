@@ -11,7 +11,7 @@ exports.start = function () {
     if (process.argv[2]) {
         batchName = process.argv[2];
 
-        var input_file = batchName + "_json.txt";
+        var input_file = batchName + ".json.txt";
         if (process.argv[3]) {
             input_file = process.argv[3];
         }
@@ -21,7 +21,7 @@ exports.start = function () {
     else
     {
         batchName = "batchRun0";
-        const in_end_time = 1 * 60 * 60 * 1000;
+        const in_end_time = 1 * 15 * 60 * 1000;
         const in_enemy_target = "E1";
 
         args_list = [
@@ -31,28 +31,25 @@ exports.start = function () {
             { target: "MNK6", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "batchRun0/MNK6", end_time: in_end_time, enemy_target: in_enemy_target, },
             { target: "MNK5", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "batchRun0/MNK5", end_time: in_end_time, enemy_target: in_enemy_target, },
             { target: "MNK4", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "batchRun0/MNK4", end_time: in_end_time, enemy_target: in_enemy_target, },
+            { target: "MNK3", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "batchRun0/MNK3", end_time: in_end_time, enemy_target: in_enemy_target, },
+            { target: "MNK2", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "batchRun0/MNK2", end_time: in_end_time, enemy_target: in_enemy_target, },
+            { target: "MNK1", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "batchRun0/MNK1", end_time: in_end_time, enemy_target: in_enemy_target, },
+            { target: "BLU1", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "batchRun0/BLU1", end_time: in_end_time, enemy_target: in_enemy_target, },
         ];
     }
 
     function run(args) {
-        try {
-            var main = require("./main");
+        var main = require("./main");
 
-            var debug_file = "debug.txt";
-            var r = main.run(
-                args.result_file_prefix,
-                args.target,
-                args.equipset_aa,
-                args.equipset_ws,
-                args.end_time,
-                args.enemy_target,
-                debug_file)
-
-        } catch (err) {
-            console.log(err);
-            console.log(err.name + ': ' + err.message);
-            process.exit(-1);
-        }
+        var debug_file = "debug.txt";
+        var r = main.run(
+            args.result_file_prefix,
+            args.target,
+            args.equipset_aa,
+            args.equipset_ws,
+            args.end_time,
+            args.enemy_target,
+            debug_file)
     }
 
     for (var i = 0; i < args_list.length; ++i) {
@@ -77,8 +74,8 @@ exports.start = function () {
     }
 
     // マージ結果の出力
-    output_to_json(batchName + "_join_json.txt",r, true);
-    output_to_tsv(batchName + "_join_tsv.txt", r);
+    output_to_json("result_" + batchName + ".json.txt",r, true);
+    output_to_tsv("result_" + batchName + ".tsv.txt", r);
     return;
 }
 
