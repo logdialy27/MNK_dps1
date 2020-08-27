@@ -69,7 +69,7 @@ WqXG786Xivqb
 ## バッチ実行1
 
 * 設定はplayer_MNKxとbatchRun1.jsonを使用する。
-* 結果はbatchRun1_all_tsv.txtにサマリーをまとめて出力される。
+* 結果はresult_batchRun1.tsv.txtにサマリーをまとめて出力される。
 * 個別の実行結果はbatchRun1/以下に出力される。
 
 ```
@@ -80,7 +80,7 @@ WqXG786Xivqb
 ## バッチ実行2
 
 * 設定はinput1.csvとbatchRun2.jsonを使用する。
-* 結果はbatchRun2_all_tsv.txtにサマリーをまとめて出力される。
+* 結果はresult_batchRun2.tsv.txtにサマリーをまとめて出力される。
 * 個別の実行結果はbatchRun2/以下に出力される。
 
 ```
@@ -354,24 +354,26 @@ WSのダメージ分布でダメージ値/100単位で発生回数を集計
 * [input.json]の省略時は、[name].jsonを対象ファイルとする
 * player_MNKx.jsを使用した例
 * MNK4,5,6,7,8をE3で実行する。
-* 作業ディレクトリは事前に作成する
+* 作業ディレクトリ自動で作成しないので事前に作成する。
 
 ```
 [
-        { target: "MNK8", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "MNK8", end_time: 0, enemy_target: "E3" },
-        { target: "MNK7", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "MNK7", end_time: 0, enemy_target: "E3", },
-        { target: "MNK6", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "MNK6", end_time :0, enemy_target: "E3", },
-        { target: "MNK5", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "MNK5", end_time :0, enemy_target: "E3", },
-        { target: "MNK4", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "MNK4", end_time: 0, enemy_target: "E3", },
-];
+{ "target": "MNK9", "equipset_aa": 0, "equipset_ws": 1, "result_file_prefix": "batchRun1/MNK9_E1", "end_time": 93600000, "enemy_target": "E1" },
+{ "target": "MNK8", "equipset_aa": 0, "equipset_ws": 1, "result_file_prefix": "batchRun1/MNK8_E1", "end_time": 93600000, "enemy_target": "E1" },
+{ "target": "MNK7", "equipset_aa": 0, "equipset_ws": 1, "result_file_prefix": "batchRun1/MNK7_E1", "end_time": 93600000, "enemy_target": "E1" },
+{ "target": "MNK6", "equipset_aa": 0, "equipset_ws": 1, "result_file_prefix": "batchRun1/MNK6_E1", "end_time" : 93600000, "enemy_target": "E1" },
+{ "target": "MNK5", "equipset_aa": 0, "equipset_ws": 1, "result_file_prefix": "batchRun1/MNK5_E1", "end_time" : 93600000, "enemy_target": "E1" },
+{ "target": "MNK4", "equipset_aa": 0, "equipset_ws": 1, "result_file_prefix": "batchRun1/MNK4_E1", "end_time": 93600000, "enemy_target": "E1" }
+]
+
 ```
 
 * player_CSV1.jsを使用した例
 * CSV1からAAとWS設定を取得して、E1～E4に対して実行する。
 
 ```
-# mkdir batchRun3
-# node app_batch.js batchRun3
+# mkdir batchRun2
+# node app_batch.js batchRun2
 ```
 
 ```
