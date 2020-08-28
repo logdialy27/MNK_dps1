@@ -42,6 +42,19 @@ WqXG786Xivqb
 
 # 簡単な使用例
 
+## CSVからのバッチ実行
+
+* 設定はinput1.csvの内容を変更する。
+* 手順例:input1.csvを一回xlsxで成形してよさそうな設定になったらinput1.csvに名前を変えて保存する。
+* 結果はresult_batchRun2.tsv.txtにサマリーをまとめて出力される。
+* 結果をエクセルに張り付ける。
+* 個別の実行結果はbatchRun2/以下に出力される。
+
+```
+# mkdir -p batchRun2/
+# node app_batch.js batchRun2
+```
+
 ## 個別実行
 
 * 設定はplayer_MNK6.jsを使用する。
@@ -52,7 +65,6 @@ WqXG786Xivqb
 # mkdir -p out/
 # node app.js MNK6 0 1 out/mnk6 
 ```
-
 
 ## 個別実行(CSV)
 
@@ -77,22 +89,9 @@ WqXG786Xivqb
 # node app_batch.js batchRun1
 ```
 
-## バッチ実行2
-
-* 設定はinput1.csvとbatchRun2.jsonを使用する。
-* 結果はresult_batchRun2.tsv.txtにサマリーをまとめて出力される。
-* 個別の実行結果はbatchRun2/以下に出力される。
-
-```
-# mkdir -p batchRun2/
-# node app_batch.js batchRun2
-```
-
 <hr>
 
 # 実行方法詳細「個別実行」
-
-バッチ実行(一括実行については後述)
 
 コマンドライン
 ```
@@ -378,29 +377,15 @@ WSのダメージ分布でダメージ値/100単位で発生回数を集計
 
 ```
 [
-        { target: "CSV1", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "CSV1_0_1_E1", end_time: 0, enemy_target: "E1", },
-        { target: "CSV1", equipset_aa: 2, equipset_ws: 3, result_file_prefix: "CSV1_2_3_E1", end_time: 0, enemy_target: "E1", },
-        { target: "CSV1", equipset_aa: 4, equipset_ws: 5, result_file_prefix: "CSV1_4_5_E1", end_time :0, enemy_target: "E1", },
-        { target: "CSV1", equipset_aa: 6, equipset_ws: 7, result_file_prefix: "CSV1_6_7_E1", end_time :0, enemy_target: "E1", },
-        { target: "CSV1", equipset_aa: 8, equipset_ws: 9, result_file_prefix: "CSV1_7_9_E1", end_time: 0, enemy_target: "E1", },
+{ "target": "CSV1", "equipset_aa": 0, "equipset_ws": 1, "result_file_prefix": "batchRun2/CSV1_0-1_E1", "end_time": 93600000, "enemy_target": "E1" },
+{ "target": "CSV1", "equipset_aa": 0, "equipset_ws": 1, "result_file_prefix": "batchRun2/CSV1_0-1_E2", "end_time": 93600000, "enemy_target": "E2" },
+{ "target": "CSV1", "equipset_aa": 0, "equipset_ws": 1, "result_file_prefix": "batchRun2/CSV1_0-1_E3", "end_time": 93600000, "enemy_target": "E3" },
+{ "target": "CSV1", "equipset_aa": 0, "equipset_ws": 1, "result_file_prefix": "batchRun2/CSV1_0-1_E4", "end_time": 93600000, "enemy_target": "E4" },
 
-        { target: "CSV1", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "CSV1_0_1_E2", end_time: 0, enemy_target: "E2", },
-        { target: "CSV1", equipset_aa: 2, equipset_ws: 3, result_file_prefix: "CSV1_2_3_E2", end_time: 0, enemy_target: "E2", },
-        { target: "CSV1", equipset_aa: 4, equipset_ws: 5, result_file_prefix: "CSV1_4_5_E2", end_time :0, enemy_target: "E2", },
-        { target: "CSV1", equipset_aa: 6, equipset_ws: 7, result_file_prefix: "CSV1_6_7_E2", end_time :0, enemy_target: "E2", },
-        { target: "CSV1", equipset_aa: 8, equipset_ws: 9, result_file_prefix: "CSV1_7_9_E2", end_time: 0, enemy_target: "E2", },
+{ "target": "CSV1", "equipset_aa": 2, "equipset_ws": 3, "result_file_prefix": "batchRun2/CSV1_2-3_E1", "end_time": 93600000, "enemy_target": "E1" },
+{ "target": "CSV1", "equipset_aa": 2, "equipset_ws": 3, "result_file_prefix": "batchRun2/CSV1_2-3_E2", "end_time": 93600000, "enemy_target": "E2" },
+{ "target": "CSV1", "equipset_aa": 2, "equipset_ws": 3, "result_file_prefix": "batchRun2/CSV1_2-3_E3", "end_time": 93600000, "enemy_target": "E3" },
+{ "target": "CSV1", "equipset_aa": 2, "equipset_ws": 3, "result_file_prefix": "batchRun2/CSV1_2-3_E4", "end_time": 93600000, "enemy_target": "E4" }
 
-        { target: "CSV1", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "CSV1_0_1_E3", end_time: 0, enemy_target: "E3", },
-        { target: "CSV1", equipset_aa: 2, equipset_ws: 3, result_file_prefix: "CSV1_2_3_E3", end_time: 0, enemy_target: "E3", },
-        { target: "CSV1", equipset_aa: 4, equipset_ws: 5, result_file_prefix: "CSV1_4_5_E3", end_time :0, enemy_target: "E3", },
-        { target: "CSV1", equipset_aa: 6, equipset_ws: 7, result_file_prefix: "CSV1_6_7_E3", end_time :0, enemy_target: "E3", },
-        { target: "CSV1", equipset_aa: 8, equipset_ws: 9, result_file_prefix: "CSV1_7_9_E3", end_time: 0, enemy_target: "E3", },
-
-        { target: "CSV1", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "CSV1_0_1_E4", end_time: 0, enemy_target: "E4", },
-        { target: "CSV1", equipset_aa: 2, equipset_ws: 3, result_file_prefix: "CSV1_2_3_E4", end_time: 0, enemy_target: "E4", },
-        { target: "CSV1", equipset_aa: 4, equipset_ws: 5, result_file_prefix: "CSV1_4_5_E4", end_time :0, enemy_target: "E4", },
-        { target: "CSV1", equipset_aa: 6, equipset_ws: 7, result_file_prefix: "CSV1_6_7_E4", end_time :0, enemy_target: "E4", },
-        { target: "CSV1", equipset_aa: 8, equipset_ws: 9, result_file_prefix: "CSV1_7_9_E4", end_time: 0, enemy_target: "E4", },
-        
-];
+]
 ```
