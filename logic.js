@@ -1000,7 +1000,7 @@ exports.属性WS基本D = function (player, line) {
 // 通常/WS時の与TP計算
 exports.与TP計算 = function (base_TP, player, enemy, line) {
 
-    var m = (100 - Math.max(75, player.モクシャ())) / 100;
+    var m = (100 - Math.min(75, player.モクシャ())) / 100;
 
     var C = 10;// TODO:この値は相手のAGIにより変化
 

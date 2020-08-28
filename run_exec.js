@@ -6,8 +6,8 @@ exports.start = function () {
 
     // player
     //var target = "MNK1";
-    //var target = "BLU1";
-    var target = "MNK6";
+    var target = "BLU1";
+    //var target = "MNK6";
     //var target = "CSV1";
     // AA時のequipset番号
     var equipset_aa = 0;
@@ -46,6 +46,6 @@ exports.start = function () {
 
     var debug_file = "debug.txt";
     for (var run_idx = 0; run_idx < 1; ++run_idx) {
-        var r = main.run(result_file_prefix, target, equipset_aa, equipset_ws, end_time, enemy_target, debug_file)
+        var r = main.run(result_file_prefix, target, equipset_aa, equipset_ws, end_time, enemy_target, false,debug_file)
     }
 }

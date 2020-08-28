@@ -114,6 +114,15 @@ exports.Load = function(name){
     food.set(this.food());
 }
 
+exports.exists_equipset = function () {
+
+    if (impl.exists_equipset) {
+        return impl.exists_equipset();
+    }
+
+    return true;
+}
+
 exports.tryWS = function () {
     if (this.n_TP >= this.WS_TP()) {
         return true;

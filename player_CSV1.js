@@ -1,5 +1,8 @@
 ﻿
 const tsv = {};
+// 装備セット番号
+// この番号を参照し装備に対応する返却値を調節する
+exports.n_equipset = 0;
 
 exports.Load = function (name) {
 
@@ -41,6 +44,14 @@ exports.Load = function (name) {
     return;
 }
 
+exports.exists_equipset = function () {
+    if (tsv.Name && tsv.Name[this.n_equipset]) {
+        return true
+    } else {
+        return false
+    }
+}
+
 exports.Name = function () {
     if (tsv.Name && tsv.Name[this.n_equipset]) {
         return tsv.Name[this.n_equipset];
@@ -75,9 +86,7 @@ exports.food = function () {
         return "ブドウ大福";
     }
 }
-// 装備セット番号
-// この番号を参照し装備に対応する返却値を調節する
-exports.n_equipset = 0;
+
 
 exports.WS_TP = function () {
     if (tsv.WS_TP && tsv.WS_TP[this.n_equipset]) {

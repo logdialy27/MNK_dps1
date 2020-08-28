@@ -4,7 +4,7 @@ const version_info = require("./version_info");
 const logic = require("./logic");
 const fs = require('fs');
 
-exports.run = function (result_file_prefix, p_target, equipset_aa, equipset_ws,end_time,e_target,debug_file) {
+exports.run = function (result_file_prefix, p_target, equipset_aa, equipset_ws,end_time,e_target,byBatch,debug_file) {
 
     var player = require("./player");
     var enemy = require("./enemy");
@@ -12,7 +12,11 @@ exports.run = function (result_file_prefix, p_target, equipset_aa, equipset_ws,e
     const setting = require("./setting");
 
     player.Load(p_target);
-    player.equipset(equipset_aa);
+    player.equipset(equipset_aa)
+
+    if (!player.exists_equipset()) {
+        return false;
+    }
 
     enemy.Load(e_target);
 
@@ -39,12 +43,10 @@ exports.run = function (result_file_prefix, p_target, equipset_aa, equipset_ws,e
 
     var startTime = new Date();
 
-
     // シミュレーション開始
     while (current_time < end_time) {
         var line = {};
 
-        // 
         current_time += setting.interval();
         line["current_time"] = current_time;
 
@@ -148,6 +150,9 @@ exports.run = function (result_file_prefix, p_target, equipset_aa, equipset_ws,e
         output_to_json(result_file_prefix + "_dist.txt", result);
     }
 
+    // バッチ実行の場合にはWSは個別に集計しない
+    batch = byBatch
+
     {
         // 集計結果出力
         var result = {}
@@ -174,7 +179,11 @@ exports.run = function (result_file_prefix, p_target, equipset_aa, equipset_ws,e
                 result["回数:WS"] = 0;
             }
             result["回数:WS"] += player.r_count[w];
-            result["回数:"+w] = player.r_count[w];
+            if (batch) {
+
+            } else {
+                result["回数:" + w] = player.r_count[w];
+            }
         }
         result["回数:連携"] = player.r_count["連携"];
 
@@ -189,7 +198,11 @@ exports.run = function (result_file_prefix, p_target, equipset_aa, equipset_ws,e
                 result["合計:WS"] = 0;
             }
             result["合計:WS"] += player.r_sum[w];
-            result["合計:"+w] = player.r_sum[w];
+            if (batch) {
+
+            } else {
+                result["合計:" + w] = player.r_sum[w];
+            }
         }
         result["合計:連携"] = player.r_sum["連携"];
 
@@ -209,20 +222,32 @@ exports.run = function (result_file_prefix, p_target, equipset_aa, equipset_ws,e
         result["最大:クリティカル"] = player.r_max["クリティカル"];
         result["最大:エンダメージ"] = player.r_max["エンダメージ"];
         for (var w of player.WS_list()) {
-            result["最大:" + w] = player.r_max[w];
+            if (batch) {
+                result["最大:WS"] = player.r_max[w];
+            } else {
+                result["最大:" + w] = player.r_max[w];
+            }
         }
 
         result["最小:攻撃"] = player.r_min["攻撃"];
         result["最小:クリティカル"] = player.r_min["クリティカル"];
         result["最小:エンダメージ"] = player.r_min["エンダメージ"];
         for (var w of player.WS_list()) {
-            result["最小:" + w] = player.r_min[w];
+            if (batch) {
+                result["最小:WS"] = player.r_min[w];
+            } else {
+                result["最小:" + w] = player.r_min[w];
+            }
         }
 
         result["平均:攻撃"] = player.r_sum["攻撃"] / player.r_count["攻撃"];
         result["平均:クリティカル"] = player.r_sum["クリティカル"] / player.r_count["クリティカル"];
         for (var w of player.WS_list()) {
-            result["平均:" + w] = player.r_sum[w] / player.r_count[w];
+            if (batch) {
+                result["平均:WS"] = player.r_sum[w] / player.r_count[w];
+            } else {
+                result["平均:" + w] = player.r_sum[w] / player.r_count[w];
+            }
         }
 
         result["TP:WS実行TP平均"] = player.r_sum["WS実行前TP"] / result["回数:WS"] ;
@@ -254,8 +279,9 @@ exports.run = function (result_file_prefix, p_target, equipset_aa, equipset_ws,e
 
         // TSVも出力
         output_to_tsv(result_file_prefix + "_all_tsv.txt",result);
-
     }
+
+    return true;
 }
 
 exports.end = function (player) {

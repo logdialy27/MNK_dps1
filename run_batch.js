@@ -49,26 +49,32 @@ exports.start = function () {
             args.equipset_ws,
             args.end_time,
             args.enemy_target,
+            true,
             debug_file)
+
+        return r;
     }
 
+    var complete = {};
     for (var i = 0; i < args_list.length; ++i) {
-        run(args_list[i]);
+        complete[i] = run(args_list[i]);
     }
 
     var r = {};
     // allのマージ
     for (var i = 0; i < args_list.length; ++i) {
-        var prefix = args_list[i].result_file_prefix;
+        if (complete[i]) {
+            var prefix = args_list[i].result_file_prefix;
 
-        var jsonData = readJsonFromFile(prefix + "_all.txt");
+            var jsonData = readJsonFromFile(prefix + "_all.txt");
 
-        for (const k in jsonData) { 
-            if (r[k] ) {
-                r[k].push(jsonData[k]);
-            }else {
-                r[k] =[];
-                r[k].push(jsonData[k]);
+            for (const k in jsonData) {
+                if (r[k]) {
+                    r[k].push(jsonData[k]);
+                } else {
+                    r[k] = [];
+                    r[k].push(jsonData[k]);
+                }
             }
         }
     }
