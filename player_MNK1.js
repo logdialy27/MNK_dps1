@@ -7,7 +7,7 @@ exports.Name = function () {
 }
 
 exports.Description = function () {
-    return "ウルス/マルチ装備";
+    return "ウルス/マルチ装備/インピタス";
 }
 
 

@@ -7,7 +7,7 @@ exports.Name = function () {
 }
 
 exports.Description = function () {
-    return "ウルス/テスト";
+    return "ウルス/テスト/インピタス";
 }
 
 // JOB

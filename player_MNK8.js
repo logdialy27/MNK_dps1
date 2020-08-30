@@ -7,7 +7,7 @@ exports.Name = function () {
 }
 
 exports.Description = function () {
-    return "グランツファウスト/調整装備";
+    return "グランツファウスト/調整装備/インピタス";
 }
 
 // JOB

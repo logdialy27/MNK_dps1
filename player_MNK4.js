@@ -7,7 +7,7 @@ exports.Name = function () {
 }
 
 exports.Description = function () {
-    return "カランビット/調整装備";
+    return "カランビット/調整装備/インピタス";
 }
 
 // JOB

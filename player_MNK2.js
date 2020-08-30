@@ -7,7 +7,7 @@ exports.Name = function () {
 }
 
 exports.Description = function () {
-    return "ウルス/クリティカル装備";
+    return "ウルス/クリティカル装備/インピタス";
 }
 
 // JOB

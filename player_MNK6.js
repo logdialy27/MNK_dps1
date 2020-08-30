@@ -7,7 +7,7 @@ exports.Name = function () {
 }
 
 exports.Description = function () {
-    return "ウルス/調整装備";
+    return "ウルス/調整装備/インピタス";
 }
 
 // JOB
