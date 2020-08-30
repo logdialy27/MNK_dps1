@@ -121,16 +121,16 @@ FFXIのモンクのDPSシミュレータ
 # node app.js MNK2 0 1 out/mnk2 1440 E4 # E4/回避1/防御884/VIT187/AGI1/ディアIII
 ```
 
-CSV1の5列目をAA設定、6列目をWS設定で実行<br>
+CSV1のequipset=6をAA設定、equipset=7をWS設定で実行<br>
 防御1,DEX-AGIキャップ<br>
 ```
-# node app.js CSV1 5 6 out/CSV1-aa5-ws6 1440 E1
+# node app.js CSV1 6 7 out/CSV1-aa6-ws7 1440 E1
 ```
 
-CSV1の7列目をAA設定、8列目をWS設定で実行<br>
+CSV1のequipset=8をAA設定、equipset=9をWS設定で実行<br>
 防御1,DEX-AGIキャップ<br>
 ```
-# node app.js CSV1 7 8 out/CSV1-aa7-ws8 1440 E1
+# node app.js CSV1 8 9 out/CSV1-aa8-ws9 1440 E1
 ```
 
 ## Windowsの場合
@@ -180,7 +180,17 @@ STR+したら攻撃は別途攻撃も+を加算する。<br>
 
 # TODO
 
-## ロジック
+## 未テスト
+
+実装はしてみたが検証未実施
+
+* エンダメージ
+* エンIIダメージ
+* 両手武器
+
+## 未対応ロジック
+
+判明している点
 
 * モ青以外のジョブの対応
 * WSの種類の追加
@@ -192,7 +202,7 @@ STR+したら攻撃は別途攻撃も+を加算する。<br>
 * モンスターのガード、盾、受け流し
 * エン魔法の魔命判定
 * 累積魔法耐性
-* モンスターのカット率(物理、魔法、武器種類)
+* モンスターの耐性(物理、魔法、武器種類)
 * イナンデーション
 * 究極連携
 * イオニックのAM
