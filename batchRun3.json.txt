@@ -1,0 +1,6 @@
+[
+{ "target": "CSV1", "equipset_aa": 6, "equipset_ws": 7, "result_file_prefix": "batchRun2/CSV1_6-7_E1", "end_time": 10800000, "enemy_target": "E1" },
+{ "target": "CSV1", "equipset_aa": 6, "equipset_ws": 7, "result_file_prefix": "batchRun2/CSV1_6-7_E2", "end_time": 10800000, "enemy_target": "E2" },
+{ "target": "CSV1", "equipset_aa": 6, "equipset_ws": 7, "result_file_prefix": "batchRun2/CSV1_6-7_E3", "end_time": 10800000, "enemy_target": "E3" },
+{ "target": "CSV1", "equipset_aa": 6, "equipset_ws": 7, "result_file_prefix": "batchRun2/CSV1_6-7_E4", "end_time": 10800000, "enemy_target": "E4" }
+]
