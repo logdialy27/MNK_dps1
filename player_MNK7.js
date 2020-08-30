@@ -3,8 +3,13 @@ exports.n_equipset = 0;
 
 // プレイヤー名
 exports.Name = function () {
-    return "MNK/WAR/ビクスマ/スファライ/調整装備";
+    return "MNK7";
 }
+
+exports.Description = function () {
+    return "スファライ/調整装備";
+}
+
 // JOB
 exports.JOB = function () {
     return "MNK";

@@ -3,7 +3,11 @@ exports.n_equipset = 0;
 
 // プレイヤー名
 exports.Name = function () {
-    return "BLU/WAR/シャンデュシニュ";
+    return "BLU1";
+}
+
+exports.Description = function () {
+    return "アルマス/マルチ装備";
 }
 
 // JOB

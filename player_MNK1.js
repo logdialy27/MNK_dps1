@@ -3,8 +3,13 @@ exports.n_equipset = 0;
 
 // プレイヤー名
 exports.Name = function () {
-    return "MNK/WAR/ビクスマ/マルチ";
+    return "MNK1";
 }
+
+exports.Description = function () {
+    return "ウルス/マルチ装備";
+}
+
 
 // JOB
 exports.JOB = function () {

@@ -158,14 +158,16 @@ exports.run = function (result_file_prefix, p_target, equipset_aa, equipset_ws,e
     {
         // 集計結果出力
         var result = {}
+        result["Player"] = player.Name();
+        result["Enemy"] = e_target;
+        result["Desctiption"] = player.Description();
         result["VERSION"] = version_info.VERSION();
         result["計算時間(秒)"] = elaspedTime / 1000;
         result["target_player"] = p_target;
         result["equipset_aa"] = equipset_aa;
         result["equipset_ws"] = equipset_ws;
-        result["target_enemy"] = e_target;
-        result["Enemy"] = enemy.toString();
-        result["Player"] = player.Name();
+        result["Enemy_Desctiption"] = enemy.toString();
+        result["Note"] = player.zone() + "/" + player.food();
 
         result["経過時間(秒)"] = Math.floor(current_time / 1000);
 
@@ -173,7 +175,6 @@ exports.run = function (result_file_prefix, p_target, equipset_aa, equipset_ws,e
         result["回数:攻撃"] = player.r_count["攻撃"];
         result["回数:ミス"] = player.r_count["ミス"];
         result["回数:クリティカル"] = player.r_count["クリティカル"];
-        result["回数:エンダメージ"] = player.r_count["エンダメージ"];
 
         // WSは一覧をまとめる
         for (var w of player.WS_list()) {
@@ -193,7 +194,6 @@ exports.run = function (result_file_prefix, p_target, equipset_aa, equipset_ws,e
         result["合計:攻撃"] = player.r_sum["攻撃"];
         result["合計:ミス"] = player.r_sum["ミス"];
         result["合計:クリティカル"] = player.r_sum["クリティカル"];
-        result["合計:エンダメージ"] = player.r_sum["エンダメージ"];
 
         for (var w of player.WS_list()) {
             if (!result["合計:WS"]) {
@@ -212,17 +212,12 @@ exports.run = function (result_file_prefix, p_target, equipset_aa, equipset_ws,e
         result["合計:AA+WS"] = result["合計:AA"] + result["合計:WS"];
         result["合計:AA+WS+連携"] = result["合計:AA+WS"] + player.r_sum["連携"];
 
-        result["合計:AA+エン"] = player.r_sum["攻撃"] + player.r_sum["エンダメージ"] + player.r_sum["クリティカル"];
-        result["合計:AA+エン+WS"] = result["合計:AA+エン"] + result["合計:WS"];
-        result["合計:AA+エン+WS+連携"] = result["合計:AA+エン+WS"] + player.r_sum["連携"];
-
         result["合計:TP"] = player.r_sum["TP"];
 
         result["合計:与TP"] = player.r_sum["与TP"];
 
         result["最大:攻撃"] = player.r_max["攻撃"];
         result["最大:クリティカル"] = player.r_max["クリティカル"];
-        result["最大:エンダメージ"] = player.r_max["エンダメージ"];
         for (var w of player.WS_list()) {
             if (batch) {
                 result["最大:WS"] = player.r_max[w];
@@ -233,7 +228,6 @@ exports.run = function (result_file_prefix, p_target, equipset_aa, equipset_ws,e
 
         result["最小:攻撃"] = player.r_min["攻撃"];
         result["最小:クリティカル"] = player.r_min["クリティカル"];
-        result["最小:エンダメージ"] = player.r_min["エンダメージ"];
         for (var w of player.WS_list()) {
             if (batch) {
                 result["最小:WS"] = player.r_min[w];
@@ -271,14 +265,24 @@ exports.run = function (result_file_prefix, p_target, equipset_aa, equipset_ws,e
         result["WSダメージ割合"] = (100 * ((result["合計:AA+WS"] - result["合計:AA"]) / result["合計:AA+WS"])).toFixed(2);
 
         // DPS計測      
-        result["(テスト中)DPS:AA"] = ((result["合計:AA"]) / result["経過時間(秒)"]).toFixed(0);
-        result["(テスト中)DPS:AA+WS"] = ((result["合計:AA+WS"]) / result["経過時間(秒)"]).toFixed(0);
-        result["(テスト中)DPS:AA+WS+連携"] = ((result["合計:AA+WS+連携"]) / result["経過時間(秒)"]).toFixed(0);
+        result["DPS:AA"] = ((result["合計:AA"]) / result["経過時間(秒)"]).toFixed(0);
+        result["DPS:AA+WS"] = ((result["合計:AA+WS"]) / result["経過時間(秒)"]).toFixed(0);
+        result["DPS:AA+WS+連携"] = ((result["合計:AA+WS+連携"]) / result["経過時間(秒)"]).toFixed(0);
 
-        result["(テスト中)DPS:AA+エン"] = ((result["合計:AA+エン"]) / result["経過時間(秒)"]).toFixed(0);
-        result["(テスト中)DPS:AA+エン+WS"] = ((result["合計:AA+エン+WS"]) / result["経過時間(秒)"]).toFixed(0);
-        result["(テスト中)DPS:AA+エン+WS+連携"] = ((result["合計:AA+エン+WS+連携"]) / result["経過時間(秒)"]).toFixed(0);
-
+        // エンダメージでない場合は未出力
+        if (player.r_sum["エンダメージ"]) {
+            result["回数:エンダメージ"] = (player.r_count["エンダメージ"] ? player.r_count["エンダメージ"] : 0);
+            result["合計:エンダメージ"] = (player.r_sum["エンダメージ"] ? player.r_sum["エンダメージ"] : 0);
+            result["合計:AA+エン"] = player.r_sum["攻撃"] + (player.r_sum["エンダメージ"] ? player.r_sum["エンダメージ"] : 0) + player.r_sum["クリティカル"];
+            result["合計:AA+エン+WS"] = result["合計:AA+エン"] + result["合計:WS"];
+            result["合計:AA+エン+WS+連携"] = result["合計:AA+エン+WS"] + player.r_sum["連携"];
+            result["最小:エンダメージ"] = (player.r_min["エンダメージ"] ? player.r_min["エンダメージ"] : 0);
+            result["最大:エンダメージ"] = (player.r_max["エンダメージ"] ? player.r_max["エンダメージ"] : 0);
+            result["DPS:エンダメージ"] = ((result["合計:エンダメージ"]) / result["経過時間(秒)"]).toFixed(0);
+            result["DPS:AA+エン"] = ((result["合計:AA+エン"]) / result["経過時間(秒)"]).toFixed(0);
+            result["DPS:AA+エン+WS"] = ((result["合計:AA+エン+WS"]) / result["経過時間(秒)"]).toFixed(0);
+            result["DPS:AA+エン+WS+連携"] = ((result["合計:AA+エン+WS+連携"]) / result["経過時間(秒)"]).toFixed(0);
+        }
         // JSON出力
         output_to_json(result_file_prefix + "_all.txt", result, true);
 

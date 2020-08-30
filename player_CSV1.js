@@ -60,6 +60,14 @@ exports.Name = function () {
     }
 }
 
+exports.Description = function () {
+    if (tsv.Description && tsv.Description[this.n_equipset]) {
+        return tsv.Description[this.n_equipset];
+    } else {
+        return "";
+    }
+}
+
 // JOB
 exports.JOB = function () {
     if (tsv.JOB && tsv.JOB[this.n_equipset]) {

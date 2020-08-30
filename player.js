@@ -136,7 +136,16 @@ exports.Name = function () {
     if (impl.Name) {
         return impl.Name();
     } else {
-        return "XXX/XXX";
+        return "XXX";
+    }
+}
+
+// 説明
+exports.Description = function () {
+    if (impl.Description) {
+        return impl.Description();
+    } else {
+        return "";
     }
 }
 
@@ -211,8 +220,8 @@ exports.zone = function () {
     if (impl.zone) {
         return impl.zone();
     } else {
-        return "イオニス";
-        //return "";
+        //return "イオニス";
+        return "";
     }
 }
 
@@ -221,8 +230,8 @@ exports.food = function () {
     if (impl.food) {
         return impl.food();
     } else {
-        return "ブドウ大福";
-        //return "";
+        //return "ブドウ大福";
+        return "";
     }
 }
 

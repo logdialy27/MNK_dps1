@@ -3,8 +3,13 @@ exports.n_equipset = 0;
 
 // プレイヤー名
 exports.Name = function () {
-    return "MNK/WAR/ビクスマ/サギッタA/調整装備";
+    return "MNK5";
 }
+
+exports.Description = function () {
+    return "サギッタA/調整装備";
+}
+
 // JOB
 exports.JOB = function () {
     return "MNK";
