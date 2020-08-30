@@ -129,20 +129,24 @@ exports.攻防比 = function (a, d, wt,player,line) {
 }
 
 // SV関数の変数計算
-// 近似計算式のため不正確だが1-4の差なので大きい影響にはならない
+// 近似計算式のため不正確
+// SV関数が下限でも上限でもない場合に、影響変数は1-4ぐらい、D値としては1-2ぐらいの誤りになる
 function SV_Lambda(d, w_rank) {
-    // 範囲は4 - 16
-    // 簡易式
-    var y = 4.00 * Math.pow(w_rank, -0.25);
-    var z = y * w_rank;
+    // 範囲は4 - 24で範囲と仮定しSTR - VITがマイナスで広がるほど24に近くなると仮定
+    // 4 - 24の幅に対するSTR - VITの範囲が武器ランクが高くなると広くなる
+    // STR - VIT差が0の時に変数=8となる
+    // 
+    // 変数が4になるときのSTR-VITの差を以下の式で近似的に算出している
+    // 武器ランク=3で12
+    // 武器ランク=20で40
+    var y = Math.ceil(4.00 * Math.pow(w_rank, -0.2375));
+    var z = Math.ceil(y * w_rank);
+    var x = (4 - 8) / z;
 
-    var x = -4 / (-1 * z);
-
-    var r = Math.floor(8 - (d) * x);
+    var r = Math.ceil(8 + d * x);
 
     r = Math.max(4, r);
-    r = Math.min(16,r);
-
+    r = Math.min(24,r);
     return r;
 }
 
@@ -283,11 +287,6 @@ exports.AA_ダメージ計算 = function (t, player, enemy, line) {
     var c = logic.critical(t.C, player, enemy, line);
 
     var attack = t.attack;
-    // TODO:シのTA攻撃力アップ
-    // TODO:戦のDA攻撃力アップ
-    // TODO:モの蹴撃効果アップ
-    // TODO:侍の残心効果アップ
-    // WSのfunctionで実装すると箇所が複数になるので此処で実装
 
     var 攻防比 = logic.攻防比(attack, enemy.Defence(), t.wt, player,line);
     var 固定ダメージ = logic.固定ダメージ(player.STR(), enemy.VIT(), t.D, t.wt, player,line);
@@ -348,11 +347,6 @@ exports.WS_ダメージ計算 = function (idx,BP_D,t, player, enemy, line) {
     }
 
     var attack = t.attack;
-    // TODO:シのTA攻撃力アップ
-    // TODO:戦のDA攻撃力アップ
-    // TODO:モの蹴撃効果アップ
-    // TODO:侍の残心効果アップ
-    // WSのfunctionで実装すると箇所が複数になるので此処で実装
 
     var 攻防比 = logic.攻防比(attack, enemy.Defence(), t.wt, player,line);
     var 固定ダメージ = logic.固定ダメージ(player.STR(), enemy.VIT(), t.D, t.wt, player,line);
@@ -973,8 +967,7 @@ exports.ガンビット = function (e, g, line) {
 }
 
 // コンサーブTP
-exports.コンサーブTP = function(player, line)
-{
+exports.コンサーブTP = function(player, line) {
     if (this.rand(player.コンサーブTP())) {
         // 10～200の均等ランダム
         var r = Math.round(Math.random() * 19) * 10 + 10 ;
