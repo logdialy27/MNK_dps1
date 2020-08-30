@@ -110,6 +110,10 @@ exports.Load = function(name){
     this.r_min = {};
     this.r_dist = {};
 
+    if (impl) {
+        impl.n_equipset = this.n_equipset;
+    }
+
     zone.set(this.zone());
     food.set(this.food());
 }
