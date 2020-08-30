@@ -21,7 +21,7 @@ exports.start = function () {
     else
     {
         batchName = "batchRun0";
-        const in_end_time = 1 * (60 * 60 * 1000);
+        const in_end_time = 1 * 60;
         const in_enemy_target = "E1";
 
         args_list = [
@@ -47,7 +47,7 @@ exports.start = function () {
             args.target,
             args.equipset_aa,
             args.equipset_ws,
-            args.end_time,
+            args.end_time * 60 * 1000 ,
             args.enemy_target,
             true,
             debug_file)
