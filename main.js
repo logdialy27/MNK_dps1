@@ -11,8 +11,8 @@ exports.run = function (result_file_prefix, p_target, equipset_aa, equipset_ws,e
 
     const setting = require("./setting");
 
-    player.Load(p_target);
     player.equipset(equipset_aa)
+    player.Load(p_target);
 
     if (!player.exists_equipset()) {
         return false;
