@@ -199,10 +199,10 @@ exports.Pursuit = function () {
 exports.Kick = function () {
     if (this.n_equipset == 0) {
         // (特性 + メリポ) + 首 + 背中 + 脚 + 足 + アフマス
-        return (14 + 5) + 25 + 10 + 19 + 10  + (15);
+        return (14 + 5) + 25 + 10 + 19 + 10;
     } else {
         // (特性 + メリポ) + 首 + 背中 + アフマス
-        return (14 + 5) + 25 + 10 + (15);
+        return (14 + 5) + 25 + 10 ;
     }
 }
 
