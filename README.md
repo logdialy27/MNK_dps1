@@ -357,12 +357,15 @@ WSのダメージ分布でダメージ値/100単位で発生回数を集計
 
 ```
 [
-{ "target": "MNK9", "equipset_aa": 0, "equipset_ws": 1, "result_file_prefix": "batchRun1/MNK9_E1", "end_time": 93600000, "enemy_target": "E1" },
-{ "target": "MNK8", "equipset_aa": 0, "equipset_ws": 1, "result_file_prefix": "batchRun1/MNK8_E1", "end_time": 93600000, "enemy_target": "E1" },
-{ "target": "MNK7", "equipset_aa": 0, "equipset_ws": 1, "result_file_prefix": "batchRun1/MNK7_E1", "end_time": 93600000, "enemy_target": "E1" },
-{ "target": "MNK6", "equipset_aa": 0, "equipset_ws": 1, "result_file_prefix": "batchRun1/MNK6_E1", "end_time" : 93600000, "enemy_target": "E1" },
-{ "target": "MNK5", "equipset_aa": 0, "equipset_ws": 1, "result_file_prefix": "batchRun1/MNK5_E1", "end_time" : 93600000, "enemy_target": "E1" },
-{ "target": "MNK4", "equipset_aa": 0, "equipset_ws": 1, "result_file_prefix": "batchRun1/MNK4_E1", "end_time": 93600000, "enemy_target": "E1" }
+{ "target": "BLU1", "equipset_aa": 0, "equipset_ws": 1, "result_file_prefix": "batchRun1/BLU1_E1", "end_time": 86400000, "enemy_target": "E1" },
+{ "target": "BLU1", "equipset_aa": 0, "equipset_ws": 1, "result_file_prefix": "batchRun1/BLU1_E2", "end_time": 86400000, "enemy_target": "E2" },
+{ "target": "BLU1", "equipset_aa": 0, "equipset_ws": 1, "result_file_prefix": "batchRun1/BLU1_E3", "end_time": 86400000, "enemy_target": "E3" },
+{ "target": "BLU1", "equipset_aa": 0, "equipset_ws": 1, "result_file_prefix": "batchRun1/BLU1_E4", "end_time": 86400000, "enemy_target": "E4" },
+
+{ "target": "MNK4", "equipset_aa": 0, "equipset_ws": 1, "result_file_prefix": "batchRun1/MNK4_E1", "end_time": 86400000, "enemy_target": "E1" },
+{ "target": "MNK4", "equipset_aa": 0, "equipset_ws": 1, "result_file_prefix": "batchRun1/MNK4_E2", "end_time": 86400000, "enemy_target": "E2" },
+{ "target": "MNK4", "equipset_aa": 0, "equipset_ws": 1, "result_file_prefix": "batchRun1/MNK4_E3", "end_time": 86400000, "enemy_target": "E3" },
+{ "target": "MNK4", "equipset_aa": 0, "equipset_ws": 1, "result_file_prefix": "batchRun1/MNK4_E4", "end_time": 86400000, "enemy_target": "E4" },
 ]
 
 ```
@@ -377,15 +380,14 @@ WSのダメージ分布でダメージ値/100単位で発生回数を集計
 
 ```
 [
-{ "target": "CSV1", "equipset_aa": 0, "equipset_ws": 1, "result_file_prefix": "batchRun2/CSV1_0-1_E1", "end_time": 93600000, "enemy_target": "E1" },
-{ "target": "CSV1", "equipset_aa": 0, "equipset_ws": 1, "result_file_prefix": "batchRun2/CSV1_0-1_E2", "end_time": 93600000, "enemy_target": "E2" },
-{ "target": "CSV1", "equipset_aa": 0, "equipset_ws": 1, "result_file_prefix": "batchRun2/CSV1_0-1_E3", "end_time": 93600000, "enemy_target": "E3" },
-{ "target": "CSV1", "equipset_aa": 0, "equipset_ws": 1, "result_file_prefix": "batchRun2/CSV1_0-1_E4", "end_time": 93600000, "enemy_target": "E4" },
+{ "target": "CSV1", "equipset_aa": 10, "equipset_ws": 11, "result_file_prefix": "batchRun2/CSV1_10-11_E1", "end_time": 86400000, "enemy_target": "E1" },
+{ "target": "CSV1", "equipset_aa": 10, "equipset_ws": 11, "result_file_prefix": "batchRun2/CSV1_10-11_E2", "end_time": 86400000, "enemy_target": "E2" },
+{ "target": "CSV1", "equipset_aa": 10, "equipset_ws": 11, "result_file_prefix": "batchRun2/CSV1_10-11_E3", "end_time": 86400000, "enemy_target": "E3" },
+{ "target": "CSV1", "equipset_aa": 10, "equipset_ws": 11, "result_file_prefix": "batchRun2/CSV1_10-11_E4", "end_time": 86400000, "enemy_target": "E4" },
 
-{ "target": "CSV1", "equipset_aa": 2, "equipset_ws": 3, "result_file_prefix": "batchRun2/CSV1_2-3_E1", "end_time": 93600000, "enemy_target": "E1" },
-{ "target": "CSV1", "equipset_aa": 2, "equipset_ws": 3, "result_file_prefix": "batchRun2/CSV1_2-3_E2", "end_time": 93600000, "enemy_target": "E2" },
-{ "target": "CSV1", "equipset_aa": 2, "equipset_ws": 3, "result_file_prefix": "batchRun2/CSV1_2-3_E3", "end_time": 93600000, "enemy_target": "E3" },
-{ "target": "CSV1", "equipset_aa": 2, "equipset_ws": 3, "result_file_prefix": "batchRun2/CSV1_2-3_E4", "end_time": 93600000, "enemy_target": "E4" }
-
+{ "target": "CSV1", "equipset_aa": 12, "equipset_ws": 13, "result_file_prefix": "batchRun2/CSV1_12-13_E1", "end_time": 86400000, "enemy_target": "E1" },
+{ "target": "CSV1", "equipset_aa": 12, "equipset_ws": 13, "result_file_prefix": "batchRun2/CSV1_12-13_E2", "end_time": 86400000, "enemy_target": "E2" },
+{ "target": "CSV1", "equipset_aa": 12, "equipset_ws": 13, "result_file_prefix": "batchRun2/CSV1_12-13_E3", "end_time": 86400000, "enemy_target": "E3" },
+{ "target": "CSV1", "equipset_aa": 12, "equipset_ws": 13, "result_file_prefix": "batchRun2/CSV1_12-13_E4", "end_time": 86400000, "enemy_target": "E4" }
 ]
 ```
