@@ -74,7 +74,7 @@ exports.zone = function () {
     if (tsv.zone && tsv.zone[this.n_equipset]) {
         return tsv.zone[this.n_equipset];
     } else {
-        return "イオニス";
+        return "";
     }
 }
 
@@ -83,7 +83,7 @@ exports.food = function () {
     if (tsv.food && tsv.food[this.n_equipset]) {
         return tsv.food[this.n_equipset];
     } else {
-        return "ブドウ大福";
+        return "";
     }
 }
 

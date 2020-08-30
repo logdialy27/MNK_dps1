@@ -208,10 +208,10 @@ exports.Kick = function () {
 exports.Critical = function () {
     if (this.n_equipset == 0) {
         // 脚と耳とアデマのコンビ
-        return 8 + 5 + 2 + (5);  // 末尾の3+5はメリポとイオニス
+        return 8 + 5 + 2 + (5);
     } else {
         // 両手+耳+脚+足+背中
-        return 5 + 5 + 7 + 5 + 10 + (5);// 末尾の3+5はメリポとイオニス
+        return 5 + 5 + 7 + 5 + 10 + (5);
     }
 }
 

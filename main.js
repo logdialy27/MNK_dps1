@@ -109,7 +109,9 @@ exports.run = function (result_file_prefix, p_target, equipset_aa, equipset_ws,e
             // オートアタックの実施
             combat.on_auto_attack(player,enemy,line);
             // 次の時間の予約
-            next_auto_attack_time = current_time + get_attack_speed(player,line) ;
+            next_auto_attack_time = current_time + get_attack_speed(player, line);
+
+            player.result_list("AA実行間隔", (next_auto_attack_time - current_time));
         }
 
         // ログ出力
@@ -240,39 +242,42 @@ exports.run = function (result_file_prefix, p_target, equipset_aa, equipset_ws,e
             }
         }
 
-        result["平均:攻撃"] = player.r_sum["攻撃"] / player.r_count["攻撃"];
-        result["平均:クリティカル"] = player.r_sum["クリティカル"] / player.r_count["クリティカル"];
+        result["平均:攻撃"] = (player.r_sum["攻撃"] / player.r_count["攻撃"]).toFixed(0);
+        result["平均:クリティカル"] = (player.r_sum["クリティカル"] / player.r_count["クリティカル"]).toFixed(0);
         for (var w of player.WS_list()) {
             if (batch) {
-                result["平均:WS"] = player.r_sum[w] / player.r_count[w];
+                result["平均:WS"] = (player.r_sum[w] / player.r_count[w]).toFixed(0);
             } else {
-                result["平均:" + w] = player.r_sum[w] / player.r_count[w];
+                result["平均:" + w] = (player.r_sum[w] / player.r_count[w]).toFixed(0);
             }
         }
 
-        result["TP:WS実行TP平均"] = player.r_sum["WS実行前TP"] / result["回数:WS"] ;
-        result["TP:WS得TP平均"] = player.r_sum["WS実行後TP"] / result["回数:WS"] ;
-        result["TP:AA得TP平均"] = average(player.r_list["TP"]);
-        result["TP:与TP平均"] = average(player.r_list["与TP"]);
+        result["TP:WS実行TP平均"] = (player.r_sum["WS実行前TP"] / result["回数:WS"]).toFixed(2) ;
+        result["TP:WS得TP平均"] = (player.r_sum["WS実行後TP"] / result["回数:WS"]).toFixed(2) ;
+        result["TP:AA得TP平均"] = average(player.r_list["TP"]).toFixed(2);
+        result["TP:与TP平均"] = average(player.r_list["与TP"]).toFixed(2);
 
-        result["間隔:WS実行間隔(ミリ秒)"] = average(player.r_list["WS実行間隔"]);
+        result["間隔:AA間隔(秒)"] = (average(player.r_list["AA実行間隔"]) / 1000).toFixed(3);
+        result["間隔:WS間隔(秒)"] = (average(player.r_list["WS実行間隔"]) / 1000).toFixed(3);
+        result["間隔:AA攻撃回数平均"] = (average(get_AA攻撃回数(player.r_list["history"]))).toFixed(2);
+        result["間隔:WSターン数"] = (average(get_WSターン数(player.r_list["history"]))).toFixed(2);
 
         // 再計算項目
-        result["命中率"] = 100 * (player.r_count["クリティカル"] + player.r_count["攻撃"]) /
-            (player.r_count["クリティカル"] + player.r_count["攻撃"] + player.r_count["ミス"]);
+        result["命中率"] = (100 * (player.r_count["クリティカル"] + player.r_count["攻撃"]) /
+            (player.r_count["クリティカル"] + player.r_count["攻撃"] + player.r_count["ミス"])).toFixed(2);
 
-        result["クリティカル率"] = 100 * (result["回数:クリティカル"] / (result["回数:クリティカル"] + result["回数:攻撃"]) );
-        result["クリティカルダメージ割合"] = 100 * (result["合計:クリティカル"] / result["合計:AA+WS"]);
-        result["WSダメージ割合"] = 100 * ((result["合計:AA+WS"] - result["合計:AA"]) / result["合計:AA+WS"]);
+        result["クリティカル率"] = (100 * (result["回数:クリティカル"] / (result["回数:クリティカル"] + result["回数:攻撃"]))).toFixed(2);
+        result["クリティカルダメージ割合"] = (100 * (result["合計:クリティカル"] / result["合計:AA+WS"])).toFixed(2);
+        result["WSダメージ割合"] = (100 * ((result["合計:AA+WS"] - result["合計:AA"]) / result["合計:AA+WS"])).toFixed(2);
 
         // DPS計測      
-        result["(テスト中)DPS:AA"] = (result["合計:AA"]) / result["経過時間(秒)"];
-        result["(テスト中)DPS:AA+WS"] = (result["合計:AA+WS"]) / result["経過時間(秒)"];
-        result["(テスト中)DPS:AA+WS+連携"] = (result["合計:AA+WS+連携"]) / result["経過時間(秒)"];
+        result["(テスト中)DPS:AA"] = ((result["合計:AA"]) / result["経過時間(秒)"]).toFixed(0);
+        result["(テスト中)DPS:AA+WS"] = ((result["合計:AA+WS"]) / result["経過時間(秒)"]).toFixed(0);
+        result["(テスト中)DPS:AA+WS+連携"] = ((result["合計:AA+WS+連携"]) / result["経過時間(秒)"]).toFixed(0);
 
-        result["(テスト中)DPS:AA+エン"] = (result["合計:AA+エン"]) / result["経過時間(秒)"];
-        result["(テスト中)DPS:AA+エン+WS"] = (result["合計:AA+エン+WS"]) / result["経過時間(秒)"];
-        result["(テスト中)DPS:AA+エン+WS+連携"] = (result["合計:AA+エン+WS+連携"]) / result["経過時間(秒)"];
+        result["(テスト中)DPS:AA+エン"] = ((result["合計:AA+エン"]) / result["経過時間(秒)"]).toFixed(0);
+        result["(テスト中)DPS:AA+エン+WS"] = ((result["合計:AA+エン+WS"]) / result["経過時間(秒)"]).toFixed(0);
+        result["(テスト中)DPS:AA+エン+WS+連携"] = ((result["合計:AA+エン+WS+連携"]) / result["経過時間(秒)"]).toFixed(0);
 
         // JSON出力
         output_to_json(result_file_prefix + "_all.txt", result, true);
@@ -337,5 +342,40 @@ function average(in_list) {
     }
     else {
         return 0;
+    }
+}
+
+// 
+function get_AA攻撃回数(in_list) {
+    if (in_list) {
+        var ret = [];
+        for (var i = 0; i < in_list.length; ++i) {
+            if (in_list[i] >= 0) {
+                ret.push(in_list[i]);
+            }
+        }
+        return ret;
+    }
+    else {
+        return [];
+    }
+}
+
+function get_WSターン数(in_list) {
+    if (in_list) {
+        var ret = [];
+        var r = 0;
+        for (var i = 0; i < in_list.length; ++i) {
+            if (in_list[i] >= 0) {
+                r += 1;
+            } else {
+                ret.push(r);
+                r = 0;
+            }
+        }
+        return ret;
+    }
+    else {
+        return [];
     }
 }

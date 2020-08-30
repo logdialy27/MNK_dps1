@@ -133,7 +133,7 @@ exports.攻防比 = function (a, d, wt,player,line) {
 function SV_Lambda(d, w_rank) {
     // 範囲は4 - 16
     // 簡易式
-    var y = 3.97 * Math.pow(w_rank, -0.232);
+    var y = 4.00 * Math.pow(w_rank, -0.25);
     var z = y * w_rank;
 
     var x = -4 / (-1 * z);
@@ -330,7 +330,7 @@ exports.AA_ダメージ計算 = function (t, player, enemy, line) {
 
     line["ダメージ:4"] = dmg;
 
-    // TODO:武器種の耐性
+    // TODO:武器種の耐性とボーナス
     // TODO:ダメージカット
 
     return [dmg, c];
@@ -631,7 +631,6 @@ exports.MythicAM3 = function (player, line) {
 
     // 乱数は一回だけ計算
     var r = Math.ceil(Math.random() * 100);
-
 
     line["MythicAM3:n"] = 3;
     line["MythicAM3:r"] = r;
@@ -1000,9 +999,12 @@ exports.属性WS基本D = function (player, line) {
 // 通常/WS時の与TP計算
 exports.与TP計算 = function (base_TP, player, enemy, line) {
 
+    // モクシャ
     var m = (100 - Math.min(75, player.モクシャ())) / 100;
 
-    var C = 10;// TODO:この値は相手のAGIにより変化
+    // AGI差
+    // TODO:この値は相手のAGIにより変化
+    var C = 10;
 
     var top = 50 + C;
     var bottom = -50 + C;

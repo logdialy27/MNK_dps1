@@ -143,18 +143,18 @@ exports.Evasion = function () {
 // ストアTP
 exports.STP = function () {
     if (this.n_equipset == 0) {
-        // 投てき + 右耳 + 両手
+        // 投てき + 右耳 + 両手 + 武器
         return 5 + 5 + 7 + 10;
     } else {
-        // 投てき + 右耳
+        // 投てき + 右耳 + 武器
         return 5 + 5 + 10;
     }
 }
 
 exports.DA = function () {
     if (this.n_equipset == 0) {
-        // サポ戦  + 耳右 + 背中
-        return (10) + 5 + 10;
+        // サポ戦  + 左耳 + 耳右 + 背中
+        return (10) + 2 + 5 + 10;
     } else {
         // サポ戦  + 耳右
         return (10) + 5;
@@ -193,11 +193,11 @@ exports.Pursuit = function () {
 // 蹴撃発動率
 exports.Kick = function () {
     if (this.n_equipset == 0) {
-        // (特性 + メリポ) + 首 + 背中 + 脚 + 足 + アフマス
-        return (14 + 5) + 25 + 10 + 19 + 10  + (15);
+        // (特性 + メリポ) + 首 + 背中 + 脚 + 足
+        return (14 + 5) + 25 + 10 + 19 + 10 
     } else {
-        // (特性 + メリポ) + 首 + 背中 + アフマス
-        return (14 + 5) + 25 + 10 + (15);
+        // (特性 + メリポ) + 首 + 背中
+        return (14 + 5) + 25 + 10
     }
 }
 
@@ -207,11 +207,11 @@ exports.Kick = function () {
 // ※WSのクリティカル補正除く
 exports.Critical = function () {
     if (this.n_equipset == 0) {
-        // 脚と耳とアデマのコンビ
-        return 8 + 5 + 2 + (5);  // 末尾の3+5はメリポとイオニス
+        // 脚とアデマのコンビ
+        return 8 + 2 + (5);  // 末尾の5はメリポ
     } else {
         // 両手+耳+脚+足+背中
-        return 5 + 5 + 7 + 5 + 10 + (5);// 末尾の3+5はメリポとイオニス
+        return 5 + 5 + 7 + 5 + 10 + (5);// 末尾の5はメリポ
     }
 }
 
@@ -284,12 +284,12 @@ exports.EquipHaste = function () {
 
 // マーシャルアーツ合計値
 // 特性、ギフト、メリポ、ジョブポ、装備全部加算後の値
-// スファライの場合耳をマーケピアス+1
+// ゴッドハンドの場合耳をマーケピアス+1
 exports.MartialArts = function () {
     if (this.n_equipset == 0) {
-        return (210) + 6;
+        return (210) + 6 + 12;
     } else {
-        return (210) + 6;
+        return (210) + 6 + 12;
     }
 }
 
