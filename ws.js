@@ -4,6 +4,7 @@ const setting = require("./setting");
 const table_ws = {
     "シャンデュシニュ": ws_シャンデュシニュ,
     "サンギンブレード": ws_サンギンブレード,
+    "サベッジブレード": ws_サベッジブレード,
 
     "ウッコフューリー": ws_ウッコフューリー,
 
@@ -550,6 +551,7 @@ function helper_属性WSダメージ計算(name,element,base_dmg, xN, BP_D, 系�
     return [d3, gain_TP];
 }
 
+
 // 片手剣:サンギンブレード
 function ws_サンギンブレード(player, enemy, line_p) {
 
@@ -568,6 +570,74 @@ function ws_サンギンブレード(player, enemy, line_p) {
     }
 
     return helper_属性WSダメージ計算("サンギンブレード", "闇", base_dmg, xN, BP_D,系統係数,player,enemy,line);
+}
+
+function helper_TP修正(execTP,table)
+{
+    var ret_value = 0;
+    for (var i = 0; i < table.length; ++i) {
+        var t = table[i];
+
+        if (logic.contains(execTP, t.min, t.max)) {
+            ret_value = t.v(execTP);
+            break;
+        }
+    }
+
+    return ret_value;
+}
+
+const table_TP_サベッジブレード =
+[
+    { min: 1000, max: 2000, v: function (tp) { return 4.00 + (10.25 - 4.0) * (tp - 1000) / 1000; } },
+    { min: 2000, max: 3000, v: function (tp) { return 10.25 + (13.75 - 10.25) * (tp - 2000) / 1000; } },
+    { min: 3000, max: 3000, v: function (tp) { return 13.75; } },
+];
+// 片手剣:サベッジブレード
+function ws_サベッジブレード(player, enemy, line_p) {
+
+    // サベッジブレード
+    // 2回攻撃 TP:ダメージ修正
+    // STR50% MND50%
+    // 属性ゴルゲ初段適用
+    var line = line_p;
+    var list = [];
+
+    // 作業用リスト
+    var list1 = []; // WSの固有分
+    var list2 = []; // マルチ
+
+    // WS実行のTP計算
+    var execTP = logic.addTP(player.n_TP, player.TP_Bonus());
+    // TP:ダメージ修正
+
+    // [1] [サブ] [2] + マルチの順
+    var attack = player.Attack();
+    var acc = player.Accuracy();
+    var D = player.D();
+    var wt = player.WeaponType();
+
+    var xN = helper_TP修正(execTP, table_TP_サベッジブレード)+ player.WS_DamageUp0();
+    var xN2 = 1.0;
+
+    // [1] マルチ判定実施
+    helper_WSマルチ(player, list1, list2, xN, xN2, attack, acc, D, wt, 0, line);
+
+    // [サブ]
+    if (player.SubWeaponType() != "") {
+        list1.push({ "C": 0, "xN": xN2, "attack": player.SubAttack(), "acc": player.SubAccuracy(), "D": player.SubD(), "wt": player.SubWeaponType(), "sub": true });
+    }
+
+    // [2] マルチ判定実施
+    helper_WSマルチ(player, list1, list2, xN2, xN2, attack, acc, D, wt, 0, line);
+
+    // リストを結合[0]～[7]までが有効
+    list = list1.concat(list2);
+
+    // 修正項目
+    var BP_D = Math.floor(player.DEX() * 50 / 100 + player.MND() * 50 / 100);
+
+    return helper_WSダメージ計算(list, BP_D, player, enemy, line);
 }
 
 // 両手剣:トアクリーバー
