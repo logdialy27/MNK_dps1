@@ -570,6 +570,17 @@ exports.Kick = function () {
     }
 }
 
+const table_フェンサーC_Bonus = {
+    0: 0,
+    1: 3,
+    2: 5,
+    3: 7,
+    4: 9,
+    5: 10,
+    6: 11,
+    7: 12,
+    8: 13,
+}
 // クリティカル
 // 装備、支援を適用後の値
 // ※DEX/AGI補正は含めない
@@ -577,6 +588,10 @@ exports.Kick = function () {
 // ※インピタスは除く
 exports.Critical = function () {
     if (impl.Critical) {
+        var f = table_フェンサーC_Bonus[this.フェンサー()];
+        if (f) {
+            return impl.Critical() + zone.Critical() + f;
+        }
         return impl.Critical() + zone.Critical();
     } else {
         return 0;
@@ -959,9 +974,27 @@ exports.WS = function () {
 }
 
 // TPボーナス
+// フェンサーを適用
+// 片手以外の場合はフェンサー値は0にする(チェックはしていない)
+
+const table_フェンサーTP_Bonus = {
+    0: 0,
+    1: 200,
+    2: 300,
+    3: 400,
+    4: 450,
+    5: 500,
+    6: 550,
+    7: 600,
+    8: 630,
+}
 // サブでも適用されるものはこちらに加算
 exports.TP_Bonus = function () {
     if (impl.TP_Bonus) {
+        var f = table_フェンサーTP_Bonus[this.フェンサー()];
+        if (f) {
+            return impl.TP_Bonus() + f;
+        }
         return impl.TP_Bonus();
     } else {
         return 0;
@@ -1134,6 +1167,14 @@ exports.残心 = function () {
 exports.意気衝天 = function () {
     if (impl.意気衝天) {
         return impl.意気衝天()
+    } else {
+        return 0;
+    }
+}
+
+exports.フェンサー = function () {
+    if (impl.フェンサー) {
+        return impl.フェンサー()
     } else {
         return 0;
     }
