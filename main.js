@@ -188,8 +188,12 @@ exports.run = function (result_file_prefix, p_target, equipset_aa, equipset_ws,e
                 result["回数:" + w] = player.r_count[w];
             }
         }
-        result["回数:連携"] = player.r_count["連携"];
-
+        if (player.r_count["連携"]) {
+            result["回数:連携"] = player.r_count["連携"];
+        } else {
+            result["回数:連携"] = 0;
+        }
+        
         // 合計
         result["合計:攻撃"] = player.r_sum["攻撃"];
         result["合計:ミス"] = player.r_sum["ミス"];
@@ -206,7 +210,11 @@ exports.run = function (result_file_prefix, p_target, equipset_aa, equipset_ws,e
                 result["合計:" + w] = player.r_sum[w];
             }
         }
-        result["合計:連携"] = player.r_sum["連携"];
+        if (player.r_sum["連携"]) {
+            result["合計:連携"] = player.r_sum["連携"];
+        } else {
+            result["合計:連携"] = 0;
+        }
 
         result["合計:AA"] = player.r_sum["攻撃"] + player.r_sum["クリティカル"];
         result["合計:AA+WS"] = result["合計:AA"] + result["合計:WS"];
