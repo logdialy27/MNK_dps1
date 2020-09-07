@@ -640,7 +640,45 @@ function ws_サベッジブレード(player, enemy, line_p) {
     return helper_WSダメージ計算(list, BP_D, player, enemy, line);
 }
 
+const table_TP_トアクリーバー =
+    [
+        { min: 1000, max: 2000, v: function (tp) { return 4.75 + (7.5 - 4.75) * (tp - 1000) / 1000; } },
+        { min: 2000, max: 3000, v: function (tp) { return 7.5 + (10.0 - 7.5) * (tp - 2000) / 1000; } },
+        { min: 3000, max: 3000, v: function (tp) { return 10.0; } },
+    ];
+
 // 両手剣:トアクリーバー
-function ws_トアクリーバー() {
-    return [0, 0];
+function ws_トアクリーバー(player, enemy, line_p) {
+
+    // 4.75	7.5	10	×1	VIT80%
+     // 属性ゴルゲ初段適用
+    var line = line_p;
+    var list = [];
+
+    // 作業用リスト
+    var list1 = []; // WSの固有分
+    var list2 = []; // 
+
+    // WS実行のTP計算
+    var execTP = logic.addTP(player.n_TP, player.TP_Bonus());
+
+    // [1]
+    var attack = player.Attack();
+    var acc = player.Accuracy();
+    var D = player.D();
+    var wt = player.WeaponType();
+
+    // TP:ダメージ修正
+    var xN = helper_TP修正(execTP, table_TP_トアクリーバー) + player.WS_DamageUp0();
+
+    // [1] マルチ判定実施
+    list1.push({ "C": 0, "xN": xN, "attack": attack, "acc": acc, "D": D, "wt": wt });
+
+    // リストを結合[0]～[7]までが有効
+    list = list1.concat(list2);
+
+    // 修正項目
+    var BP_D = Math.floor(player.VIT() * 80 / 100 );
+
+    return helper_WSダメージ計算(list, BP_D, player, enemy, line);
 }
