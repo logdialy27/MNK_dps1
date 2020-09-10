@@ -1,5 +1,4 @@
-﻿// 青のマルチ装備
-exports.n_equipset = 0;
+﻿exports.n_equipset = 0;
 
 // プレイヤー名
 exports.Name = function () {
@@ -271,9 +270,9 @@ exports.EquipHaste = function () {
 // 八双のヘイスト
 exports.HassoHaste = function () {
     if (this.n_equipset == 0) {
-        return 10;
+        return 0;
     } else {
-        return 10;
+        return 0;
     }
 }
 // ラストリゾートのヘイスト

@@ -22,7 +22,7 @@ exports.攻防関数min = function (ad, C,wt, dlu,pdl, line) {
 
     // クリティカル時のボーナス
     var c_bounus = 1.0;
-    line["攻防関数上限:max1"] = max;
+    line["攻防関数下限:max1"] = max;
 
     // 特性の加算
     max += dlu;
@@ -105,6 +105,100 @@ exports.攻防関数max = function (ad, C,wt,dlu,pdl,line) {
 
     return r;
 }
+
+
+const table_遠隔攻防関数min = [
+    { begin: 0, end: 0.95, f: function (n, max) { return Math.max(0,n * 1.141 - 0.08395); } },
+    { begin: 0.95, end: 1.2, f: function (n, max) { return 1; } },
+    { begin: 1.2, end: 2.07642, f: function (n, max) { return n * 1.141 - 0.3692; } },
+    { begin: 2.07642, end: 100.0, f: function (n, max) { return n - 0.07642; } },
+];
+
+exports.遠隔攻防関数min = function (ad, C, wt, dlu, pdl, line) {
+    if (wt == "射撃") {
+        max = 3.50;
+    } else {
+        max = 3.25;
+    }
+
+    // クリティカル時のボーナス
+    line["遠隔攻防関数下限:max1"] = max;
+
+    // 特性の加算
+    max += dlu;
+    line["遠隔攻防関数下限:max2"] = max;
+
+    // 装備の乗算
+    max = max * (100 + pdl) / 100;
+    line["遠隔攻防関数下限:max3"] = max;
+
+    var r = 0.0;
+    for (var t of table_遠隔攻防関数min) {
+        if (t.begin <= ad && ad < t.end) {
+            r = t.f(ad, max);
+            break;
+        }
+    }
+
+    line["遠隔攻防関数下限:r1"] = r;
+    r = Math.min(r, max);
+    line["遠隔攻防関数下限:r2"] = r;
+
+    if (C) {
+        line["遠隔攻防関数下限:クリティカル"] = true;
+        r = Math.floor(r * (100 + 25) / 100);
+    }
+
+    line["遠隔攻防関数下限:r3"] = r;
+
+    return r;
+}
+
+const table_遠隔攻防関数max = [
+    { begin: 0, end: 0.825, f: function (n, max) { return n * 1.141 + 0.05867 } },
+    { begin: 0.825, end: 1.075, f: function (n, max) { return 1; } },
+    { begin: 1.075, end: 1.95142, f: function (n, max) { return n * 1.141 - 0.226575 } },
+    { begin: 1.95142, end: 100.0, f: function (n, max) { return n + 0.04858; } },
+];
+
+exports.遠隔攻防関数max = function (ad, C, wt, dlu, pdl, line) {
+    if (wt == "射撃") {
+        max = 3.50;
+    } else {
+        max = 3.25;
+    }
+
+    line["遠隔攻防関数上限:max1"] = max;
+    // 特性の加算
+    max += dlu;
+    line["遠隔攻防関数上限:max2"] = max;
+
+    // 装備の乗算
+    max = max * (100 + pdl) / 100;
+    line["遠隔攻防関数上限:max3"] = max;
+
+    var r = 0.0;
+    for (var t of table_遠隔攻防関数max) {
+        if (t.begin <= ad && ad < t.end) {
+            r = t.f(ad, max);
+            break;
+        }
+    }
+
+    line["遠隔攻防関数上限:r1"] = r;
+    r = Math.min(r, max);
+    line["遠隔攻防関数上限:r2"] = r;
+
+    if (C) {
+        line["遠隔攻防関数上限:クリティカル"] = true;
+        r = Math.floor(r * (100 + 25) / 100);
+    }
+
+    line["遠隔攻防関数上限:r3"] = r;
+
+    return r;
+}
+
 
 exports.攻防比 = function (a, d, wt,player,line) {
     if (d == 0) {
@@ -415,6 +509,13 @@ exports.WS_ダメージ計算 = function (idx,BP_D,t, player, enemy, line) {
 }
 
 exports.WS属性_ダメージ計算 = function (idx, BP_D, t, player, enemy, line) {
+    var logic = this;
+
+    // TODO:作成
+    return 0;
+}
+
+exports.WS遠隔_ダメージ計算 = function (idx, BP_D, t, player, enemy, line) {
     var logic = this;
 
     // TODO:作成
