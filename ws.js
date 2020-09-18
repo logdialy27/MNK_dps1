@@ -13,6 +13,7 @@ const table_ws = {
     "夢想阿修羅拳": ws_夢想阿修羅拳,
 
     "トアクリーバー": ws_トアクリーバー,
+    "祖之太刀・不動": ws_祖之太刀不動,
 };
 
 exports.ws = function (name, player, enemy,line) {
@@ -679,6 +680,49 @@ function ws_トアクリーバー(player, enemy, line_p) {
 
     // 修正項目
     var BP_D = Math.floor(player.VIT() * 80 / 100 );
+
+    return helper_WSダメージ計算(list, BP_D, player, enemy, line);
+}
+
+const table_TP_祖之太刀不動 =
+    [
+        { min: 1000, max: 2000, v: function (tp) { return 3.50 + (5.75 - 3.50) * (tp - 1000) / 1000; } },
+        { min: 2000, max: 3000, v: function (tp) { return 5.75 + (8.0 - 5.757) * (tp - 2000) / 1000; } },
+        { min: 3000, max: 3000, v: function (tp) { return 8.0; } },
+    ];
+
+// 両手刀:祖之太刀・不動
+// 「・」はJSの禁則文字なので削除するが、設定時は「・」を使用する。
+// メソッド名のみ対象
+function ws_祖之太刀不動(player, enemy, line_p) {
+
+    var line = line_p;
+    var list = [];
+
+    // 作業用リスト
+    var list1 = []; // WSの固有分
+    var list2 = []; // 
+
+    // WS実行のTP計算
+    var execTP = logic.addTP(player.n_TP, player.TP_Bonus());
+
+    // [1]
+    var attack = player.Attack();
+    var acc = player.Accuracy();
+    var D = player.D();
+    var wt = player.WeaponType();
+
+    // TP:ダメージ修正
+    var xN = helper_TP修正(execTP, table_TP_祖之太刀不動) + player.WS_DamageUp0();
+
+    // [1] マルチ判定実施
+    list1.push({ "C": 0, "xN": xN, "attack": attack, "acc": acc, "D": D, "wt": wt });
+
+    // リストを結合[0]～[7]までが有効
+    list = list1.concat(list2);
+
+    // 修正項目
+    var BP_D = Math.floor(player.STR() * 80 / 100);
 
     return helper_WSダメージ計算(list, BP_D, player, enemy, line);
 }

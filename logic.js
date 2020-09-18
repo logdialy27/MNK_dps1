@@ -199,7 +199,6 @@ exports.遠隔攻防関数max = function (ad, C, wt, dlu, pdl, line) {
     return r;
 }
 
-
 exports.攻防比 = function (a, d, wt,player,line) {
     if (d == 0) {
         d = 1;

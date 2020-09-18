@@ -212,17 +212,15 @@ exports.SubCritical = function () {
 // クリティカルヒットダメージアップ
 exports.CriticalDamage = function () {
     // Cインクリースやギフトも含む合算値で0～100の%値
-    // 青の特性1+2とアデマ+1頭
     if (this.n_equipset == 0) {
-        return 11 + 6;
+        return 6;
     } else {
-        return 11 + 6 + 5;
+        return 0;
     }
 }
 
 // 連携ボーナス+
 exports.SkillchainBonus = function () {
-    // 青の特性1+2
     return 0;
 }
 
@@ -288,7 +286,7 @@ exports.EquipHaste = function () {
 
 // 特性のダメージ上限アップ
 exports.DamageLimit = function () {
-    // サポ戦の0.1
+    // サポ踊の0.1
     return 1 * 26/256;
 }
 // 装備の物理ダメージ上限(%)
