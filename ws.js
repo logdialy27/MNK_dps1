@@ -205,7 +205,7 @@ function ws_ウッコフューリー(player, enemy, line_p) {
     var acc = player.Accuracy();
     var D = player.D();
     var wt = player.WeaponType();
-    var critcal = logic.critical(player.Critical() + C_add, player, enemy, line);
+    var critcal = player.Critical() + C_add;
 
     var xN = 2.0 + player.WS_DamageUp0();
     var xN2 = 1.0;

@@ -20,25 +20,25 @@ exports.JOB = function () {
 //
 exports.STR = function () {
     if (this.n_equipset == 0) {
-        return 114 + 281;
+        return 114 + 259;
     } else {
-        return 114 + 308;
+        return 114 + 344;
     }
 }
 
 exports.DEX = function () {
     if (this.n_equipset == 0) {
-        return 101 + 177;
+        return 101 + 184;
     } else {
-        return 101 + 220;
+        return 101 + 215;
     }
 }
 
 exports.VIT = function () {
     if (this.n_equipset == 0) {
-        return 104 + 211;
+        return 104 + 218;
     } else {
-        return 104 + 227;
+        return 104 + 198;
     }
 }
 
@@ -46,7 +46,7 @@ exports.AGI = function () {
     if (this.n_equipset == 0) {
         return 96 + 102;
     } else {
-        return 96 + 138;
+        return 96 + 134;
     }
 }
 
@@ -54,7 +54,7 @@ exports.INT = function () {
     if (this.n_equipset == 0) {
         return 86 + 92;
     } else {
-        return 86 + 119;
+        return 86 + 108;
     }
 }
 
@@ -62,7 +62,7 @@ exports.MND = function () {
     if (this.n_equipset == 0) {
         return 97 + 134;
     } else {
-        return 97 + 137;
+        return 97 + 117;
     }
 }
 
@@ -70,7 +70,7 @@ exports.CHR = function () {
     if (this.n_equipset == 0) {
         return 96 + 161;
     } else {
-        return 96 + 149;
+        return 96 + 127;
     }
 }
 
@@ -91,9 +91,9 @@ exports.SubD = function () {
 
 exports.Attack = function () {
     if (this.n_equipset == 0) {
-        return 1886;
+        return 1801;
     } else {
-        return 1935;
+        return 1750;
     }
 }
 
@@ -107,17 +107,17 @@ exports.SubAttack = function () {
 
 exports.Defense = function () {
     if (this.n_equipset == 0) {
-        return 1357;
+        return 1385;
     } else {
-        return 1319;
+        return 1352;
     }
 }
 
 exports.Accuracy = function () {
     if (this.n_equipset == 0) {
-        return 1207;
+        return 1204;
     } else {
-        return 1229;
+        return 1264;
     }
 }
 
@@ -130,29 +130,29 @@ exports.SubAccuracy = function () {
 }
 
 exports.Evasion = function () {
-    return 778;
+    return 725;
 }
 
 // ストアTP
 exports.STP = function () {
     if (this.n_equipset == 0) {
-        return 7 + 5 + 3 + 10 + 6 + 4 + (15);
+        return 5 + 7 + 5 + 3 + 10 + 5 + 4 + (15) ;
     } else {
-        return 4 + (15);
+        return 6 + 4 + (15);
     }
 }
 
 exports.DA = function () {
     if (this.n_equipset == 0) {
-        return (28) + (5) + 6 + 6 + 1 + 3 + 6 + 10 + 5 + 6 + 9;
+        return (28) + (5) + 6 + 6 + 1 + 3 + 6 + 10 + 9 + 6 + 9 
     } else {
-        return (28) + (5) + 6 + 3 + 6 + 10 + 5 + 6 + 9;
+        return (28) + (5) + 3 + 6 + 5 + 6 + 9
     }
 }
 
 exports.TA = function () {
     if (this.n_equipset == 0) {
-        return 2;
+        return 0;
     } else {
         return 2;
     }
@@ -192,9 +192,9 @@ exports.Sub複数回攻撃 = function () {
 // ※WSのクリティカル補正除く
 exports.Critical = function () {
     if (this.n_equipset == 0) {
-        return 13 + (5); // メリポ(5)
+        return 13 + (5) + (10); // メリポ(5) + ギフト(10)
     } else {
-        return 2 + (5); // メリポ(5)
+        return 10 + 13 + 8 + (5) + (10); // メリポ(5)+ ギフト(10)
     }
 }
 
@@ -212,9 +212,10 @@ exports.SubCritical = function () {
 exports.CriticalDamage = function () {
     // Cインクリースやギフトも含む合算値で0～100の%値
     if (this.n_equipset == 0) {
-        return 0
+        // 特性+ギフト
+        return (8+10)
     } else {
-        return 6
+        return (8+10) + 6
     }
 }
 
@@ -317,7 +318,11 @@ exports.xN_SU5 = function () {
 
 // ダブルアタックダメージアップ
 exports.DA_DamageUp = function () {
-    return 11;
+    if (this.n_equipset == 0) {
+        return 31;
+    } else {
+        return 31;
+    }
 }
 
 // トリプルアタックダメージアップ
@@ -337,7 +342,12 @@ exports.WS_DamageUp0 = function () {
 
 // WSダメージアップ:装備やギフト
 exports.WS_DamageUp1 = function () {
-    return 20;
+    if (this.n_equipset == 0) {
+        // マント＋ギフト
+        return 0 + (3); 
+    } else {
+        return 0;
+    }
 }
 
 // WSダメージアップ:竜の特性
@@ -391,8 +401,8 @@ exports.モクシャ = function () {
 // ウェポンスキルDEX補正+10
 exports.equip_ウェポンスキルDEX補正 = function () {
     if (this.n_equipset == 0) {
-        return 10;
+        return 0;
     } else {
-        return 10;
+        return 0;
     }
 }

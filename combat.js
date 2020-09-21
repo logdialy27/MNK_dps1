@@ -194,7 +194,7 @@ exports.on_auto_attack = function (player,enemy,line_p) {
         if (logic.rand(player.QA())) {
             // QA判定
             for (i = 0; i < 4; ++i) {
-                var critcal = logic.critical(player.Critical(), player, enemy, line);
+                var critcal = player.Critical()
                 var xN = logic.xN(player, wt, i, line);
 
                 list.push({
@@ -210,7 +210,7 @@ exports.on_auto_attack = function (player,enemy,line_p) {
         } else if (logic.rand(player.TA())) {
             // TA判定
             for (i = 0; i < 3; ++i) {
-                var critcal = logic.critical(player.Critical(), player, enemy, line);
+                var critcal = player.Critical()
                 // 倍撃
                 var xN = logic.xN(player, wt, i, line);
 
@@ -227,7 +227,7 @@ exports.on_auto_attack = function (player,enemy,line_p) {
         } else if (logic.rand(player.DA())) {
             // DA判定
             for (i = 0; i < 2; ++i) {
-                var critcal = logic.critical(player.Critical(), player, enemy, line);
+                var critcal = player.Critical()
                 // 倍撃
                 var xN = logic.xN(player, wt, i, line);
 
@@ -245,7 +245,7 @@ exports.on_auto_attack = function (player,enemy,line_p) {
             // ミシックAM3
             var count = logic.MythicAM3(player, line);
             for (i = 0; i < count; ++i) {
-                var critcal = logic.critical(player.Critical(), player, enemy, line);
+                var critcal = player.Critical()
                 // 倍撃
                 var xN = 1.0;
 
@@ -266,7 +266,7 @@ exports.on_auto_attack = function (player,enemy,line_p) {
             var count = logic.複数回攻撃判定(player, line);
 
             for (i = 0; i < count; ++i) {
-                var critcal = logic.critical(player.Critical(), player, enemy, line);
+                var critcal = player.Critical()
                 // 倍撃
                 var xN = 1.0;
 
@@ -283,7 +283,7 @@ exports.on_auto_attack = function (player,enemy,line_p) {
 
         } else {
             // 
-            var critcal = logic.critical(player.Critical(), player, enemy, line);
+            var critcal = player.Critical()
             // 倍撃
             var xN = logic.xN(player, wt, 0, line);
 
