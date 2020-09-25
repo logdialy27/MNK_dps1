@@ -473,15 +473,15 @@ exports.WS_ダメージ計算 = function (idx,BP_D,t, player, enemy, line) {
     }
 
     if (t.DA) {
-        // DAダメージアップ適用
-        dmg = Math.floor(dmg * (100 + player.DA_DamageUp()) / 100);
-        line["ダメージ:3-DA_DamageUp"] = dmg;
+        // DAダメージアップ適用はWSは対象外
+        //dmg = Math.floor(dmg * (100 + player.DA_DamageUp()) / 100);
+        //line["ダメージ:3-DA_DamageUp"] = dmg;
     }
 
     if (t.TA) {
-        // TAダメージアップ適用
-        dmg = Math.floor(dmg * (100 + player.TA_DamageUp()) / 100);
-        line["ダメージ:3-TA_DamageUp"] = dmg;
+        // TAダメージアップ適用は対象外
+        //dmg = Math.floor(dmg * (100 + player.TA_DamageUp()) / 100);
+        //は対象外line["ダメージ:3-TA_DamageUp"] = dmg;
     }
 
     line["ダメージ:4"] = dmg;

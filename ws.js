@@ -264,7 +264,7 @@ function helper_WSマルチ(player, list1, list2, xN1, xN2, attack, acc, D, wt, 
     } else if (logic.rand(player.TA())) {
         // TA判定
         list1.push({
-            "TA": true, // TA・・TAダメージアップのために必要
+            "TA": true, // TA
             "C": critcal,
             "xN": xN1,
             "attack": attack,
@@ -275,7 +275,7 @@ function helper_WSマルチ(player, list1, list2, xN1, xN2, attack, acc, D, wt, 
 
         for (i = 1; i < 3; ++i) {
             list2.push({
-                "TA": true, // TA・・TAダメージアップのために必要
+                "TA": true, // TA
                 "C": critcal,
                 "xN": xN2,
                 "attack": attack,
@@ -287,7 +287,7 @@ function helper_WSマルチ(player, list1, list2, xN1, xN2, attack, acc, D, wt, 
     } else if (logic.rand(player.DA())) {
         // DA判定
         list1.push({
-            "DA": true, // DA・・DAダメージアップのために必要
+            "DA": true, // DA
             "C": critcal,
             "xN": xN1,
             "attack": attack,
@@ -298,7 +298,7 @@ function helper_WSマルチ(player, list1, list2, xN1, xN2, attack, acc, D, wt, 
 
         for (i = 1; i < 2; ++i) {
             list2.push({
-                "DA": true, // DA・・DAダメージアップのために必要
+                "DA": true, // DA
                 "C": critcal,
                 "xN": xN2,
                 "attack": attack,
