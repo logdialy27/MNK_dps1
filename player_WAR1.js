@@ -6,7 +6,7 @@ exports.Name = function () {
 }
 
 exports.Description = function () {
-    return "ウコンバサラ/ウッコフューリー/ウコン装備AM1";
+    return "ウコンバサラ/ウッコフューリー/ウコン装備AM1/2/3";
 }
 
 // JOB
@@ -20,25 +20,25 @@ exports.JOB = function () {
 //
 exports.STR = function () {
     if (this.n_equipset == 0) {
-        return 114 + 262;
+        return 114 + 259 + 7; // +7=八双
     } else {
-        return 114 + 345;
+        return 114 + 349 + 7; // +7=八双
     }
 }
 
 exports.DEX = function () {
     if (this.n_equipset == 0) {
-        return 101 + 187;
+        return 101 + 167;
     } else {
-        return 101 + 208;
+        return 101 + 217;
     }
 }
 
 exports.VIT = function () {
     if (this.n_equipset == 0) {
-        return 104 + 218;
+        return 104 + 201;
     } else {
-        return 104 + 209;
+        return 104 + 195;
     }
 }
 
@@ -46,7 +46,7 @@ exports.AGI = function () {
     if (this.n_equipset == 0) {
         return 96 + 102;
     } else {
-        return 96 + 120;
+        return 96 + 106;
     }
 }
 
@@ -54,7 +54,7 @@ exports.INT = function () {
     if (this.n_equipset == 0) {
         return 86 + 92;
     } else {
-        return 86 + 99;
+        return 86 + 94;
     }
 }
 
@@ -62,7 +62,7 @@ exports.MND = function () {
     if (this.n_equipset == 0) {
         return 97 + 134;
     } else {
-        return 97 + 113;
+        return 97 + 101;
     }
 }
 
@@ -70,7 +70,7 @@ exports.CHR = function () {
     if (this.n_equipset == 0) {
         return 96 + 161;
     } else {
-        return 96 + 129;
+        return 96 + 114;
     }
 }
 
@@ -91,9 +91,9 @@ exports.SubD = function () {
 
 exports.Attack = function () {
     if (this.n_equipset == 0) {
-        return 1818;
+        return 1860;
     } else {
-        return 1814;
+        return 1726;
     }
 }
 
@@ -107,17 +107,17 @@ exports.SubAttack = function () {
 
 exports.Defense = function () {
     if (this.n_equipset == 0) {
-        return 1385;
+        return 1353;
     } else {
-        return 1360;
+        return 1340;
     }
 }
 
 exports.Accuracy = function () {
     if (this.n_equipset == 0) {
-        return 1219;
+        return 1228;
     } else {
-        return 1221;
+        return 1243;
     }
 }
 
@@ -130,15 +130,19 @@ exports.SubAccuracy = function () {
 }
 
 exports.Evasion = function () {
-    return 752;
+    if (this.n_equipset == 0) {
+        return 726;
+    } else {
+        return 753;
+    }
 }
 
 // ストアTP
 exports.STP = function () {
     if (this.n_equipset == 0) {
-        return 5 + 7 + 5 + 3 + 10 + 5 + 4 + (15) ;
+        return 7 + 5 + 3 + 10 + 5 + 5 + 4 + (15) ;
     } else {
-        return 10 + 6 + 4 + (15);
+        return 10 + 6 + 6 + (15);
     }
 }
 
@@ -146,13 +150,14 @@ exports.DA = function () {
     if (this.n_equipset == 0) {
         return (28) + (5) + 6 + 7 + 1 + 3 + 6 + 10 + 9 + 6 + 9 
     } else {
-        return (28) + (5) + 3 + 7 + 5 + 6 + 9
+        return (28) + (5) + 3 + 7 + (1) + 5 + 11 + 6
+//        return (28) + (5) + 3 + 7 + (3) + 5 + 11 + 6 // 夜間
     }
 }
 
 exports.TA = function () {
     if (this.n_equipset == 0) {
-        return 2;
+        return 0;
     } else {
         return 2;
     }
@@ -160,7 +165,7 @@ exports.TA = function () {
 
 exports.QA = function () {
     if (this.n_equipset == 0) {
-        return 3;
+        return 0;
     } else {
         return 3;
     }
@@ -192,7 +197,7 @@ exports.Sub複数回攻撃 = function () {
 // ※WSのクリティカル補正除く
 exports.Critical = function () {
     if (this.n_equipset == 0) {
-        return 2 + 13 + (5) + (10); // メリポ(5) + ギフト(10)
+        return 13 + (5) + (10); // メリポ(5) + ギフト(10)
     } else {
         return 2 + 10 + 13 + 8 + (5) + (10); // メリポ(5)+ ギフト(10)
     }
@@ -258,21 +263,37 @@ exports.MagicHaste = function () {
 }
 
 // 装備枠ヘイスト合計値
+// 装備枠ヘイストは26%でないとキャップしない
+// これは装備品毎にMath.floor(10.24 * N)を実施しているため
 exports.EquipHaste = function () {
     //return 25.0;
     if (this.n_equipset == 0) {
-        return Math.min(25, (4 + 3 + 9 + 6 + 4));
+        return Math.min(25,5 + 3 + 8 + 6 + 4)
+        //イオスケハで25%の場合の厳密式
+        //return Math.floor(Math.min(256,
+        //    Math.floor(10.24 * 4) +
+        //    Math.floor(10.24 * 3) +
+        //    Math.floor(10.24 * 8) +
+        //    Math.floor(10.24 * 6) +
+        //    Math.floor(10.24 * 4) ) / 1024 * 100)
     } else {
-        return Math.min(25, (4 + 3 + 9 + 6 + 4));
+        return Math.min(25,8 + 4 + 9 + 6 + 2)
+        //25%の場合の厳密式
+        //return Math.floor(Math.min(256,
+        //    Math.floor(10.24 * 4) +
+        //    Math.floor(10.24 * 3) +
+        //    Math.floor(10.24 * 8) +
+        //    Math.floor(10.24 * 6) +
+        //    Math.floor(10.24 * 4)) / 1024 * 100)
     }
 }
 
 // 八双のヘイスト
 exports.HassoHaste = function () {
     if (this.n_equipset == 0) {
-        return 10;
+        return 10
     } else {
-        return 10;
+        return 10
     }
 }
 
@@ -344,7 +365,7 @@ exports.WS_DamageUp0 = function () {
 exports.WS_DamageUp1 = function () {
     if (this.n_equipset == 0) {
         // ギフト
-        return 0 + (3); 
+        return (3); 
     } else {
         // 耳 + マント + ギフト
         return 3 + 10 + (3);
@@ -395,15 +416,26 @@ exports.ウェポンスキル使用時TPを消費しない = function () {
 // モクシャ
 // モクシャI+IIの合計
 exports.モクシャ = function () {
-    return 5;
+    return 0;
+}
+
+// スマイト
+exports.攻撃力アップ = function () {
+    return 1.2;
+}
+
+exports.JP_ダブルアタック効果アップ = function () {
+    return 20;
 }
 
 // ウトゥグリップ
 // ウェポンスキルDEX補正+10
 exports.equip_ウェポンスキルDEX補正 = function () {
     if (this.n_equipset == 0) {
-        return 0;
+        return 10;
     } else {
-        return 0;
+        return 10;
     }
 }
+
+

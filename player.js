@@ -1180,6 +1180,33 @@ exports.フェンサー = function () {
     }
 }
 
+// スマイト、バーサク、カオスロールなどの割合による攻撃アップの倍率
+exports.攻撃力アップ = function () {
+    if (impl.攻撃力アップ) {
+        return impl.攻撃力アップ()
+    } else {
+        return 1.0;
+    }
+}
+
+// ジョブポ
+
+exports.JP_ダブルアタック効果アップ = function () {
+    if (impl.JP_ダブルアタック効果アップ) {
+        return impl.JP_ダブルアタック効果アップ()
+    } else {
+        return 0;
+    }
+}
+
+exports.JP_ジョブポのトリプルアタック効果アップ = function () {
+    if (impl.JP_ジョブポのトリプルアタック効果アップ) {
+        return impl.JP_ジョブポのトリプルアタック効果アップ()
+    } else {
+        return 0;
+    }
+}
+
 // アビリティによる特別な効果
 
 // バフの有無

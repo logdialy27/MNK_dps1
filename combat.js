@@ -226,6 +226,7 @@ exports.on_auto_attack = function (player,enemy,line_p) {
             }
         } else if (logic.rand(player.DA())) {
             // DA判定
+
             for (i = 0; i < 2; ++i) {
                 var critcal = player.Critical()
                 // 倍撃
@@ -590,7 +591,10 @@ exports.on_auto_attack = function (player,enemy,line_p) {
     // 得TP履歴
     player.result_list("TP", TP);
 
-    // 
+    // AAの得TP履歴
+    player.result_list("AA-TP", TP);
+
+    //
     player.n_TP = logic.addTP(player.n_TP, TP);
 
     line_p["TP"] = TP;
@@ -648,8 +652,13 @@ exports.on_ws = function (player,enemy, line) {
     player.result_sum("WS実行後TP", player.n_TP);
     line["WS実行後:TP"] = player.n_TP;
 
-    // 得TP==0の場合ミス判定
+    // TP履歴
+    player.result_list("TP", TP);
 
+    // WSのTP履歴
+    player.result_list("WS-TP", TP);
+
+    // 得TP==0の場合ミス判定
     if (TP != 0) {
         return true;
     } else {

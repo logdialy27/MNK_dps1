@@ -381,6 +381,16 @@ exports.AA_ダメージ計算 = function (t, player, enemy, line) {
 
     var attack = t.attack;
 
+    if (t.DA) {
+        // 戦士のジョブポのダブルアタックの物理攻撃力をアップ。
+        attack += player.JP_ダブルアタック効果アップ() * player.攻撃力アップ()
+    }
+
+    if (t.TA) {
+        // シーフのジョブポのトリプルアタック効果アップ
+        attack += player.JP_ジョブポのトリプルアタック効果アップ() * player.攻撃力アップ()
+    }
+
     var 攻防比 = logic.攻防比(attack, enemy.Defence(), t.wt, player,line);
     var 固定ダメージ = logic.固定ダメージ(player.STR(), enemy.VIT(), t.D, t.wt, player,line);
 
@@ -576,7 +586,7 @@ exports.AA_間隔 = function(player,line)
 
     line["間隔:ヘイスト合計"] = h;
 
-    w= Math.floor(w * (100 - h) / 100.0);
+    w = Math.floor(w * (100 - h) / 100.0);
     line["間隔:装備ヘイスト後"] = w;
 
     // 以降ミリ秒

@@ -256,8 +256,11 @@ exports.run = function (result_file_prefix, p_target, equipset_aa, equipset_ws,e
 
         result["TP:WS実行TP平均"] = (player.r_sum["WS実行前TP"] / result["回数:WS"]).toFixed(2) ;
         result["TP:WS得TP平均"] = (player.r_sum["WS実行後TP"] / result["回数:WS"]).toFixed(2) ;
-        result["TP:AA得TP平均"] = average(player.r_list["TP"]).toFixed(2);
+        result["TP:AA得TP平均"] = average(player.r_list["AA-TP"]).toFixed(2);
         result["TP:与TP平均"] = average(player.r_list["与TP"]).toFixed(2);
+
+        result["TP:WS得TPリスト"] = unique(player.r_list["WS-TP"]);
+        result["TP:AA得TPリスト"] = unique(player.r_list["AA-TP"]);
 
         result["間隔:AA間隔(秒)"] = (average(player.r_list["AA実行間隔"]) / 1000).toFixed(3);
         result["間隔:WS間隔(秒)"] = (average(player.r_list["WS実行間隔"]) / 1000).toFixed(3);
@@ -356,6 +359,32 @@ function average(in_list) {
         return 0;
     }
 }
+
+// ユニークリストの計算
+function unique(in_list) {
+    var out = {};
+    if (in_list) {
+        for (var i = 0; i < in_list.length; ++i) {
+            if (out[in_list[i]]) {
+                out[in_list[i]] += 1;
+            } else {
+                out[in_list[i]] =1
+            }
+        }
+
+        var out2 = []
+        for (key in out) {
+            out2.push(key+"="+out[key])
+        }
+
+        return out2.join(",")
+    }
+    else {
+        return [];
+    }
+}
+
+
 
 // 
 function get_AA攻撃回数(in_list) {

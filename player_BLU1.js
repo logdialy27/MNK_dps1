@@ -364,15 +364,15 @@ exports.WS_DamageUp3 = function (name) {
 // 使用する可能性のあるWS一覧
 exports.WS_list = function () {
     //return ["サンギンブレード"];
-    //return ["シャンデュシニュ"];
-    return ["サベッジブレード"];
+    return ["シャンデュシニュ"];
+    //return ["サベッジブレード"];
 }
 
 // 使用するWS名
 exports.WS = function () {
     //return ["サンギンブレード"];
-    //return ["シャンデュシニュ"];
-    return ["サベッジブレード"];
+    return ["シャンデュシニュ"];
+    //return ["サベッジブレード"];
 }
 
 // TPボーナス
