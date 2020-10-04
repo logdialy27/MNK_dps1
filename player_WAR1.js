@@ -1,5 +1,8 @@
 ﻿exports.n_equipset = 0;
 
+//const ws_set = 100 // BI
+const ws_set = 101 // フラマ
+
 // プレイヤー名
 exports.Name = function () {
     return "WAR1";
@@ -21,6 +24,8 @@ exports.JOB = function () {
 exports.STR = function () {
     if (this.n_equipset == 0) {
         return 114 + 259 + 7; // +7=八双
+    } else if (ws_set == 100) {
+        return 114 + 323 + 7; // +7=八双
     } else {
         return 114 + 349 + 7; // +7=八双
     }
@@ -29,6 +34,8 @@ exports.STR = function () {
 exports.DEX = function () {
     if (this.n_equipset == 0) {
         return 101 + 167;
+    } else if (ws_set == 100) {
+        return 101 + 190;
     } else {
         return 101 + 217;
     }
@@ -37,6 +44,8 @@ exports.DEX = function () {
 exports.VIT = function () {
     if (this.n_equipset == 0) {
         return 104 + 201;
+    } else if (ws_set == 100) {
+        return 101 + 183;
     } else {
         return 104 + 195;
     }
@@ -45,6 +54,8 @@ exports.VIT = function () {
 exports.AGI = function () {
     if (this.n_equipset == 0) {
         return 96 + 102;
+    } else if (ws_set == 1001) {
+        return 96 + 105;
     } else {
         return 96 + 106;
     }
@@ -53,6 +64,8 @@ exports.AGI = function () {
 exports.INT = function () {
     if (this.n_equipset == 0) {
         return 86 + 92;
+    } else if (ws_set == 100) {
+        return 86 + 94;
     } else {
         return 86 + 94;
     }
@@ -61,6 +74,8 @@ exports.INT = function () {
 exports.MND = function () {
     if (this.n_equipset == 0) {
         return 97 + 134;
+    } else if (ws_set == 100) {
+        return 97 + 100;
     } else {
         return 97 + 101;
     }
@@ -69,6 +84,8 @@ exports.MND = function () {
 exports.CHR = function () {
     if (this.n_equipset == 0) {
         return 96 + 161;
+    } else if (ws_set == 100) {
+        return 96 + 113;
     } else {
         return 96 + 114;
     }
@@ -92,6 +109,8 @@ exports.SubD = function () {
 exports.Attack = function () {
     if (this.n_equipset == 0) {
         return 1860;
+    } else if (ws_set == 100) {
+        return 1702;
     } else {
         return 1726;
     }
@@ -100,6 +119,8 @@ exports.Attack = function () {
 exports.SubAttack = function () {
     if (this.n_equipset == 0) {
         return 0;
+    } else if (ws_set == 100) {
+        return 0;
     } else {
         return 0;
     }
@@ -107,15 +128,19 @@ exports.SubAttack = function () {
 
 exports.Defense = function () {
     if (this.n_equipset == 0) {
-        return 1353;
+        return 1579;
+    } else if (ws_set == 100) {
+        return 1531;
     } else {
-        return 1340;
+        return 1540;
     }
 }
 
 exports.Accuracy = function () {
     if (this.n_equipset == 0) {
         return 1228;
+    } else if (ws_set == 100) {
+        return 1209;
     } else {
         return 1243;
     }
@@ -132,6 +157,8 @@ exports.SubAccuracy = function () {
 exports.Evasion = function () {
     if (this.n_equipset == 0) {
         return 726;
+    } else if (ws_set == 100) {
+        return 732;
     } else {
         return 753;
     }
@@ -141,6 +168,8 @@ exports.Evasion = function () {
 exports.STP = function () {
     if (this.n_equipset == 0) {
         return 7 + 5 + 3 + 10 + 5 + 5 + 4 + (15) ;
+    } else if (ws_set == 100) {
+        return 10 + 6 + (15);
     } else {
         return 10 + 6 + 6 + (15);
     }
@@ -149,9 +178,10 @@ exports.STP = function () {
 exports.DA = function () {
     if (this.n_equipset == 0) {
         return (28) + (5) + 6 + 7 + 1 + 3 + 6 + 10 + 9 + 6 + 9 
+    } else if (ws_set == 100) {
+        return (28) + (5) + 3 + 7 + (1) + 5 + 11
     } else {
         return (28) + (5) + 3 + 7 + (1) + 5 + 11 + 6
-//        return (28) + (5) + 3 + 7 + (3) + 5 + 11 + 6 // 夜間
     }
 }
 
@@ -203,6 +233,8 @@ exports.Critical = function () {
     }
 }
 
+
+
 // 武器に付与されているプロパティ「クリティカルヒット+」は、基本的にその武器での攻撃にしか適用されない。
 
 exports.SubCritical = function () {
@@ -219,8 +251,10 @@ exports.CriticalDamage = function () {
     if (this.n_equipset == 0) {
         // 特性+ギフト
         return (8+10)
+    } else if (ws_set == 100) {
+        return (8 + 10) + 6 + 11
     } else {
-        return (8+10) + 6
+        return (8+10) + 6 
     }
 }
 
@@ -327,7 +361,7 @@ exports.xN_Relic = function () {
 // エンピをメインに装備していてAMの場合に設定
 // 発生確率なのでAMの発生確率を設定
 exports.xN_Empyrean = function () {
-    return 50;
+    return 30;
 }
 
 // マスター武器の倍撃
@@ -342,7 +376,7 @@ exports.DA_DamageUp = function () {
     if (this.n_equipset == 0) {
         return 31
     } else {
-        return 31
+        return 20
     }
 }
 
@@ -420,11 +454,7 @@ exports.モクシャ = function () {
 }
 
 // スマイト
-exports.攻撃力アップ = function () {
-    return 1.2;
-}
-
-exports.JP_ダブルアタック効果アップ = function () {
+exports.スマイト = function () {
     return 20;
 }
 
@@ -438,4 +468,19 @@ exports.equip_ウェポンスキルDEX補正 = function () {
     }
 }
 
+exports.buff_ブラッドレイジ = function () {
+    return 40
+}
+
+exports.buff_サベッジリ = function () {
+    return 500
+}
+
+exports.buff_ウォークライ = function () {
+    return 11.3
+}
+
+exports.buff_バーサク = function () {
+    return 35.0
+}
 

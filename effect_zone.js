@@ -4,7 +4,7 @@
 // 攻撃力にはバーサクやスマイト枠の補正が必要だが未対応
 
 // イオニス=1
-var zone_no = 0;
+var zone_no = 0
 
 exports.set = function (name) {
     if (name == "イオニス") {

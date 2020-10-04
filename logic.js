@@ -844,18 +844,16 @@ const table_dex_agi = {
     50: 20,
 }
 
-exports.critical = function (c, player, enemy,line) {
+exports.critical = function (c, player, enemy, line) {
     var dex = player.DEX();
     var agi = enemy.AGI();
 
     var d = (dex - agi);
     if (d > 50) {
         v = 20;
-    }
-    else if (d < 0) {
+    } else if (d < 0) {
         v =  5;
-    }
-    else {
+    } else {
         v = table_dex_agi[d];
     }
 

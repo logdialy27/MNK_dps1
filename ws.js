@@ -170,7 +170,7 @@ function ws_ビクトリースマイト(player, enemy, line_p) {
 // ウッコフューリーのTPクリティカル修正のテーブル
 const table_TP_ウッコフューリー =
     [
-        { min: 1000, max: 2000, v: function (tp) { return 20 + 10 * (tp - 1000) / 1000; } },
+        { min: 1000, max: 2000, v: function (tp) { return 20 + 15 * (tp - 1000) / 1000; } },
         { min: 2000, max: 3000, v: function (tp) { return 35 + 20 * (tp - 2000) / 1000; } },
         { min: 3000, max: 3000, v: function (tp) { return 55; } },
     ];
@@ -191,7 +191,7 @@ function ws_ウッコフューリー(player, enemy, line_p) {
     // WS実行のTP計算
     var execTP = logic.addTP(player.n_TP, player.TP_Bonus()); 
     // クリティカルヒット率修正
-    var C_add = 15;
+    var C_add = 20;
     for (var i = 0; i < table_TP_ウッコフューリー.length; ++i) {
         var t = table_TP_ウッコフューリー[i];
 

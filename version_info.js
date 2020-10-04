@@ -1,10 +1,11 @@
 ﻿// バージョン文字列
 exports.VERSION = function () {
-    return "pBsE6XVXsXer";
+    return "AVkXYyqJYrRN";
 }
 
 const version_history =
 {
+    "AVkXYyqJYrRN": "2020092601",
     "pBsE6XVXsXer": "2020092101",
     "AFbcsKg8sct4": "2020083001",
     "zB4WAfsNGqeR": "2020082801",

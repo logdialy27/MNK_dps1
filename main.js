@@ -196,7 +196,7 @@ exports.run = function (result_file_prefix, p_target, equipset_aa, equipset_ws,e
         
         // 合計
         result["合計:攻撃"] = player.r_sum["攻撃"];
-        result["合計:ミス"] = player.r_sum["ミス"];
+        //result["合計:ミス"] = player.r_count["ミス"];
         result["合計:クリティカル"] = player.r_sum["クリティカル"];
 
         for (var w of player.WS_list()) {
@@ -294,6 +294,12 @@ exports.run = function (result_file_prefix, p_target, equipset_aa, equipset_ws,e
             result["DPS:AA+エン+WS"] = ((result["合計:AA+エン+WS"]) / result["経過時間(秒)"]).toFixed(0);
             result["DPS:AA+エン+WS+連携"] = ((result["合計:AA+エン+WS+連携"]) / result["経過時間(秒)"]).toFixed(0);
         }
+
+        result["その他:秒間与TP"] = ((result["合計:与TP"]) / result["経過時間(秒)"]).toFixed(0);
+        result["その他:与TPと与ダメージ比:AA"] = (result["合計:AA"] / result["合計:与TP"]).toFixed(2);
+        result["その他:与TPと与ダメージ比:AA+WS"] = (result["合計:AA+WS"] / result["合計:与TP"]).toFixed(2);
+        result["その他:与TPと与ダメージ比:AA+WS+連携"] = (result["合計:AA+WS+連携"] / result["合計:与TP"]).toFixed(2);
+
         // JSON出力
         output_to_json(result_file_prefix + "_all.txt", result, true);
 

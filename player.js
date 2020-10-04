@@ -211,6 +211,11 @@ exports.WS_TP = function () {
     }
 }
 
+// バフの状態の取得
+exports.has_buff = function(name){
+    return false
+}
+
 // メインジョブ
 exports.JOB = function () {
     if (impl.JOB) {
@@ -237,6 +242,15 @@ exports.food = function () {
         //return "ブドウ大福";
         return "";
     }
+}
+
+// 攻撃力アップの乗算枠合計
+exports.攻撃力アップ = function () {
+    var a = this.スマイト()
+    var b = this.buff_ウォークライ()
+    var c = this.buff_バーサク()
+
+    return (100 + a + b + c) / 100
 }
 
 // playerの各種ステータス
@@ -588,11 +602,13 @@ const table_フェンサーC_Bonus = {
 // ※インピタスは除く
 exports.Critical = function () {
     if (impl.Critical) {
-        var f = table_フェンサーC_Bonus[this.フェンサー()];
+        var b = this.buff_ブラッドレイジ ? this.buff_ブラッドレイジ() : 0;
+
+        var f = table_フェンサーC_Bonus[this.フェンサー()] ;
         if (f) {
-            return impl.Critical() + zone.Critical() + f;
+            return impl.Critical() + zone.Critical() + f + b;
         }
-        return impl.Critical() + zone.Critical();
+        return impl.Critical() + zone.Critical() + b;
     } else {
         return 0;
     }
@@ -991,11 +1007,15 @@ const table_フェンサーTP_Bonus = {
 // サブでも適用されるものはこちらに加算
 exports.TP_Bonus = function () {
     if (impl.TP_Bonus) {
+
+        var s = this.buff_サベッジリ()
+
         var f = table_フェンサーTP_Bonus[this.フェンサー()];
         if (f) {
-            return impl.TP_Bonus() + f;
+            return impl.TP_Bonus() + f + s;
         }
-        return impl.TP_Bonus();
+
+        return impl.TP_Bonus() + s;
     } else {
         return 0;
     }
@@ -1180,41 +1200,70 @@ exports.フェンサー = function () {
     }
 }
 
-// スマイト、バーサク、カオスロールなどの割合による攻撃アップの倍率
-exports.攻撃力アップ = function () {
-    if (impl.攻撃力アップ) {
-        return impl.攻撃力アップ()
-    } else {
-        return 1.0;
-    }
-}
-
-// ジョブポ
-
-exports.JP_ダブルアタック効果アップ = function () {
-    if (impl.JP_ダブルアタック効果アップ) {
-        return impl.JP_ダブルアタック効果アップ()
+// スマイト
+exports.スマイト = function () {
+    if (impl.スマイト) {
+        return impl.スマイト()
     } else {
         return 0;
     }
 }
 
-exports.JP_ジョブポのトリプルアタック効果アップ = function () {
-    if (impl.JP_ジョブポのトリプルアタック効果アップ) {
-        return impl.JP_ジョブポのトリプルアタック効果アップ()
-    } else {
-        return 0;
-    }
-}
+// バフ関係
 
-// アビリティによる特別な効果
-
-// バフの有無
 exports.buff_インピタス = function () {
     if (impl.buff_インピタス) {
         return impl.buff_インピタス();
     } else {
         return false;
+    }
+}
+
+exports.buff_ブラッドレイジ = function () {
+    if (this.has_buff("ブラッドレイジ")) {
+        if (impl.buff_ブラッドレイジ) {
+            return impl.buff_ブラッドレイジ();
+        } else {
+            return 0;
+        }
+    } else {
+        return 0
+    }
+}
+
+exports.buff_サベッジリ = function () {
+    if (this.has_buff("ウォークライ")) {
+        if (impl.buff_サベッジリ) {
+            return impl.buff_サベッジリ();
+        } else {
+            return 0;
+        }
+    } else {
+        return 0
+    }
+}
+
+exports.buff_ウォークライ = function () {
+    if (this.has_buff("ウォークライ")) {
+        if (impl.buff_ウォークライ) {
+            return impl.buff_ウォークライ();
+        } else {
+            return 0;
+        }
+    } else {
+        return 0
+    }
+}
+
+exports.buff_バーサク = function () {
+    if (this.has_buff("バーサク")) {
+        if (impl.buff_バーサク) {
+            return impl.buff_バーサク();
+        } else {
+            return 0;
+        }
+    } else {
+        return 0
     }
 }
 
@@ -1258,3 +1307,24 @@ exports.equip_ウェポンスキルDEX補正 = function () {
         return 0;
     }
 }
+
+
+// ジョブポ
+// ジョブポは基本的にはマスターにするので設定化するのは一部
+
+exports.JP_ダブルアタック効果アップ = function () {
+    if (impl.JP_ダブルアタック効果アップ) {
+        return impl.JP_ダブルアタック効果アップ()
+    } else {
+        return 20;
+    }
+}
+
+exports.JP_ジョブポのトリプルアタック効果アップ = function () {
+    if (impl.JP_ジョブポのトリプルアタック効果アップ) {
+        return impl.JP_ジョブポのトリプルアタック効果アップ()
+    } else {
+        return 20;
+    }
+}
+

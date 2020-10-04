@@ -857,6 +857,36 @@ exports.buff_インピタス = function () {
     }
 }
 
+
+exports.buff_ブラッドレイジ = function () {
+    if (tsv.buff_ブラッドレイジ && tsv.buff_ブラッドレイジ[this.n_equipset]) {
+        return tsv.buff_ブラッドレイジ[this.n_equipset];
+    } else {
+        return 0;
+    }
+}
+
+exports.buff_サベッジリ = function () {
+    if (tsv.buff_サベッジリ && tsv.buff_サベッジリ[this.n_equipset]) {
+        return tsv.buff_サベッジリ[this.n_equipset];
+    } else {
+        return 0;
+    }
+}
+
+exports.buff_ウォークライ = function () {
+    if (tsv.buff_ウォークライ && tsv.buff_ウォークライ[this.n_equipset]) {
+        return tsv.buff_ウォークライ[this.n_equipset];
+    } else {
+        return 0;
+    }
+}
+
+
+
+
+
+
 exports.equip_インピタス性能アップ = function () {
     if (tsv.equip_インピタス性能アップ && tsv.equip_インピタス性能アップ[this.n_equipset]) {
         return tsv.equip_インピタス性能アップ[this.n_equipset];
@@ -864,6 +894,7 @@ exports.equip_インピタス性能アップ = function () {
         return 0;
     }
 }
+
 
 exports.equip_クリティカルヒット時TP = function () {
     if (tsv.equip_クリティカルヒット時TP && tsv.equip_クリティカルヒット時TP[this.n_equipset]) {
