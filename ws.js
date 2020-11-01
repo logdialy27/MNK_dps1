@@ -729,8 +729,6 @@ function ws_祖之太刀不動(player, enemy, line_p) {
     return helper_WSダメージ計算(list, BP_D, player, enemy, line);
 }
 
-
-
 const table_TP_カタクリスム =
     [
         { min: 1000, max: 2000, v: function (tp) { return 1.75 + (3.75 - 1.75) * (tp - 1000) / 1000; } },
@@ -750,8 +748,9 @@ function ws_カタクリスム(player, enemy, line_p) {
     // TP:ダメージ修正
     var xN = helper_TP修正(execTP, table_TP_カタクリスム) + player.WS_DamageUp0();
 
-    var BP_D = Math.floor(player.STR() * 30 / 100) + Math.floor(player.MND() * 30 / 100);
+    var BP_D = Math.floor(player.STR() * 30 / 100) + Math.floor(player.INT() * 30 / 100);
 
+    // カタクリスムは系統係数はない
     var 系統係数 = 0
 
     return helper_属性WSダメージ計算("カタクリスム", "闇", base_dmg, xN, BP_D, 系統係数, player, enemy, line);

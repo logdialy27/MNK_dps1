@@ -67,3 +67,8 @@ exports.ガンビット = function () {
 exports.レイク = function () {
     return [];
 }
+
+// 魔防
+exports.魔防 = function () {
+    return 114;
+}

@@ -54,7 +54,7 @@ exports.INT = function () {
     if (this.n_equipset == 0) {
         return 109 + 174;
     } else {
-        return 109 + 259;
+        return 109 + 256;
     }
 }
 
@@ -139,7 +139,7 @@ exports.Evasion = function () {
 
 exports.MagicAttack = function () {
     if (this.n_equipset == 0) {
-        return 0;
+        return (33)
     } else {
         return 4 + 7 + 52 + (33 + 20) + 8 + 3 + 51 + 39 + (33);
     }
@@ -216,8 +216,6 @@ exports.Critical = function () {
     }
 }
 
-
-
 // 武器に付与されているプロパティ「クリティカルヒット+」は、基本的にその武器での攻撃にしか適用されない。
 
 exports.SubCritical = function () {
@@ -283,18 +281,26 @@ exports.SubWeaponType = function () {
 // 魔法枠ヘイスト合計値
 exports.MagicHaste = function () {
     //return 43.75;
-    return 40.0;
+    return 26.0+15.0;
 }
 
 // 装備枠ヘイスト合計値
 // 装備枠ヘイストは26%でないとキャップしない
 // これは装備品毎にMath.floor(10.24 * N)を実施しているため
 exports.EquipHaste = function () {
-    //return 25.0;
     if (this.n_equipset == 0) {
         return Math.min(25,4 + 8 + 3 + 3 + (5+10))
     } else {
         return Math.min(25,3 + 3 + 5)
+    }
+}
+
+// ヘイストサンバ
+exports.SambaHaste = function () {
+    if (this.n_equipset == 0) {
+        return 0
+    } else {
+        return 0
     }
 }
 
@@ -307,18 +313,10 @@ exports.HassoHaste = function () {
     }
 }
 
-// ラストリゾートのヘイスト
-exports.LastResortHaste = function () {
-    if (this.n_equipset == 0) {
-        return 0;
-    } else {
-        return 0;
-    }
-}
 
 // 特性のダメージ上限アップ
 exports.DamageLimit = function () {
-    return 0;
+    return 0.1;
 }
 
 // 装備の物理ダメージ上限(%)
