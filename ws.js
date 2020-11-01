@@ -14,6 +14,8 @@ const table_ws = {
 
     "トアクリーバー": ws_トアクリーバー,
     "祖之太刀・不動": ws_祖之太刀不動,
+
+    "カタクリスム": ws_カタクリスム,
 };
 
 exports.ws = function (name, player, enemy,line) {
@@ -725,4 +727,32 @@ function ws_祖之太刀不動(player, enemy, line_p) {
     var BP_D = Math.floor(player.STR() * 80 / 100);
 
     return helper_WSダメージ計算(list, BP_D, player, enemy, line);
+}
+
+
+
+const table_TP_カタクリスム =
+    [
+        { min: 1000, max: 2000, v: function (tp) { return 1.75 + (3.75 - 1.75) * (tp - 1000) / 1000; } },
+        { min: 2000, max: 3000, v: function (tp) { return 3.75 + (6.5 - 3.75) * (tp - 2000) / 1000; } },
+        { min: 3000, max: 3000, v: function (tp) { return 6.5; } },
+    ];
+
+// 両手根:カタクリスム
+function ws_カタクリスム(player, enemy, line_p) {
+
+    var line = line_p;
+
+    var base_dmg = logic.属性WS基本D(player, line);
+    // WS実行のTP計算
+    var execTP = logic.addTP(player.n_TP, player.TP_Bonus());
+
+    // TP:ダメージ修正
+    var xN = helper_TP修正(execTP, table_TP_カタクリスム) + player.WS_DamageUp0();
+
+    var BP_D = Math.floor(player.STR() * 30 / 100) + Math.floor(player.MND() * 30 / 100);
+
+    var 系統係数 = 0
+
+    return helper_属性WSダメージ計算("カタクリスム", "闇", base_dmg, xN, BP_D, 系統係数, player, enemy, line);
 }

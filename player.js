@@ -212,7 +212,11 @@ exports.WS_TP = function () {
 }
 
 // バフの状態の取得
-exports.has_buff = function(name){
+exports.gain_buff = function (name) {
+    if (name == "ウォークライ") {
+        return true
+    }
+
     return false
 }
 
@@ -1220,7 +1224,7 @@ exports.buff_インピタス = function () {
 }
 
 exports.buff_ブラッドレイジ = function () {
-    if (this.has_buff("ブラッドレイジ")) {
+    if (this.gain_buff("ブラッドレイジ")) {
         if (impl.buff_ブラッドレイジ) {
             return impl.buff_ブラッドレイジ();
         } else {
@@ -1232,7 +1236,7 @@ exports.buff_ブラッドレイジ = function () {
 }
 
 exports.buff_サベッジリ = function () {
-    if (this.has_buff("ウォークライ")) {
+    if (this.gain_buff("ウォークライ")) {
         if (impl.buff_サベッジリ) {
             return impl.buff_サベッジリ();
         } else {
@@ -1244,7 +1248,7 @@ exports.buff_サベッジリ = function () {
 }
 
 exports.buff_ウォークライ = function () {
-    if (this.has_buff("ウォークライ")) {
+    if (this.gain_buff("ウォークライ")) {
         if (impl.buff_ウォークライ) {
             return impl.buff_ウォークライ();
         } else {
@@ -1256,7 +1260,7 @@ exports.buff_ウォークライ = function () {
 }
 
 exports.buff_バーサク = function () {
-    if (this.has_buff("バーサク")) {
+    if (this.gain_buff("バーサク")) {
         if (impl.buff_バーサク) {
             return impl.buff_バーサク();
         } else {
