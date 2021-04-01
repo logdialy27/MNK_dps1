@@ -171,13 +171,23 @@ exports.on_timer = function(current_time,line){
 }
 
 // WS実行後に呼び出される
-exports.on_ws_done = function (current_time, ws_name, line) {
+exports.on_ws_done = function (current_time,line) {
     if (impl.on_ws_done) {
-        return impl.on_ws_done(current_time, ws_name, line);
+        return impl.on_ws_done(current_time,line);
     } else {
         return 0;
     }
 }
+
+// 連携実行後に実行後に呼び出される
+exports.on_skillchain_done = function (skillchain_done,current_time,line) {
+    if (impl.on_skillchain_done) {
+        return impl.on_skillchain_done(skillchain_done,current_time, line);
+    } else {
+        return 0;
+    }
+}
+
 
 // equipset変更
 // 0:オートアタック装備

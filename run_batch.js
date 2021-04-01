@@ -21,22 +21,19 @@ exports.start = function () {
     else
     {
         batchName = "batchRun0";
-        const in_end_time = 1 * 60;
-        const in_enemy_target = "E1";
+        const in_end_time = 2 * 24 * 60;
 
         args_list = [
-            { target: "MNK9", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "batchRun0/MNK9", end_time: in_end_time, enemy_target: in_enemy_target, },
-            { target: "MNK8", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "batchRun0/MNK8", end_time: in_end_time, enemy_target: in_enemy_target, },
-            { target: "MNK7", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "batchRun0/MNK7", end_time: in_end_time, enemy_target: in_enemy_target, },
-            { target: "MNK6", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "batchRun0/MNK6", end_time: in_end_time, enemy_target: in_enemy_target, },
-            { target: "MNK5", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "batchRun0/MNK5", end_time: in_end_time, enemy_target: in_enemy_target, },
-            { target: "MNK4", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "batchRun0/MNK4", end_time: in_end_time, enemy_target: in_enemy_target, },
-            { target: "MNK3", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "batchRun0/MNK3", end_time: in_end_time, enemy_target: in_enemy_target, },
-            { target: "MNK2", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "batchRun0/MNK2", end_time: in_end_time, enemy_target: in_enemy_target, },
-            { target: "MNK1", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "batchRun0/MNK1", end_time: in_end_time, enemy_target: in_enemy_target, },
-            { target: "BLU1", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "batchRun0/BLU1", end_time: in_end_time, enemy_target: in_enemy_target, },
-        ];
+            { target: "WAR1", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "batchRun0/WAR1_E1", end_time: in_end_time, enemy_target: "E1", },
+            { target: "WAR1", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "batchRun0/WAR1_E2", end_time: in_end_time, enemy_target: "E2", },
+            { target: "WAR1", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "batchRun0/WAR1_E3", end_time: in_end_time, enemy_target: "E3", },
+            { target: "WAR1", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "batchRun0/WAR1_E4", end_time: in_end_time, enemy_target: "E4", },
+         ];
     }
+//    { target: "CSV1", equipset_aa: 12, equipset_ws: 13, result_file_prefix: "batchRun0/CSV1_12-13_E1", end_time: in_end_time, "enemy_target": in_enemy_target },
+//    { target: "MNK9", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "batchRun0/MNK9", end_time: in_end_time, enemy_target: in_enemy_target, },
+//    { target: "CSV1", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "batchRun0/CSV1_0-1_E1", end_time: in_end_time, "enemy_target": in_enemy_target },
+//    { target: "BLU1", equipset_aa: 0, equipset_ws: 1, result_file_prefix: "batchRun0/BLU1", end_time: in_end_time, enemy_target: in_enemy_target, },
 
     function run(args) {
         var main = require("./main");

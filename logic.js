@@ -1104,7 +1104,7 @@ exports.与TP計算 = function (base_TP, player, enemy, line) {
     var m = (100 - Math.min(75, player.モクシャ())) / 100;
 
     // AGI差
-    // TODO:この値は相手のAGIにより変化
+    // TODO:この値は相手のCLにより変化
     var C = 10;
 
     var top = 50 + C;

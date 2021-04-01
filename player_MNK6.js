@@ -145,14 +145,15 @@ exports.Evasion = function () {
     }
 }
 
+const サムライロールSTP = 65
 // ストアTP
 exports.STP = function () {
     if (this.n_equipset == 0) {
         // 投てき + 右耳 + 両手
-        return 5 + 5 + 7;
+        return 5 + 5 + 7 + サムライロールSTP;
     } else {
         // 投てき + 右耳
-        return 5 + 5;
+        return 5 + 5 + サムライロールSTP;
     }
 }
 
@@ -363,28 +364,57 @@ exports.WS_DamageUp3 = function (name) {
     return 0;
 }
 
+
+var ws_target_idx = 2;
+const ws_set_list = [
+    ["夢想阿修羅拳", "四神円舞", "ビクトリースマイト"],
+    ["夢想阿修羅拳", "四神円舞", "ビクトリースマイト"],
+    ["夢想阿修羅拳", "四神円舞", "ビクトリースマイト"],
+]
+
 // 使用する可能性のあるWS一覧
 exports.WS_list = function () {
-//    return ["四神円舞","ビクトリースマイト"];
-    return ["ビクトリースマイト"];
+    return ws_set_list[ws_target_idx];
 }
 
 var ws_idx = 0;
-//const ws_list = ["四神円舞", "ビクトリースマイト", "ビクトリースマイト"];
-const ws_list = ["ビクトリースマイト"];
+
+const ws_list_list = [
+    ["ビクトリースマイト", "ビクトリースマイト"],
+    ["四神円舞", "ビクトリースマイト", "ビクトリースマイト"],
+    ["夢想阿修羅拳", "ビクトリースマイト", "四神円舞", "ビクトリースマイト"]
+]
+
+var ws_list = ws_list_list[ws_target_idx];
+
 // 使用するWS名
 exports.WS = function () {
-
     return ws_list[ws_idx];
 }
 
-exports.on_ws_done = function () {
+// WS実行完了
+exports.on_ws_done = function (current_time, line) {
+
+    var last_ws_idx = ws_idx
+
     ws_idx = ws_idx + 1;
     if (ws_idx >= ws_list.length) {
         ws_idx = 0;
     }
+
+    // 変更前のws_idxを応答
+    return last_ws_idx
 }
 
+// 連携実行完了
+exports.on_skillchain_done = function (skillchain_done, current_time, line) {
+    if (!skillchain_done) {
+        //連携が発動しなかった場合
+        if (ws_idx != 0) {
+            ws_idx = 0
+        }
+    }
+}
 
 // TPボーナス
 // サブでも適用されるものはこちらに加算

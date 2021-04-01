@@ -673,6 +673,11 @@ exports.on_ws = function (player,enemy, line) {
     }
 }
 
+
+exports.on_skillchain_failed = function () {
+    skillchain.clear_ws();
+}
+
 // 連携
 exports.on_skillchain = function (player,enemy, line) {
 
@@ -789,9 +794,11 @@ exports.on_skillchain = function (player,enemy, line) {
         // 次回の連携時に下がる耐性
         enemy.down_elements(element_all);
         line["連携:耐性ダウン"] = element_all;
+
+        return true;
     }
 
-    return 0;
+    return false;
 }
 
 

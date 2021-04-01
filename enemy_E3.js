@@ -57,7 +57,7 @@ exports.属性耐性1 = function (e) {
 
 // 連携の耐性
 exports.属性耐性2 = function (e) {
-    return 100;
+    return 150;
 }
 
 exports.ガンビット = function () {

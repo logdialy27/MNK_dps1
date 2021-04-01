@@ -7,7 +7,11 @@ exports.start = function () {
     // player
     //var target = "MNK1";
     //var target = "BLU1";
-    var target = "MNK6";
+    //var target = "COR1";
+    //var target = "WAR1";
+    var target = "WAR2";
+    //var target = "MNK6";
+    //var target = "SCH1";
     //var target = "CSV1";
     // AA時のequipset番号
     var equipset_aa = 0;
@@ -18,7 +22,7 @@ exports.start = function () {
     // 実行時間(分)
     var end_time = 0;
     // enemy_target
-    var enemy_target = "E1";
+    var enemy_target = "E3";
 
     if (process.argv[2]) {
         target = process.argv[2];

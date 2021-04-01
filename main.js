@@ -72,17 +72,33 @@ exports.run = function (result_file_prefix, p_target, equipset_aa, equipset_ws,e
                     }
 
                     // WSの終了
-                    player.on_ws_done();
-
+                    var ws_idx = player.on_ws_done();
+                    
                     // 連携判定
                     if (ws_hit) {
-                        combat.on_skillchain(player, enemy, line);
+                        var skillchain_done = combat.on_skillchain(player, enemy, line);
+
+                        if (ws_idx == 0) {
+                            player.result_sum("連携実施", 1);
+                        } else {
+                            // 初段以外で連携が発動しなかった場合はWS順をリセット
+                            // 連携実施後
+
+                            if (!skillchain_done) {
+                                combat.on_skillchain_failed()
+                                player.result_sum("連携中断", 1);
+                            } else {
+
+                            }
+
+                            player.on_skillchain_done(skillchain_done, player, enemy, line)
+                        }
+
+
                     } else {
                         // ミスの場合は判定除外
                         // 連携の状態は維持
                     }
-
-
 
                     // オートアタック装備に変更
                     player.equipset(equipset_aa);
@@ -299,6 +315,9 @@ exports.run = function (result_file_prefix, p_target, equipset_aa, equipset_ws,e
         result["その他:与TPと与ダメージ比:AA"] = (result["合計:AA"] / result["合計:与TP"]).toFixed(2);
         result["その他:与TPと与ダメージ比:AA+WS"] = (result["合計:AA+WS"] / result["合計:与TP"]).toFixed(2);
         result["その他:与TPと与ダメージ比:AA+WS+連携"] = (result["合計:AA+WS+連携"] / result["合計:与TP"]).toFixed(2);
+        result["その他:連携中断回数"] = player.r_sum["連携中断"]
+        result["その他:連携実施回数"] = player.r_sum["連携実施"]
+        result["その他:連携中断率"] = ((result["その他:連携中断回数"]) / result["その他:連携実施回数"] * 100).toFixed(2);
 
         // JSON出力
         output_to_json(result_file_prefix + "_all.txt", result, true);

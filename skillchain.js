@@ -17,6 +17,7 @@ const table_ws_element = {
     "シャンデュシニュ": ["光", "湾曲"],
     "ビクトリースマイト": ["光", "分解"],
     "四神円舞":["核熱","振動"],
+    "夢想阿修羅拳": ["重力","溶解"],
     "ウッコフューリー": ["光", "分解"],
     "サベッジブレード": ["分解","切断"],
     "トアクリーバー": ["光", "湾曲"],
@@ -47,6 +48,10 @@ const table_skillchain_element = {
     "極光": ["火", "風", "雷", "光"],
     "黒闇": ["氷", "土", "水", "闇"],
 };
+
+exports.clear_ws = function () {
+    history_ws = [];
+}
 
 exports.push_ws = function (current_time, name, dmg,player) {
 

@@ -413,6 +413,13 @@ function helper_WSダメージ計算(list, BP_D, player,enemy,line_p) {
                 //player.result_all("与TP/WS", give_TP);
                 line["与TP"] = give_TP;
             }
+            else {
+                // 以降の段やマルチの与TP計算
+                var give_TP = logic.与TP計算(10, player, enemy, line);
+                player.result_all("与TP", give_TP);
+                //player.result_all("与TP/WS", give_TP);
+                line["与TP"] = give_TP;
+            }
         }
 
         line_p["WS"].push(line);
